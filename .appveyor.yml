@@ -23,7 +23,7 @@ install:
       Write-Host "vcpkg installing packages: $env:PACKAGES"
       cd c:\tools\vcpkg
       $env:GIT_REDIRECT_STDERR = '2>&1' # git is writing non-errors to STDERR when doing git pull. Send to STDOUT instead.
-      git pull origin master > $null
+      git pull origin master-v0.20.1 > $null
       git -c advice.detachedHead=false checkout $env:VCPKG_COMMIT_ID
       .\bootstrap-vcpkg.bat > $null
       Add-Content "C:\tools\vcpkg\triplets\$env:PLATFORM-windows-static.cmake" "set(VCPKG_BUILD_TYPE release)"
