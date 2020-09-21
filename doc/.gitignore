@@ -1,8 +1,0 @@
-Doxyfile
-
-# BTC original docs
-release-notes
-*.md
-*.txt
-Doxyfile.in
-bitcoin_logo_doxygen.png
