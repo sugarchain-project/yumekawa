@@ -36,7 +36,7 @@ NORMAL       = 0.00100000
 HIGH         = 0.00500000
 TOO_HIGH     = 1.00000000
 
-BTC_MODE = "BTC/kB"
+BTC_MODE = "SUGAR/kB"
 SAT_MODE = "sat/B"
 
 class BumpFeeTest(BitcoinTestFramework):
@@ -113,7 +113,7 @@ class BumpFeeTest(BitcoinTestFramework):
             assert_raises_rpc_error(-8, "Insufficient total fee", rbf_node.bumpfee, rbfid, options)
 
         self.log.info("Test explicit fee rate raises RPC error if estimate_mode is passed without a conf_target")
-        for unit, fee_rate in {"SAT/B": 100, "BTC/KB": NORMAL}.items():
+        for unit, fee_rate in {"SAT/B": 100, "SUGAR/kB": NORMAL}.items():
             assert_raises_rpc_error(-8, "Selected estimate_mode {} requires a fee rate to be specified in conf_target".format(unit),
                                     rbf_node.bumpfee, rbfid, {"fee_rate": fee_rate, "estimate_mode": unit})
 
@@ -147,7 +147,7 @@ class BumpFeeTest(BitcoinTestFramework):
                                         lambda: rbf_node.bumpfee(rbfid, {"estimate_mode": mode, "fee_rate": v}))
                 assert_raises_rpc_error(-3, "Amount out of range",
                                         lambda: rbf_node.bumpfee(rbfid, {"estimate_mode": mode, "fee_rate": -1}))
-                assert_raises_rpc_error(-8, "Invalid fee_rate 0.00000000 BTC/kB (must be greater than 0)",
+                assert_raises_rpc_error(-8, "Invalid fee_rate 0.00000000 SUGAR/kB (must be greater than 0)",
                                         lambda: rbf_node.bumpfee(rbfid, {"estimate_mode": mode, "fee_rate": 0}))
         self.clear_mempool()
 

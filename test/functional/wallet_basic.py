@@ -227,24 +227,24 @@ class WalletTest(BitcoinTestFramework):
         assert_equal(self.nodes[2].getbalance(), node_2_bal)
         node_0_bal = self.check_fee_amount(self.nodes[0].getbalance(), node_0_bal + Decimal('10'), fee_per_byte, self.get_vsize(self.nodes[2].gettransaction(txid)['hex']))
 
-        self.log.info("Test case-insensitive explicit fee rate (sendmany as BTC/kB)")
+        self.log.info("Test case-insensitive explicit fee rate (sendmany as SUGAR/kB)")
         # Throw if no conf_target provided
-        assert_raises_rpc_error(-8, "Selected estimate_mode bTc/kB requires a fee rate to be specified in conf_target",
+        assert_raises_rpc_error(-8, "Selected estimate_mode SUGAR/kB requires a fee rate to be specified in conf_target",
             self.nodes[2].sendmany,
             amounts={ address: 10 },
-            estimate_mode='bTc/kB')
+            estimate_mode='SUGAR/kB')
         # Throw if negative feerate
         assert_raises_rpc_error(-3, "Amount out of range",
             self.nodes[2].sendmany,
             amounts={ address: 10 },
             conf_target=-1,
-            estimate_mode='bTc/kB')
+            estimate_mode='SUGAR/kB')
         fee_per_kb = 0.0002500
         explicit_fee_per_byte = Decimal(fee_per_kb) / 1000
         txid = self.nodes[2].sendmany(
             amounts={ address: 10 },
             conf_target=fee_per_kb,
-            estimate_mode='bTc/kB',
+            estimate_mode='SUGAR/kB',
         )
         self.nodes[2].generate(1)
         self.sync_all(self.nodes[0:3])
@@ -282,9 +282,9 @@ class WalletTest(BitcoinTestFramework):
         assert_equal(self.nodes[0].getbalance(), node_0_bal)
 
         # Test setting explicit fee rate just below the minimum.
-        for unit, fee_rate in {"BTC/kB": 0.00000999, "sat/B": 0.99999999}.items():
+        for unit, fee_rate in {"SUGAR/kB": 0.00000999, "sat/B": 0.99999999}.items():
             self.log.info("Test sendmany raises 'fee rate too low' if conf_target {} and estimate_mode {} are passed".format(fee_rate, unit))
-            assert_raises_rpc_error(-6, "Fee rate (0.00000999 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)",
+            assert_raises_rpc_error(-6, "Fee rate (0.00000999 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)",
                 self.nodes[2].sendmany, amounts={address: 10}, estimate_mode=unit, conf_target=fee_rate)
 
         self.start_node(3, self.nodes[3].extra_args)
@@ -399,13 +399,13 @@ class WalletTest(BitcoinTestFramework):
             assert_raises_rpc_error(-3, "Address does not refer to a key", self.nodes[0].dumpprivkey, temp_address)
 
             # This will raise an exception for attempting to get the private key of an invalid Bitcoin address
-            assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].dumpprivkey, "invalid")
+            assert_raises_rpc_error(-5, "Invalid Sugarchain address", self.nodes[0].dumpprivkey, "invalid")
 
             # This will raise an exception for attempting to set a label for an invalid Bitcoin address
-            assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].setlabel, "invalid address", "label")
+            assert_raises_rpc_error(-5, "Invalid Sugarchain address", self.nodes[0].setlabel, "invalid address", "label")
 
             # This will raise an exception for importing an invalid address
-            assert_raises_rpc_error(-5, "Invalid Bitcoin address or script", self.nodes[0].importaddress, "invalid")
+            assert_raises_rpc_error(-5, "Invalid Sugarchain address or script", self.nodes[0].importaddress, "invalid")
 
             # This will raise an exception for attempting to import a pubkey that isn't in hex
             assert_raises_rpc_error(-5, "Pubkey must be a hex string", self.nodes[0].importpubkey, "not hex")
@@ -420,30 +420,30 @@ class WalletTest(BitcoinTestFramework):
             self.nodes[0].generate(1)
             self.sync_all(self.nodes[0:3])
 
-            self.log.info("Test case-insensitive explicit fee rate (sendtoaddress as BTC/kB)")
+            self.log.info("Test case-insensitive explicit fee rate (sendtoaddress as SUGAR/kB)")
             self.nodes[0].generate(1)
             self.sync_all(self.nodes[0:3])
             prebalance = self.nodes[2].getbalance()
             assert prebalance > 2
             address = self.nodes[1].getnewaddress()
             # Throw if no conf_target provided
-            assert_raises_rpc_error(-8, "Selected estimate_mode BTc/Kb requires a fee rate to be specified in conf_target",
+            assert_raises_rpc_error(-8, "Selected estimate_mode SUGAR/kB requires a fee rate to be specified in conf_target",
                 self.nodes[2].sendtoaddress,
                 address=address,
                 amount=1.0,
-                estimate_mode='BTc/Kb')
+                estimate_mode='SUGAR/kB')
             # Throw if negative feerate
             assert_raises_rpc_error(-3, "Amount out of range",
                 self.nodes[2].sendtoaddress,
                 address=address,
                 amount=1.0,
                 conf_target=-1,
-                estimate_mode='btc/kb')
+                estimate_mode='SUGAR/kB')
             txid = self.nodes[2].sendtoaddress(
                 address=address,
                 amount=1.0,
                 conf_target=0.00002500,
-                estimate_mode='btc/kb',
+                estimate_mode='SUGAR/kB',
             )
             tx_size = self.get_vsize(self.nodes[2].gettransaction(txid)['hex'])
             self.sync_all(self.nodes[0:3])
@@ -488,9 +488,9 @@ class WalletTest(BitcoinTestFramework):
             assert_fee_amount(fee, tx_size, Decimal('0.00002000'))
 
             # Test setting explicit fee rate just below the minimum.
-            for unit, fee_rate in {"BTC/kB": 0.00000999, "sat/B": 0.99999999}.items():
+            for unit, fee_rate in {"SUGAR/kB": 0.00000999, "sat/B": 0.99999999}.items():
                 self.log.info("Test sendtoaddress raises 'fee rate too low' if conf_target {} and estimate_mode {} are passed".format(fee_rate, unit))
-                assert_raises_rpc_error(-6, "Fee rate (0.00000999 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)",
+                assert_raises_rpc_error(-6, "Fee rate (0.00000999 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)",
                     self.nodes[2].sendtoaddress, address=address, amount=1, estimate_mode=unit, conf_target=fee_rate)
 
             # 2. Import address from node2 to node1
