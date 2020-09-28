@@ -255,10 +255,10 @@ class WalletSendTest(BitcoinTestFramework):
         # Fee rate of 0.1 satoshi per byte should throw an error
         # TODO: error should use sat/b
         self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.1, estimate_mode="sat/b",
-                       expect_error=(-4, "Fee rate (0.00000100 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)"))
+                       expect_error=(-4, "Fee rate (0.00000100 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)"))
 
-        self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.000001, estimate_mode="BTC/KB",
-                       expect_error=(-4, "Fee rate (0.00000100 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)"))
+        self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.000001, estimate_mode="SUGAR/kB",
+                       expect_error=(-4, "Fee rate (0.00000100 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)"))
 
         # TODO: Return hex if fee rate is below -maxmempool
         # res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.1, estimate_mode="sat/b", add_to_wallet=False)
@@ -283,7 +283,7 @@ class WalletSendTest(BitcoinTestFramework):
 
         self.log.info("Manual change address and position...")
         self.test_send(from_wallet=w0, to_wallet=w1, amount=1, change_address="not an address",
-                       expect_error=(-5, "Change address must be a valid bitcoin address"))
+                       expect_error=(-5, "Change address must be a valid sugarchain address"))
         change_address = w0.getnewaddress()
         self.test_send(from_wallet=w0, to_wallet=w1, amount=1, add_to_wallet=False, change_address=change_address)
         assert res["complete"]
