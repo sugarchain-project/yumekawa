@@ -319,14 +319,14 @@ class BackwardsCompatibilityTest(BitcoinTestFramework):
 
         # Instead, we stop node and try to launch it with the wallet:
         self.stop_node(4)
-        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Bitcoin Core")
+        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Sugarchain Yumekawa")
         if self.options.descriptors:
             # Descriptor wallets appear to be corrupted wallets to old software
             node_v17.assert_start_raises_init_error(["-wallet=w1"], "Error: wallet.dat corrupt, salvage failed")
             node_v17.assert_start_raises_init_error(["-wallet=w2"], "Error: wallet.dat corrupt, salvage failed")
             node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: wallet.dat corrupt, salvage failed")
         else:
-            node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Bitcoin Core")
+            node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Sugarchain Yumekawa")
         self.start_node(4)
 
         if not self.options.descriptors:

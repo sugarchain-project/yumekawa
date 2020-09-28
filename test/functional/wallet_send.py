@@ -226,7 +226,7 @@ class WalletSendTest(BitcoinTestFramework):
         assert_equal(self.nodes[1].decodepsbt(res1["psbt"])["fee"],
                      self.nodes[1].decodepsbt(res2["psbt"])["fee"])
         # but not at the same time
-        for mode in ["unset", "economical", "conservative", "btc/kb", "sat/b"]:
+        for mode in ["unset", "economical", "conservative", "SUGAR/kB", "sat/b"]:
             self.test_send(from_wallet=w0, to_wallet=w1, amount=1, arg_conf_target=1, arg_estimate_mode="economical",
                 conf_target=1, estimate_mode=mode, add_to_wallet=False,
                 expect_error=(-8, "Use either conf_target and estimate_mode or the options dictionary to control fee rate"))
@@ -255,7 +255,7 @@ class WalletSendTest(BitcoinTestFramework):
         res2 = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=1, estimate_mode="economical", add_to_wallet=False)
         assert_equal(self.nodes[1].decodepsbt(res1["psbt"])["fee"], self.nodes[1].decodepsbt(res2["psbt"])["fee"])
 
-        res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.00007, estimate_mode="btc/kb", add_to_wallet=False)
+        res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.00007, estimate_mode="SUGAR/kB", add_to_wallet=False)
         fee = self.nodes[1].decodepsbt(res["psbt"])["fee"]
         assert_fee_amount(fee, Decimal(len(res["hex"]) / 2), Decimal("0.00007"))
 
@@ -263,7 +263,7 @@ class WalletSendTest(BitcoinTestFramework):
         fee = self.nodes[1].decodepsbt(res["psbt"])["fee"]
         assert_fee_amount(fee, Decimal(len(res["hex"]) / 2), Decimal("0.00002"))
 
-        res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, arg_conf_target=0.00004531, arg_estimate_mode="btc/kb", add_to_wallet=False)
+        res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, arg_conf_target=0.00004531, arg_estimate_mode="SUGAR/kB", add_to_wallet=False)
         fee = self.nodes[1].decodepsbt(res["psbt"])["fee"]
         assert_fee_amount(fee, Decimal(len(res["hex"]) / 2), Decimal("0.00004531"))
 
@@ -273,11 +273,11 @@ class WalletSendTest(BitcoinTestFramework):
 
         # TODO: This test should pass with all modes, e.g. with the next line uncommented, for consistency with the other explicit feerate RPCs.
         # for mode in ["unset", "economical", "conservative", "btc/kb", "sat/b"]:
-        for mode in ["btc/kb", "sat/b"]:
+        for mode in ["SUGAR/kB", "sat/b"]:
             self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=-1, estimate_mode=mode,
                 expect_error=(-3, "Amount out of range"))
             self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0, estimate_mode=mode,
-                expect_error=(-4, "Fee rate (0.00000000 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)"))
+                expect_error=(-4, "Fee rate (0.00000000 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)"))
 
         for mode in ["foo", Decimal("3.141592")]:
             self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.1, estimate_mode=mode,
@@ -296,13 +296,13 @@ class WalletSendTest(BitcoinTestFramework):
 
         # TODO: error should use sat/B instead of BTC/kB if sat/B is selected.
         # Test setting explicit fee rate just below the minimum.
-        for unit, fee_rate in {"sat/B": 0.99999999, "BTC/kB": 0.00000999}.items():
+        for unit, fee_rate in {"sat/B": 0.99999999, "SUGAR/kB": 0.00000999}.items():
             self.log.info("Explicit fee rate raises RPC error 'fee rate too low' if conf_target {} and estimate_mode {} are passed".format(fee_rate, unit))
             self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=fee_rate, estimate_mode=unit,
-                expect_error=(-4, "Fee rate (0.00000999 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)"))
+                expect_error=(-4, "Fee rate (0.00000999 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)"))
 
         self.log.info("Explicit fee rate raises RPC error if estimate_mode is passed without a conf_target")
-        for unit, fee_rate in {"sat/B": 100, "BTC/kB": 0.001}.items():
+        for unit, fee_rate in {"sat/B": 100, "SUGAR/kB": 0.001}.items():
             self.test_send(from_wallet=w0, to_wallet=w1, amount=1, estimate_mode=unit,
                 expect_error=(-8, "Selected estimate_mode {} requires a fee rate to be specified in conf_target".format(unit)))
 
@@ -329,7 +329,7 @@ class WalletSendTest(BitcoinTestFramework):
 
         self.log.info("Manual change address and position...")
         self.test_send(from_wallet=w0, to_wallet=w1, amount=1, change_address="not an address",
-                       expect_error=(-5, "Change address must be a valid bitcoin address"))
+                       expect_error=(-5, "Change address must be a valid sugarchain address"))
         change_address = w0.getnewaddress()
         self.test_send(from_wallet=w0, to_wallet=w1, amount=1, add_to_wallet=False, change_address=change_address)
         assert res["complete"]
