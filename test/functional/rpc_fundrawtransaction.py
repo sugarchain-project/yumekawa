@@ -229,7 +229,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         dec_tx  = self.nodes[2].decoderawtransaction(rawtx)
         assert_equal(utx['txid'], dec_tx['vin'][0]['txid'])
 
-        assert_raises_rpc_error(-5, "Change address must be a valid bitcoin address", self.nodes[2].fundrawtransaction, rawtx, {'changeAddress':'foobar'})
+        assert_raises_rpc_error(-5, "Change address must be a valid sugarchain address", self.nodes[2].fundrawtransaction, rawtx, {'changeAddress':'foobar'})
 
     def test_valid_change_address(self):
         self.log.info("Test fundrawtxn with a provided change address")
@@ -754,7 +754,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         self.log.info("Test invalid fee rate settings")
         assert_raises_rpc_error(-8, "Invalid fee_rate 0.000 sat/vB (must be greater than 0)",
             node.fundrawtransaction, rawtx, {"fee_rate": 0, "add_inputs": True})
-        assert_raises_rpc_error(-8, "Invalid feeRate 0.00000000 BTC/kvB (must be greater than 0)",
+        assert_raises_rpc_error(-8, "Invalid feeRate 0.00000000 SUGAR/kvB (must be greater than 0)",
             node.fundrawtransaction, rawtx, {"feeRate": 0, "add_inputs": True})
         for param, value in {("fee_rate", 100000), ("feeRate", 1.000)}:
             assert_raises_rpc_error(-4, "Fee exceeds maximum configured by user (e.g. -maxtxfee, maxfeerate)",
@@ -771,7 +771,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         node.fundrawtransaction(rawtx, {"feeRate": 0.00000999, "add_inputs": True})
 
         self.log.info("- raises RPC error if both feeRate and fee_rate are passed")
-        assert_raises_rpc_error(-8, "Cannot specify both fee_rate (sat/vB) and feeRate (BTC/kvB)",
+        assert_raises_rpc_error(-8, "Cannot specify both fee_rate (sat/vB) and feeRate (SUGAR/kvB)",
             node.fundrawtransaction, rawtx, {"fee_rate": 0.1, "feeRate": 0.1, "add_inputs": True})
 
         self.log.info("- raises RPC error if both feeRate and estimate_mode passed")

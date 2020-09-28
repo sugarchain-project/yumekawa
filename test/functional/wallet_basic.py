@@ -262,7 +262,7 @@ class WalletTest(BitcoinTestFramework):
         for target, mode in product([-1, 0, 1009], ["economical", "conservative"]):
             assert_raises_rpc_error(-8, "Invalid conf_target, must be between 1 and 1008",  # max value of 1008 per src/policy/fees.h
                 self.nodes[2].sendmany, amounts={address: 1}, conf_target=target, estimate_mode=mode)
-        for target, mode in product([-1, 0], ["btc/kb", "sat/b"]):
+        for target, mode in product([-1, 0], ["SUGAR/kB", "sat/b"]):
             assert_raises_rpc_error(-8, 'Invalid estimate_mode parameter, must be one of: "unset", "economical", "conservative"',
                 self.nodes[2].sendmany, amounts={address: 1}, conf_target=target, estimate_mode=mode)
 
@@ -378,13 +378,13 @@ class WalletTest(BitcoinTestFramework):
             assert_raises_rpc_error(-3, "Address does not refer to a key", self.nodes[0].dumpprivkey, temp_address)
 
             # This will raise an exception for attempting to get the private key of an invalid Bitcoin address
-            assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].dumpprivkey, "invalid")
+            assert_raises_rpc_error(-5, "Invalid Sugarchain address", self.nodes[0].dumpprivkey, "invalid")
 
             # This will raise an exception for attempting to set a label for an invalid Bitcoin address
-            assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].setlabel, "invalid address", "label")
+            assert_raises_rpc_error(-5, "Invalid Sugarchain address", self.nodes[0].setlabel, "invalid address", "label")
 
             # This will raise an exception for importing an invalid address
-            assert_raises_rpc_error(-5, "Invalid Bitcoin address or script", self.nodes[0].importaddress, "invalid")
+            assert_raises_rpc_error(-5, "Invalid Sugarchain address or script", self.nodes[0].importaddress, "invalid")
 
             # This will raise an exception for attempting to import a pubkey that isn't in hex
             assert_raises_rpc_error(-5, "Pubkey must be a hex string", self.nodes[0].importpubkey, "not hex")
@@ -433,7 +433,7 @@ class WalletTest(BitcoinTestFramework):
             for target, mode in product([-1, 0, 1009], ["economical", "conservative"]):
                 assert_raises_rpc_error(-8, "Invalid conf_target, must be between 1 and 1008",  # max value of 1008 per src/policy/fees.h
                     self.nodes[2].sendtoaddress, address=address, amount=1, conf_target=target, estimate_mode=mode)
-            for target, mode in product([-1, 0], ["btc/kb", "sat/b"]):
+            for target, mode in product([-1, 0], ["SUGAR/kB", "sat/b"]):
                 assert_raises_rpc_error(-8, 'Invalid estimate_mode parameter, must be one of: "unset", "economical", "conservative"',
                     self.nodes[2].sendtoaddress, address=address, amount=1, conf_target=target, estimate_mode=mode)
 
