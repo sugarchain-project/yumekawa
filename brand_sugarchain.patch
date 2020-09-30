@@ -909,7 +909,7 @@ index e8698994f..72764916f 100755
  PATTERN_ONION = re.compile(r"^([abcdefghijklmnopqrstuvwxyz234567]{16}\.onion):(\d+)$")
  PATTERN_AGENT = re.compile(
 -    r"^/Satoshi:("
-+    r"^/SugarchainCore:("
++    r"^/Yumekawa:("
      r"0.14.(0|1|2|3|99)|"
      r"0.15.(0|1|2|99)|"
      r"0.16.(0|1|2|3|99)|"
@@ -1866,7 +1866,7 @@ index 993967a18..a2df60c69 100644
   * target servers or GUI users specifically.
   */
 -const std::string CLIENT_NAME("Satoshi");
-+const std::string CLIENT_NAME("SugarchainCore");
++const std::string CLIENT_NAME("Yumekawa");
  
  
  #ifdef HAVE_BUILD_INFO
