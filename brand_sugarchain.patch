@@ -955,7 +955,7 @@ index 07d61b3bd..d3885952b 100644
 -See the bitcoin wiki at:
 -  https://en.bitcoin.it/wiki/Main_Page
 +See the sugarchain wiki at:
-+  https://sugarchain.info/
++  https://sugarchain.org/
  for more help and information.
 diff --git a/doc/man/Makefile.am b/doc/man/Makefile.am
 index edbc0911a..4e209160d 100644
