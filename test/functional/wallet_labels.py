@@ -156,7 +156,7 @@ class WalletLabelsTest(BitcoinTestFramework):
             ad = BECH32_INVALID[l]
             assert_raises_rpc_error(
                 -5,
-                "Invalid Litecoin address or script",
+                "Invalid Bitcoin address or script",
                 lambda: wallet_watch_only.importaddress(label=l, rescan=False, address=ad),
             )
 
