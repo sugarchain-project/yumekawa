@@ -1904,7 +1904,7 @@ index 5ad807cba..5f6993dd8 100644
 +    const std::string URL_SOURCE_CODE = "<https://github.com/sugarchain-project/sugarchain>";
  
 -    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " ") + "\n" +
-+    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2011, COPYRIGHT_YEAR) + " ") + "\n" +
++    return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2019, COPYRIGHT_YEAR) + " ") + "\n" +
             "\n" +
             strprintf(_("Please contribute if you find %s useful. "
                         "Visit %s for further information about the software.").translated,
@@ -2523,7 +2523,7 @@ index 235722d09..562d4c2ee 100644
          .arg(m_blockchain_size_gb)
 -        .arg(2009)
 -        .arg(tr("Bitcoin"))
-+        .arg(2011)
++        .arg(2019)
 +        .arg(tr("Sugarchain"))
      );
      ui->lblExplanation2->setText(ui->lblExplanation2->text().arg(PACKAGE_NAME));
@@ -2677,7 +2677,7 @@ index 8e381861a..d722b7d47 100644
      QString titleText       = PACKAGE_NAME;
      QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
 -    QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2009, COPYRIGHT_YEAR)).c_str());
-+    QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2011, COPYRIGHT_YEAR)).c_str());
++    QString copyrightText   = QString::fromUtf8(CopyrightHolders(strprintf("\xc2\xA9 %u-%u ", 2019, COPYRIGHT_YEAR)).c_str());
      QString titleAddText    = networkStyle->getTitleAddText();
  
      QString font            = QApplication::font().toString();
