@@ -338,8 +338,8 @@ index fbf56443f..f3a2e3627 100644
  define(_COPYRIGHT_HOLDERS,[The %s developers])
 -define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Bitcoin Core]])
 -AC_INIT([Bitcoin Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/bitcoin/bitcoin/issues],[bitcoin],[https://bitcoincore.org/])
-+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Sugarchain Core]])
-+AC_INIT([Sugarchain Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/sugarchain-project/sugarchain/issues],[sugarchain],[https://sugarchain.org/])
++define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Sugarchain Yumekawa]])
++AC_INIT([Sugarchain Yumekawa],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/sugarchain-project/sugarchain/issues],[sugarchain],[https://sugarchain.org/])
  AC_CONFIG_SRCDIR([src/validation.cpp])
  AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
  AC_CONFIG_AUX_DIR([build-aux])
@@ -928,7 +928,7 @@ index 07d61b3bd..d3885952b 100644
 +++ b/doc/README_windows.txt
 @@ -1,9 +1,9 @@
 -Bitcoin Core
-+Sugarchain Core
++Sugarchain Yumekawa
  =============
  
  Intro
@@ -947,7 +947,7 @@ index 07d61b3bd..d3885952b 100644
  
 -Bitcoin Core is the original Bitcoin client and it builds the backbone of the network.
 -However, it downloads and stores the entire history of Bitcoin transactions;
-+Sugarchain Core is the original Sugarchain client and it builds the backbone of the network.
++Sugarchain Yumekawa is the original Sugarchain client and it builds the backbone of the network.
 +However, it downloads and stores the entire history of Sugarchain transactions;
  depending on the speed of your computer and network connection, the synchronization
  process can take anywhere from a few hours to a day or more.
@@ -3463,8 +3463,8 @@ index daefb161a..9dfcfd3d1 100755
          self.stop_node(4)
 -        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Bitcoin Core")
 -        node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Bitcoin Core")
-+        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Sugarchain Core")
-+        node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Sugarchain Core")
++        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Sugarchain Yumekawa")
++        node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Sugarchain Yumekawa")
          self.start_node(4)
  
          # Open most recent wallet in v0.16 (no loadwallet RPC)
