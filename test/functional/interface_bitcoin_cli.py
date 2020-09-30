@@ -2,7 +2,7 @@
 # Copyright (c) 2017-2020 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Test litecoin-cli"""
+"""Test sugarchain-cli"""
 
 from decimal import Decimal
 from test_framework.test_framework import BitcoinTestFramework
@@ -37,7 +37,7 @@ class TestBitcoinCli(BitcoinTestFramework):
         """Main test logic"""
         self.nodes[0].generate(BLOCKS)
 
-        self.log.info("Compare responses from getblockchaininfo RPC and `litecoin-cli getblockchaininfo`")
+        self.log.info("Compare responses from getblockchaininfo RPC and `sugarchain-cli getblockchaininfo`")
         cli_response = self.nodes[0].cli.getblockchaininfo()
         rpc_response = self.nodes[0].getblockchaininfo()
         assert_equal(cli_response, rpc_response)
@@ -84,7 +84,7 @@ class TestBitcoinCli(BitcoinTestFramework):
         assert_equal(cli_get_info['chain'], blockchain_info['chain'])
 
         if self.is_wallet_compiled():
-            self.log.info("Test -getinfo and litecoin-cli getwalletinfo return expected wallet info")
+            self.log.info("Test -getinfo and sugarchain-cli getwalletinfo return expected wallet info")
             assert_equal(cli_get_info['balance'], BALANCE)
             assert 'balances' not in cli_get_info.keys()
             wallet_info = self.nodes[0].getwalletinfo()

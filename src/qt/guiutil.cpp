@@ -669,8 +669,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "litecoin.desktop";
-    return GetAutostartDir() / strprintf("litecoin-%s.desktop", chain);
+        return GetAutostartDir() / "sugarchain.desktop";
+    return GetAutostartDir() / strprintf("sugarchain-%s.desktop", chain);
 }
 
 bool GetStartOnSystemStartup()

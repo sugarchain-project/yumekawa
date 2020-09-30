@@ -83,22 +83,22 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += litecoind
+  bin_PROGRAMS += sugarchaind
 endif
 
 if BUILD_BITCOIN_NODE
-  bin_PROGRAMS += litecoin-node
+  bin_PROGRAMS += sugarchain-node
 endif
 
 if BUILD_BITCOIN_CLI
-  bin_PROGRAMS += litecoin-cli
+  bin_PROGRAMS += sugarchain-cli
 endif
 if BUILD_BITCOIN_TX
-  bin_PROGRAMS += litecoin-tx
+  bin_PROGRAMS += sugarchain-tx
 endif
 if ENABLE_WALLET
 if BUILD_BITCOIN_WALLET
-  bin_PROGRAMS += litecoin-wallet
+  bin_PROGRAMS += sugarchain-wallet
 endif
 endif
 
@@ -567,16 +567,16 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind & bitcoin-node binaries #
-litecoin_daemon_sources = bitcoind.cpp
-litecoin_bin_cppflags = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-litecoin_bin_cxxflags = $(AM_CXXFLAGS) $(PIE_FLAGS)
-litecoin_bin_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+sugarchain_daemon_sources = bitcoind.cpp
+sugarchain_bin_cppflags = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+sugarchain_bin_cxxflags = $(AM_CXXFLAGS) $(PIE_FLAGS)
+sugarchain_bin_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
 if TARGET_WINDOWS
-litecoin_daemon_sources += bitcoind-res.rc
+sugarchain_daemon_sources += bitcoind-res.rc
 endif
 
-litecoin_bin_ldadd = \
+sugarchain_bin_ldadd = \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -589,50 +589,50 @@ litecoin_bin_ldadd = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-litecoin_bin_ldadd += $(BOOST_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+sugarchain_bin_ldadd += $(BOOST_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-litecoind_SOURCES = $(litecoin_daemon_sources)
-litecoind_CPPFLAGS = $(litecoin_bin_cppflags)
-litecoind_CXXFLAGS = $(litecoin_bin_cxxflags)
-litecoind_LDFLAGS = $(litecoin_bin_ldflags)
-litecoind_LDADD = $(LIBBITCOIN_SERVER) $(litecoin_bin_ldadd)
+sugarchaind_SOURCES = $(sugarchain_daemon_sources)
+sugarchaind_CPPFLAGS = $(sugarchain_bin_cppflags)
+sugarchaind_CXXFLAGS = $(sugarchain_bin_cxxflags)
+sugarchaind_LDFLAGS = $(sugarchain_bin_ldflags)
+sugarchaind_LDADD = $(LIBBITCOIN_SERVER) $(sugarchain_bin_ldadd)
 
-litecoin_node_SOURCES = $(litecoin_daemon_sources)
-litecoin_node_CPPFLAGS = $(litecoin_bin_cppflags)
-litecoin_node_CXXFLAGS = $(litecoin_bin_cxxflags)
-litecoin_node_LDFLAGS = $(litecoin_bin_ldflags)
-litecoin_node_LDADD = $(LIBBITCOIN_SERVER) $(litecoin_bin_ldadd)
+sugarchain_node_SOURCES = $(sugarchain_daemon_sources)
+sugarchain_node_CPPFLAGS = $(sugarchain_bin_cppflags)
+sugarchain_node_CXXFLAGS = $(sugarchain_bin_cxxflags)
+sugarchain_node_LDFLAGS = $(sugarchain_bin_ldflags)
+sugarchain_node_LDADD = $(LIBBITCOIN_SERVER) $(sugarchain_bin_ldadd)
 
 # bitcoin-cli binary #
-litecoin_cli_SOURCES = bitcoin-cli.cpp
-litecoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-litecoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-litecoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+sugarchain_cli_SOURCES = bitcoin-cli.cpp
+sugarchain_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+sugarchain_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+sugarchain_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
 if TARGET_WINDOWS
-litecoin_cli_SOURCES += bitcoin-cli-res.rc
+sugarchain_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-litecoin_cli_LDADD = \
+sugarchain_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-litecoin_cli_LDADD += $(BOOST_LIBS) $(EVENT_LIBS)
+sugarchain_cli_LDADD += $(BOOST_LIBS) $(EVENT_LIBS)
 #
 
 # bitcoin-tx binary #
-litecoin_tx_SOURCES = bitcoin-tx.cpp
-litecoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-litecoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-litecoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+sugarchain_tx_SOURCES = bitcoin-tx.cpp
+sugarchain_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+sugarchain_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+sugarchain_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
 if TARGET_WINDOWS
-litecoin_tx_SOURCES += bitcoin-tx-res.rc
+sugarchain_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-litecoin_tx_LDADD = \
+sugarchain_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -640,18 +640,18 @@ litecoin_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-litecoin_tx_LDADD += $(BOOST_LIBS)
+sugarchain_tx_LDADD += $(BOOST_LIBS)
 #
 
 # bitcoin-wallet binary #
-litecoin_wallet_SOURCES = bitcoin-wallet.cpp
-litecoin_wallet_CPPFLAGS = $(litecoin_bin_cppflags)
-litecoin_wallet_CXXFLAGS = $(litecoin_bin_cxxflags)
-litecoin_wallet_LDFLAGS = $(litecoin_bin_ldflags)
-litecoin_wallet_LDADD = $(LIBBITCOIN_WALLET_TOOL) $(litecoin_bin_ldadd)
+sugarchain_wallet_SOURCES = bitcoin-wallet.cpp
+sugarchain_wallet_CPPFLAGS = $(sugarchain_bin_cppflags)
+sugarchain_wallet_CXXFLAGS = $(sugarchain_bin_cxxflags)
+sugarchain_wallet_LDFLAGS = $(sugarchain_bin_ldflags)
+sugarchain_wallet_LDADD = $(LIBBITCOIN_WALLET_TOOL) $(sugarchain_bin_ldadd)
 
 if TARGET_WINDOWS
-litecoin_wallet_SOURCES += bitcoin-wallet-res.rc
+sugarchain_wallet_SOURCES += bitcoin-wallet-res.rc
 endif
 #
 

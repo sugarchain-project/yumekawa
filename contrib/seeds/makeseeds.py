@@ -211,7 +211,7 @@ def main():
     ips.sort(key=lambda x: (x['uptime'], x['lastsuccess'], x['ip']), reverse=True)
     # Filter out hosts with multiple bitcoin ports, these are likely abusive
     ips = filtermultiport(ips)
-    print('%s Filter out hosts with multiple litecoin ports' % (ip_stats(ips)), file=sys.stderr)
+    print('%s Filter out hosts with multiple sugarchain ports' % (ip_stats(ips)), file=sys.stderr)
     # Look up ASNs and limit results, both per ASN and globally.
     ips = filterbyasn(ips, MAX_SEEDS_PER_ASN, NSEEDS)
     print('%s Look up ASNs and limit results per ASN and per net' % (ip_stats(ips)), file=sys.stderr)

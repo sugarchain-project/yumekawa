@@ -34,7 +34,7 @@ NON_DETERMINISTIC_TESTS=(
     "wallet_tests/wallet_disableprivkeys"                     # validation.cpp: if (GetMainSignals().CallbacksPending() > 10)
 )
 
-TEST_BITCOIN_BINARY="src/test/test_litecoin"
+TEST_BITCOIN_BINARY="src/test/test_sugarchain"
 
 print_usage() {
     echo "Usage: $0 [custom test filter (default: all but known non-deterministic tests)] [number of test runs (default: 2)]"

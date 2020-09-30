@@ -10,7 +10,7 @@ export LC_ALL=C.UTF-8
 if [ "$TRAVIS_OS_NAME" == "osx" ]; then
   echo > $HOME/Library/Application\ Support/Litecoin
 else
-  DOCKER_EXEC echo \> \$HOME/.litecoin
+  DOCKER_EXEC echo \> \$HOME/.sugarchain
 fi
 
 DOCKER_EXEC mkdir -p ${DEPENDS_DIR}/SDKs ${DEPENDS_DIR}/sdk-sources
