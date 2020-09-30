@@ -204,8 +204,8 @@ class BitcoinTestFramework(metaclass=BitcoinTestMetaClass):
             "src",
             "sugarchain-cli" + config["environment"]["EXEEXT"],
         )
-        self.options.bitcoind = os.getenv("LITECOIND", default=fname_bitcoind)
-        self.options.bitcoincli = os.getenv("LITECOINCLI", default=fname_bitcoincli)
+        self.options.bitcoind = os.getenv("SUGARCHAIND", default=fname_bitcoind)
+        self.options.bitcoincli = os.getenv("SUGARCHAINCLI", default=fname_bitcoincli)
 
         os.environ['PATH'] = os.pathsep.join([
             os.path.join(config['environment']['BUILDDIR'], 'src'),
