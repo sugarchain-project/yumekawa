@@ -84,6 +84,9 @@ src/qt/bitcoin-qt.includes
 *.patch
 !depends/patches/**/*.patch
 
+# TODO.ZENY.BRANDING
+!brand_sugarchain.patch
+
 #libtool object files
 *.lo
 *.la
