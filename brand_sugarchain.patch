@@ -1,7 +1,7 @@
 From 81e186bb4ec3b1c4856a338d4fb476ca1a3c6828 Mon Sep 17 00:00:00 2001
 From: kanon <60179867+decryp2kanon@users.noreply.github.com>
 Date: Mon, 28 Sep 2020 09:24:51 +0900
-Subject: [PATCH] Litecoin: branding - Skip some tests because no previous
+Subject: [PATCH] Sugarchain: branding - Skip some tests because no previous
  releases   * feature_backwards_compatibility.py   * wallet_upgradewallet.py  
  * mempool_compatibility.py - No changes on comments or unnecessary word
 
@@ -214,7 +214,7 @@ index c8af4228f..6ae6bedfe 100644
  space := $(empty) $(empty)
  
 -OSX_APP=Bitcoin-Qt.app
-+OSX_APP=Litecoin-Qt.app
++OSX_APP=Sugarchain-Qt.app
  OSX_VOLNAME = $(subst $(space),-,$(PACKAGE_NAME))
  OSX_DMG = $(OSX_VOLNAME).dmg
  OSX_BACKGROUND_SVG=background.svg
@@ -223,7 +223,7 @@ index c8af4228f..6ae6bedfe 100644
  	$(INSTALL_DATA) $< $@
  
 -$(OSX_APP)/Contents/MacOS/Bitcoin-Qt: all-recursive
-+$(OSX_APP)/Contents/MacOS/Litecoin-Qt: all-recursive
++$(OSX_APP)/Contents/MacOS/Sugarchain-Qt: all-recursive
  	$(MKDIR_P) $(@D)
  	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM)  $(BITCOIN_QT_BIN) $@
  
@@ -232,7 +232,7 @@ index c8af4228f..6ae6bedfe 100644
  OSX_APP_BUILT=$(OSX_APP)/Contents/PkgInfo $(OSX_APP)/Contents/Resources/empty.lproj \
    $(OSX_APP)/Contents/Resources/bitcoin.icns $(OSX_APP)/Contents/Info.plist \
 -  $(OSX_APP)/Contents/MacOS/Bitcoin-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
-+  $(OSX_APP)/Contents/MacOS/Litecoin-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
++  $(OSX_APP)/Contents/MacOS/Sugarchain-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
  
  osx_volname:
  	echo $(OSX_VOLNAME) >$@
@@ -241,7 +241,7 @@ index c8af4228f..6ae6bedfe 100644
  	@cd $(@D); $(LN_S) /Applications $(@F)
  
 -$(APP_DIST_EXTRAS): $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Bitcoin-Qt
-+$(APP_DIST_EXTRAS): $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Litecoin-Qt
++$(APP_DIST_EXTRAS): $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Sugarchain-Qt
  
  $(OSX_DMG): $(APP_DIST_EXTRAS)
  	$(GENISOIMAGE) -no-cache-inodes -D -l -probe -V "$(OSX_VOLNAME)" -no-pad -r -dir-mode 0755 -apple -o $@ dist
@@ -250,7 +250,7 @@ index c8af4228f..6ae6bedfe 100644
  	$(PYTHON) $< "$@" "$(OSX_VOLNAME)"
  
 -$(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Bitcoin-Qt: $(OSX_APP_BUILT) $(OSX_PACKAGING)
-+$(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Litecoin-Qt: $(OSX_APP_BUILT) $(OSX_PACKAGING)
++$(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Sugarchain-Qt: $(OSX_APP_BUILT) $(OSX_PACKAGING)
  	INSTALLNAMETOOL=$(INSTALLNAMETOOL)  OTOOL=$(OTOOL) STRIP=$(STRIP) $(PYTHON) $(OSX_DEPLOY_SCRIPT) $(OSX_APP) -translations-dir=$(QT_TRANSLATION_DIR) -add-qt-tr $(OSX_QT_TRANSLATIONS) -verbose 2
  
  deploydir: $(APP_DIST_EXTRAS)
@@ -295,7 +295,7 @@ index 8ce839fc0..b61be473c 100755
  # Make sure default datadir does not exist and is never read by creating a dummy file
  if [ "$TRAVIS_OS_NAME" == "osx" ]; then
 -  echo > $HOME/Library/Application\ Support/Bitcoin
-+  echo > $HOME/Library/Application\ Support/Litecoin
++  echo > $HOME/Library/Application\ Support/Sugarchain
  else
 -  DOCKER_EXEC echo \> \$HOME/.bitcoin
 +  DOCKER_EXEC echo \> \$HOME/.sugarchain
@@ -338,8 +338,8 @@ index fbf56443f..f3a2e3627 100644
  define(_COPYRIGHT_HOLDERS,[The %s developers])
 -define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Bitcoin Core]])
 -AC_INIT([Bitcoin Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/bitcoin/bitcoin/issues],[bitcoin],[https://bitcoincore.org/])
-+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Litecoin Core]])
-+AC_INIT([Litecoin Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/sugarchain-project/sugarchain/issues],[sugarchain],[https://sugarchain.org/])
++define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Sugarchain Core]])
++AC_INIT([Sugarchain Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_REVISION, m4_if(_CLIENT_VERSION_BUILD, [0], [], _CLIENT_VERSION_BUILD))m4_if(_CLIENT_VERSION_RC, [0], [], [rc]_CLIENT_VERSION_RC),[https://github.com/sugarchain-project/sugarchain/issues],[sugarchain],[https://sugarchain.org/])
  AC_CONFIG_SRCDIR([src/validation.cpp])
  AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
  AC_CONFIG_AUX_DIR([build-aux])
@@ -835,7 +835,7 @@ index dc1c1882d..be4831075 100755
  
  ds['Applications']['Iloc'] = (370, 156)
 -ds['Bitcoin-Qt.app']['Iloc'] = (128, 156)
-+ds['Litecoin-Qt.app']['Iloc'] = (128, 156)
++ds['Sugarchain-Qt.app']['Iloc'] = (128, 156)
  
  ds.flush()
  ds.close()
@@ -848,7 +848,7 @@ index 31a97f0a2..fe11235bd 100755
  
  ROOTDIR=dist
 -BUNDLE="${ROOTDIR}/Bitcoin-Qt.app"
-+BUNDLE="${ROOTDIR}/Litecoin-Qt.app"
++BUNDLE="${ROOTDIR}/Sugarchain-Qt.app"
  CODESIGN=codesign
  TEMPDIR=sign.temp
  TEMPLIST=${TEMPDIR}/signatures.txt
@@ -861,7 +861,7 @@ index ef277a7f1..1dd36c9d1 100644
  			<integer>156</integer>
  		</array>
 -		<key>Bitcoin-Qt.app</key>
-+		<key>Litecoin-Qt.app</key>
++		<key>Sugarchain-Qt.app</key>
  		<array>
  			<integer>128</integer>
  			<integer>156</integer>
@@ -874,7 +874,7 @@ index d8088aa12..ab90cee6c 100755
      def __init__(self, path: str):
          self.path = path
 -        appName = "Bitcoin-Qt"
-+        appName = "Litecoin-Qt"
++        appName = "Sugarchain-Qt"
          self.binaryPath = os.path.join(path, "Contents", "MacOS", appName)
          if not os.path.exists(self.binaryPath):
              raise RuntimeError("Could not find bundle binary for " + path)
@@ -883,7 +883,7 @@ index d8088aa12..ab90cee6c 100755
  # ------------------------------------------------
  
 -target = os.path.join("dist", "Bitcoin-Qt.app")
-+target = os.path.join("dist", "Litecoin-Qt.app")
++target = os.path.join("dist", "Sugarchain-Qt.app")
  
  if verbose >= 2:
      print("+ Copying source bundle +")
@@ -909,7 +909,7 @@ index e8698994f..72764916f 100755
  PATTERN_ONION = re.compile(r"^([abcdefghijklmnopqrstuvwxyz234567]{16}\.onion):(\d+)$")
  PATTERN_AGENT = re.compile(
 -    r"^/Satoshi:("
-+    r"^/LitecoinCore:("
++    r"^/SugarchainCore:("
      r"0.14.(0|1|2|3|99)|"
      r"0.15.(0|1|2|99)|"
      r"0.16.(0|1|2|3|99)|"
@@ -928,13 +928,13 @@ index 07d61b3bd..d3885952b 100644
 +++ b/doc/README_windows.txt
 @@ -1,9 +1,9 @@
 -Bitcoin Core
-+Litecoin Core
++Sugarchain Core
  =============
  
  Intro
  -----
 -Bitcoin is a free open source peer-to-peer electronic cash system that is
-+Litecoin is a free open source peer-to-peer electronic cash system that is
++Sugarchain is a free open source peer-to-peer electronic cash system that is
  completely decentralized, without the need for a central server or trusted
  parties.  Users hold the crypto keys to their own money and transact directly
  with each other, with the help of a P2P network to check for double-spending.
@@ -947,8 +947,8 @@ index 07d61b3bd..d3885952b 100644
  
 -Bitcoin Core is the original Bitcoin client and it builds the backbone of the network.
 -However, it downloads and stores the entire history of Bitcoin transactions;
-+Litecoin Core is the original Litecoin client and it builds the backbone of the network.
-+However, it downloads and stores the entire history of Litecoin transactions;
++Sugarchain Core is the original Sugarchain client and it builds the backbone of the network.
++However, it downloads and stores the entire history of Sugarchain transactions;
  depending on the speed of your computer and network connection, the synchronization
  process can take anywhere from a few hours to a day or more.
  
@@ -1038,11 +1038,11 @@ index 90a592cc6..912b2e020 100644
  
  #
 -# JSON-RPC options (for controlling a running Bitcoin/bitcoind process)
-+# JSON-RPC options (for controlling a running Litecoin/sugarchaind process)
++# JSON-RPC options (for controlling a running Sugarchain/sugarchaind process)
  #
  
 -# server=1 tells Bitcoin-Qt and bitcoind to accept JSON-RPC commands
-+# server=1 tells Litecoin-Qt and sugarchaind to accept JSON-RPC commands
++# server=1 tells Sugarchain-Qt and sugarchaind to accept JSON-RPC commands
  #server=0
  
  # Bind to given address to listen for JSON-RPC connections.
@@ -1080,7 +1080,7 @@ index 90a592cc6..912b2e020 100644
  
 -# server=1 tells Bitcoin-Qt to accept JSON-RPC commands.
 -# it is also read by bitcoind to determine if RPC should be enabled
-+# server=1 tells Litecoin-Qt to accept JSON-RPC commands.
++# server=1 tells Sugarchain-Qt to accept JSON-RPC commands.
 +# it is also read by sugarchaind to determine if RPC should be enabled
  #rpcallowip=10.1.1.34/255.255.255.0
  #rpcallowip=1.2.3.4/24
@@ -1090,7 +1090,7 @@ index 90a592cc6..912b2e020 100644
  #rpcport=8332
  
 -# You can use Bitcoin or bitcoind to send commands to Bitcoin/bitcoind
-+# You can use Litecoin or sugarchaind to send commands to Litecoin/sugarchaind
++# You can use Sugarchain or sugarchaind to send commands to Sugarchain/sugarchaind
  # running on another host using this option:
  #rpcconnect=127.0.0.1
  
@@ -1108,7 +1108,7 @@ index 90a592cc6..912b2e020 100644
  # User interface options
  
 -# Start Bitcoin minimized
-+# Start Litecoin minimized
++# Start Sugarchain minimized
  #min=1
  
  # Minimize to the system tray
@@ -1121,18 +1121,18 @@ index 3befba342..c702a7856 100644
  
    <key>CFBundleExecutable</key>
 -  <string>Bitcoin-Qt</string>
-+  <string>Litecoin-Qt</string>
++  <string>Sugarchain-Qt</string>
  
    <key>CFBundleName</key>
 -  <string>Bitcoin-Qt</string>
-+  <string>Litecoin-Qt</string>
++  <string>Sugarchain-Qt</string>
  
    <key>LSHasLocalizedDisplayName</key>
    <true/>
  
    <key>CFBundleIdentifier</key>
 -  <string>org.bitcoinfoundation.Bitcoin-Qt</string>
-+  <string>org.sugarchain.Litecoin-Qt</string>
++  <string>org.sugarchain.Sugarchain-Qt</string>
  
    <key>CFBundleURLTypes</key>
    <array>
@@ -1141,7 +1141,7 @@ index 3befba342..c702a7856 100644
        <string>Editor</string>
        <key>CFBundleURLName</key>
 -      <string>org.bitcoin.BitcoinPayment</string>
-+      <string>org.sugarchain.LitecoinPayment</string>
++      <string>org.sugarchain.SugarchainPayment</string>
        <key>CFBundleURLSchemes</key>
        <array>
 -        <string>bitcoin</string>
@@ -1171,7 +1171,7 @@ index 5431909bb..7dc6a5c48 100644
  
  # Installer attributes
 -InstallDir $PROGRAMFILES64\Bitcoin
-+InstallDir $PROGRAMFILES64\Litecoin
++InstallDir $PROGRAMFILES64\Sugarchain
  CRCCheck on
  XPStyle on
  BrandingText " "
@@ -1186,7 +1186,7 @@ index 5431909bb..7dc6a5c48 100644
      WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
      WriteRegStr HKCR "@PACKAGE_TARNAME@" "URL Protocol" ""
 -    WriteRegStr HKCR "@PACKAGE_TARNAME@" "" "URL:Bitcoin"
-+    WriteRegStr HKCR "@PACKAGE_TARNAME@" "" "URL:Litecoin"
++    WriteRegStr HKCR "@PACKAGE_TARNAME@" "" "URL:Sugarchain"
      WriteRegStr HKCR "@PACKAGE_TARNAME@\DefaultIcon" "" $INSTDIR\@BITCOIN_GUI_NAME@@EXEEXT@
      WriteRegStr HKCR "@PACKAGE_TARNAME@\shell\open\command" "" '"$INSTDIR\@BITCOIN_GUI_NAME@@EXEEXT@" "%1"'
  SectionEnd
@@ -1195,7 +1195,7 @@ index 5431909bb..7dc6a5c48 100644
      Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
      Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\@PACKAGE_NAME@ (testnet, 64-bit).lnk"
 -    Delete /REBOOTOK "$SMSTARTUP\Bitcoin.lnk"
-+    Delete /REBOOTOK "$SMSTARTUP\Litecoin.lnk"
++    Delete /REBOOTOK "$SMSTARTUP\Sugarchain.lnk"
      Delete /REBOOTOK $INSTDIR\uninstall.exe
      Delete /REBOOTOK $INSTDIR\debug.log
      Delete /REBOOTOK $INSTDIR\db.log
@@ -1638,7 +1638,7 @@ index 58f8f1e8a..61100934a 100644
          BEGIN
 -            VALUE "CompanyName",        "Bitcoin"
 -            VALUE "FileDescription",    "bitcoin-cli (JSON-RPC client for " PACKAGE_NAME ")"
-+            VALUE "CompanyName",        "Litecoin"
++            VALUE "CompanyName",        "Sugarchain"
 +            VALUE "FileDescription",    "sugarchain-cli (JSON-RPC client for " PACKAGE_NAME ")"
              VALUE "FileVersion",        VER_FILEVERSION_STR
 -            VALUE "InternalName",       "bitcoin-cli"
@@ -1726,8 +1726,8 @@ index 3e49b820b..c5111fb0e 100644
          BEGIN
 -            VALUE "CompanyName",        "Bitcoin"
 -            VALUE "FileDescription",    "bitcoin-tx (CLI Bitcoin transaction editor utility)"
-+            VALUE "CompanyName",        "Litecoin"
-+            VALUE "FileDescription",    "sugarchain-tx (CLI Litecoin transaction editor utility)"
++            VALUE "CompanyName",        "Sugarchain"
++            VALUE "FileDescription",    "sugarchain-tx (CLI Sugarchain transaction editor utility)"
              VALUE "FileVersion",        VER_FILEVERSION_STR
 -            VALUE "InternalName",       "bitcoin-tx"
 +            VALUE "InternalName",       "sugarchain-tx"
@@ -1767,7 +1767,7 @@ index e9fa2dbb4..277890cca 100644
          BEGIN
 -            VALUE "CompanyName",        "Bitcoin"
 -            VALUE "FileDescription",    "bitcoin-wallet (CLI tool for " PACKAGE_NAME " wallets)"
-+            VALUE "CompanyName",        "Litecoin"
++            VALUE "CompanyName",        "Sugarchain"
 +            VALUE "FileDescription",    "sugarchain-wallet (CLI tool for " PACKAGE_NAME " wallets)"
              VALUE "FileVersion",        VER_FILEVERSION_STR
 -            VALUE "InternalName",       "bitcoin-wallet"
@@ -1821,8 +1821,8 @@ index 3a64acd5d..3dc7c38af 100644
          BEGIN
 -            VALUE "CompanyName",        "Bitcoin"
 -            VALUE "FileDescription",    "bitcoind (Bitcoin node with a JSON-RPC server)"
-+            VALUE "CompanyName",        "Litecoin"
-+            VALUE "FileDescription",    "sugarchaind (Litecoin node with a JSON-RPC server)"
++            VALUE "CompanyName",        "Sugarchain"
++            VALUE "FileDescription",    "sugarchaind (Sugarchain node with a JSON-RPC server)"
              VALUE "FileVersion",        VER_FILEVERSION_STR
 -            VALUE "InternalName",       "bitcoind"
 +            VALUE "InternalName",       "sugarchaind"
@@ -1866,7 +1866,7 @@ index 993967a18..a2df60c69 100644
   * target servers or GUI users specifically.
   */
 -const std::string CLIENT_NAME("Satoshi");
-+const std::string CLIENT_NAME("LitecoinCore");
++const std::string CLIENT_NAME("SugarchainCore");
  
  
  #ifdef HAVE_BUILD_INFO
@@ -1879,7 +1879,7 @@ index 4b0b224c6..6c0e65e6d 100644
  //             being a noop at runtime.
  #if defined(NDEBUG)
 -# error "Bitcoin cannot be compiled without assertions."
-+# error "Litecoin cannot be compiled without assertions."
++# error "Sugarchain cannot be compiled without assertions."
  #endif
  
  // Assumption: We assume a C++11 (ISO/IEC 14882:2011) compiler (minimum requirement).
@@ -1942,13 +1942,13 @@ index aa4ec0449..32cb96704 100644
      {
      case SendingTab:
 -        ui->labelExplanation->setText(tr("These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins."));
-+        ui->labelExplanation->setText(tr("These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins."));
++        ui->labelExplanation->setText(tr("These are your Sugarchain addresses for sending payments. Always check the amount and the receiving address before sending coins."));
          ui->deleteAddress->setVisible(true);
          ui->newAddress->setVisible(true);
          break;
      case ReceivingTab:
 -        ui->labelExplanation->setText(tr("These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.\nSigning is only possible with addresses of the type 'legacy'."));
-+        ui->labelExplanation->setText(tr("These are your Litecoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.\nSigning is only possible with addresses of the type 'legacy'."));
++        ui->labelExplanation->setText(tr("These are your Sugarchain addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.\nSigning is only possible with addresses of the type 'legacy'."));
          ui->deleteAddress->setVisible(false);
          ui->newAddress->setVisible(false);
          break;
@@ -1983,7 +1983,7 @@ index 0c2dcc358..54e61ef42 100644
  
      sendCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/send"), tr("&Send"), this);
 -    sendCoinsAction->setStatusTip(tr("Send coins to a Bitcoin address"));
-+    sendCoinsAction->setStatusTip(tr("Send coins to a Litecoin address"));
++    sendCoinsAction->setStatusTip(tr("Send coins to a Sugarchain address"));
      sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
      sendCoinsAction->setCheckable(true);
      sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
@@ -2001,16 +2001,16 @@ index 0c2dcc358..54e61ef42 100644
      changePassphraseAction->setStatusTip(tr("Change the passphrase used for wallet encryption"));
      signMessageAction = new QAction(tr("Sign &message..."), this);
 -    signMessageAction->setStatusTip(tr("Sign messages with your Bitcoin addresses to prove you own them"));
-+    signMessageAction->setStatusTip(tr("Sign messages with your Litecoin addresses to prove you own them"));
++    signMessageAction->setStatusTip(tr("Sign messages with your Sugarchain addresses to prove you own them"));
      verifyMessageAction = new QAction(tr("&Verify message..."), this);
 -    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Bitcoin addresses"));
-+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Litecoin addresses"));
++    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Sugarchain addresses"));
      m_load_psbt_action = new QAction(tr("&Load PSBT from file..."), this);
 -    m_load_psbt_action->setStatusTip(tr("Load Partially Signed Bitcoin Transaction"));
-+    m_load_psbt_action->setStatusTip(tr("Load Partially Signed Litecoin Transaction"));
++    m_load_psbt_action->setStatusTip(tr("Load Partially Signed Sugarchain Transaction"));
      m_load_psbt_clipboard_action = new QAction(tr("Load PSBT from clipboard..."), this);
 -    m_load_psbt_clipboard_action->setStatusTip(tr("Load Partially Signed Bitcoin Transaction from clipboard"));
-+    m_load_psbt_clipboard_action->setStatusTip(tr("Load Partially Signed Litecoin Transaction from clipboard"));
++    m_load_psbt_clipboard_action->setStatusTip(tr("Load Partially Signed Sugarchain Transaction from clipboard"));
  
      openRPCConsoleAction = new QAction(tr("Node window"), this);
      openRPCConsoleAction->setStatusTip(tr("Open node debugging and diagnostic console"));
@@ -2028,7 +2028,7 @@ index 0c2dcc358..54e61ef42 100644
      showHelpMessageAction = new QAction(tr("&Command-line options"), this);
      showHelpMessageAction->setMenuRole(QAction::NoRole);
 -    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible Bitcoin command-line options").arg(PACKAGE_NAME));
-+    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible Litecoin command-line options").arg(PACKAGE_NAME));
++    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible Sugarchain command-line options").arg(PACKAGE_NAME));
  
      m_mask_values_action = new QAction(tr("&Mask values"), this);
      m_mask_values_action->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_M));
@@ -2037,7 +2037,7 @@ index 0c2dcc358..54e61ef42 100644
  
      if (m_node.getNetworkActive()) {
 -        tooltip = tr("%n active connection(s) to Bitcoin network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
-+        tooltip = tr("%n active connection(s) to Litecoin network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
++        tooltip = tr("%n active connection(s) to Sugarchain network", "", count) + QString(".<br>") + tr("Click to disable network activity.");
      } else {
          tooltip = tr("Network activity disabled.") + QString("<br>") + tr("Click to enable network activity again.");
          icon = ":/icons/network_disabled";
@@ -2065,9 +2065,9 @@ index fd55c547f..1d8489e0f 100644
 -    case BTC: return QString("Bitcoins");
 -    case mBTC: return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
 -    case uBTC: return QString("Micro-Bitcoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-+    case BTC: return QString("Litecoins");
-+    case mBTC: return QString("Milli-Litecoins (1 / 1" THIN_SP_UTF8 "000)");
-+    case uBTC: return QString("Micro-Litecoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
++    case BTC: return QString("Sugarchains");
++    case mBTC: return QString("Milli-Sugarchains (1 / 1" THIN_SP_UTF8 "000)");
++    case uBTC: return QString("Micro-Sugarchains (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
      case SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
      default: return QString("???");
      }
@@ -2080,7 +2080,7 @@ index e0af9a20a..42de2ead6 100644
          case AddressTableModel::INVALID_ADDRESS:
              QMessageBox::warning(this, windowTitle(),
 -                tr("The entered address \"%1\" is not a valid Bitcoin address.").arg(ui->addressEdit->text()),
-+                tr("The entered address \"%1\" is not a valid Litecoin address.").arg(ui->addressEdit->text()),
++                tr("The entered address \"%1\" is not a valid Sugarchain address.").arg(ui->addressEdit->text()),
                  QMessageBox::Ok, QMessageBox::Ok);
              break;
          case AddressTableModel::DUPLICATE_ADDRESS:
@@ -2155,7 +2155,7 @@ index 0016fb973..c9656b850 100644
          <widget class="QCheckBox" name="mapPortUpnp">
           <property name="toolTip">
 -          <string>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
-+          <string>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
++          <string>Automatically open the Sugarchain client port on the router. This only works when your router supports UPnP and it is enabled.</string>
           </property>
           <property name="text">
            <string>Map port using &amp;UPnP</string>
@@ -2164,7 +2164,7 @@ index 0016fb973..c9656b850 100644
          <widget class="QCheckBox" name="connectSocks">
           <property name="toolTip">
 -          <string>Connect to the Bitcoin network through a SOCKS5 proxy.</string>
-+          <string>Connect to the Litecoin network through a SOCKS5 proxy.</string>
++          <string>Connect to the Sugarchain network through a SOCKS5 proxy.</string>
           </property>
           <property name="text">
            <string>&amp;Connect through SOCKS5 proxy (default proxy):</string>
@@ -2173,7 +2173,7 @@ index 0016fb973..c9656b850 100644
          <widget class="QCheckBox" name="connectSocksTor">
           <property name="toolTip">
 -          <string>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor onion services.</string>
-+          <string>Connect to the Litecoin network through a separate SOCKS5 proxy for Tor onion services.</string>
++          <string>Connect to the Sugarchain network through a separate SOCKS5 proxy for Tor onion services.</string>
           </property>
           <property name="text">
            <string>Use separate SOCKS&amp;5 proxy to reach peers via Tor onion services:</string>
@@ -2186,7 +2186,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="toolTip">
 -               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</string>
-+               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</string>
++               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Sugarchain network after a connection is established, but this process has not completed yet.</string>
                </property>
                <property name="text">
                 <string/>
@@ -2267,7 +2267,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="toolTip">
 -               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</string>
-+               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</string>
++               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Sugarchain network after a connection is established, but this process has not completed yet.</string>
                </property>
                <property name="text">
                 <string/>
@@ -2280,7 +2280,7 @@ index 06d39426c..2ebaa50ff 100644
           <widget class="QLabel" name="label_3">
            <property name="toolTip">
 -           <string>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</string>
-+           <string>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Litecoin network.</string>
++           <string>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Sugarchain network.</string>
            </property>
            <property name="text">
             <string>&amp;Message:</string>
@@ -2351,7 +2351,7 @@ index 934363af1..e55d7c9b7 100644
         <widget class="QValidatedLineEdit" name="payTo">
          <property name="toolTip">
 -         <string>The Bitcoin address to send the payment to</string>
-+         <string>The Litecoin address to send the payment to</string>
++         <string>The Sugarchain address to send the payment to</string>
          </property>
         </widget>
        </item>
@@ -2369,7 +2369,7 @@ index 934363af1..e55d7c9b7 100644
       <widget class="QLabel" name="messageTextLabel">
        <property name="toolTip">
 -       <string>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</string>
-+       <string>A message that was attached to the sugarchain: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Litecoin network.</string>
++       <string>A message that was attached to the sugarchain: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Sugarchain network.</string>
        </property>
        <property name="textFormat">
         <enum>Qt::PlainText</enum>
@@ -2391,7 +2391,7 @@ index f42d19093..d8110873b 100644
            <widget class="QValidatedLineEdit" name="addressIn_SM">
             <property name="toolTip">
 -            <string>The Bitcoin address to sign the message with</string>
-+            <string>The Litecoin address to sign the message with</string>
++            <string>The Sugarchain address to sign the message with</string>
             </property>
            </widget>
           </item>
@@ -2400,7 +2400,7 @@ index f42d19093..d8110873b 100644
            <widget class="QPushButton" name="signMessageButton_SM">
             <property name="toolTip">
 -            <string>Sign the message to prove you own this Bitcoin address</string>
-+            <string>Sign the message to prove you own this Litecoin address</string>
++            <string>Sign the message to prove you own this Sugarchain address</string>
             </property>
             <property name="text">
              <string>Sign &amp;Message</string>
@@ -2409,7 +2409,7 @@ index f42d19093..d8110873b 100644
            <widget class="QValidatedLineEdit" name="addressIn_VM">
             <property name="toolTip">
 -            <string>The Bitcoin address the message was signed with</string>
-+            <string>The Litecoin address the message was signed with</string>
++            <string>The Sugarchain address the message was signed with</string>
             </property>
            </widget>
           </item>
@@ -2418,7 +2418,7 @@ index f42d19093..d8110873b 100644
            <widget class="QPushButton" name="verifyMessageButton_VM">
             <property name="toolTip">
 -            <string>Verify the message to ensure it was signed with the specified Bitcoin address</string>
-+            <string>Verify the message to ensure it was signed with the specified Litecoin address</string>
++            <string>Verify the message to ensure it was signed with the specified Sugarchain address</string>
             </property>
             <property name="text">
              <string>Verify &amp;Message</string>
@@ -2436,12 +2436,12 @@ index 882d2c8f5..e768c1619 100644
 -#define QAPP_APP_NAME_TESTNET "Bitcoin-Qt-testnet"
 -#define QAPP_APP_NAME_SIGNET "Bitcoin-Qt-signet"
 -#define QAPP_APP_NAME_REGTEST "Bitcoin-Qt-regtest"
-+#define QAPP_ORG_NAME "Litecoin"
++#define QAPP_ORG_NAME "Sugarchain"
 +#define QAPP_ORG_DOMAIN "sugarchain.org"
-+#define QAPP_APP_NAME_DEFAULT "Litecoin-Qt"
-+#define QAPP_APP_NAME_TESTNET "Litecoin-Qt-testnet"
-+#define QAPP_APP_NAME_SIGNET "Litecoin-Qt-signet"
-+#define QAPP_APP_NAME_REGTEST "Litecoin-Qt-regtest"
++#define QAPP_APP_NAME_DEFAULT "Sugarchain-Qt"
++#define QAPP_APP_NAME_TESTNET "Sugarchain-Qt-testnet"
++#define QAPP_APP_NAME_SIGNET "Sugarchain-Qt-signet"
++#define QAPP_APP_NAME_REGTEST "Sugarchain-Qt-regtest"
  
  /* One gigabyte (GB) in bytes */
  static constexpr uint64_t GB_BYTES{1000000000};
@@ -2454,7 +2454,7 @@ index bab17562a..22c9a54bb 100644
      // We don't want translators to use own addresses in translations
      // and this is the only place, where this address is supplied.
 -    widget->setPlaceholderText(QObject::tr("Enter a Bitcoin address (e.g. %1)").arg(
-+    widget->setPlaceholderText(QObject::tr("Enter a Litecoin address (e.g. %1)").arg(
++    widget->setPlaceholderText(QObject::tr("Enter a Sugarchain address (e.g. %1)").arg(
          QString::fromStdString(DummyAddress(Params()))));
      widget->setValidator(new BitcoinAddressEntryValidator(parent));
      widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -2481,12 +2481,12 @@ index bab17562a..22c9a54bb 100644
      std::string chain = gArgs.GetChainName();
      if (chain == CBaseChainParams::MAIN)
 -        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitcoin.lnk";
-+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Litecoin.lnk";
++        return GetSpecialFolderPath(CSIDL_STARTUP) / "Sugarchain.lnk";
      if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
 -        return GetSpecialFolderPath(CSIDL_STARTUP) / "Bitcoin (testnet).lnk";
 -    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Bitcoin (%s).lnk", chain);
-+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Litecoin (testnet).lnk";
-+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Litecoin (%s).lnk", chain);
++        return GetSpecialFolderPath(CSIDL_STARTUP) / "Sugarchain (testnet).lnk";
++    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Sugarchain (%s).lnk", chain);
  }
  
  bool GetStartOnSystemStartup()
@@ -2506,10 +2506,10 @@ index bab17562a..22c9a54bb 100644
          optionFile << "Type=Application\n";
          if (chain == CBaseChainParams::MAIN)
 -            optionFile << "Name=Bitcoin\n";
-+            optionFile << "Name=Litecoin\n";
++            optionFile << "Name=Sugarchain\n";
          else
 -            optionFile << strprintf("Name=Bitcoin (%s)\n", chain);
-+            optionFile << strprintf("Name=Litecoin (%s)\n", chain);
++            optionFile << strprintf("Name=Sugarchain (%s)\n", chain);
          optionFile << "Exec=" << pszExePath << strprintf(" -min -chain=%s\n", chain);
          optionFile << "Terminal=false\n";
          optionFile << "Hidden=false\n";
@@ -2524,7 +2524,7 @@ index 235722d09..562d4c2ee 100644
 -        .arg(2009)
 -        .arg(tr("Bitcoin"))
 +        .arg(2011)
-+        .arg(tr("Litecoin"))
++        .arg(tr("Sugarchain"))
      );
      ui->lblExplanation2->setText(ui->lblExplanation2->text().arg(PACKAGE_NAME));
  
@@ -2533,7 +2533,7 @@ index 235722d09..562d4c2ee 100644
      ui->lblExplanation3->setVisible(prune_checked);
      ui->sizeWarningLabel->setText(
 -        tr("%1 will download and store a copy of the Bitcoin block chain.").arg(PACKAGE_NAME) + " " +
-+        tr("%1 will download and store a copy of the Litecoin block chain.").arg(PACKAGE_NAME) + " " +
++        tr("%1 will download and store a copy of the Sugarchain block chain.").arg(PACKAGE_NAME) + " " +
          storageRequiresMsg.arg(m_required_space_gb) + " " +
          tr("The wallet will also be stored in this directory.")
      );
@@ -2546,7 +2546,7 @@ index 2d26a8383..2b305fcb6 100644
  {
      if (self == [NSBundle mainBundle]) {
 -        return @"org.bitcoinfoundation.Bitcoin-Qt";
-+        return @"org.sugarchain.Litecoin-Qt";
++        return @"org.sugarchain.Sugarchain-Qt";
      } else {
          return [self __bundleIdentifier];
      }
@@ -2581,7 +2581,7 @@ index 8679ced68..a88fda55f 100644
  static QString ipcServerName()
  {
 -    QString name("BitcoinQt");
-+    QString name("LitecoinQt");
++    QString name("SugarchainQt");
  
      // Append a simple hash of the datadir
      // Note that GetDataDir(true) returns a different path
@@ -2611,7 +2611,7 @@ index 8679ced68..a88fda55f 100644
              else
                  Q_EMIT message(tr("URI handling"),
 -                    tr("URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters."),
-+                    tr("URI cannot be parsed! This can be caused by an invalid Litecoin address or malformed URI parameters."),
++                    tr("URI cannot be parsed! This can be caused by an invalid Sugarchain address or malformed URI parameters."),
                      CClientUIInterface::ICON_WARNING);
  
              return;
@@ -2625,8 +2625,8 @@ index 94ae25647..9f7d0ea80 100644
          BEGIN
 -            VALUE "CompanyName",        "Bitcoin"
 -            VALUE "FileDescription",    PACKAGE_NAME " (GUI node for Bitcoin)"
-+            VALUE "CompanyName",        "Litecoin"
-+            VALUE "FileDescription",    PACKAGE_NAME " (GUI node for Litecoin)"
++            VALUE "CompanyName",        "Sugarchain"
++            VALUE "FileDescription",    PACKAGE_NAME " (GUI node for Sugarchain)"
              VALUE "FileVersion",        VER_FILEVERSION_STR
 -            VALUE "InternalName",       "bitcoin-qt"
 +            VALUE "InternalName",       "sugarchain-qt"
@@ -2646,7 +2646,7 @@ index 97fb88d71..c5740738c 100644
          if (model->wallet().privateKeysDisabled()) {
              ui->sendButton->setText(tr("Cr&eate Unsigned"));
 -            ui->sendButton->setToolTip(tr("Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.").arg(PACKAGE_NAME));
-+            ui->sendButton->setToolTip(tr("Creates a Partially Signed Litecoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.").arg(PACKAGE_NAME));
++            ui->sendButton->setToolTip(tr("Creates a Partially Signed Sugarchain Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.").arg(PACKAGE_NAME));
          }
  
          // set the smartfee-sliders default value (wallets default conf.target or last stored value)
@@ -2655,7 +2655,7 @@ index 97fb88d71..c5740738c 100644
      question_string.append("<br /><span style='font-size:10pt;'>");
      if (model->wallet().privateKeysDisabled()) {
 -        question_string.append(tr("Please, review your transaction proposal. This will produce a Partially Signed Bitcoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.").arg(PACKAGE_NAME));
-+        question_string.append(tr("Please, review your transaction proposal. This will produce a Partially Signed Litecoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.").arg(PACKAGE_NAME));
++        question_string.append(tr("Please, review your transaction proposal. This will produce a Partially Signed Sugarchain Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.").arg(PACKAGE_NAME));
      } else {
          question_string.append(tr("Please, review your transaction."));
      }
@@ -2664,7 +2664,7 @@ index 97fb88d71..c5740738c 100644
          else if (!IsValidDestination(dest)) // Invalid address
          {
 -            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Bitcoin address"));
-+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Litecoin address"));
++            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Sugarchain address"));
          }
          else // Valid address
          {
@@ -2716,7 +2716,7 @@ index 86356b43c..075d291a7 100644
      BitcoinApplication app;
      app.setNode(*node);
 -    app.setApplicationName("Bitcoin-Qt-test");
-+    app.setApplicationName("Litecoin-Qt-test");
++    app.setApplicationName("Sugarchain-Qt-test");
  
      app.node().context()->args = &gArgs;     // Make gArgs available in the NodeContext
      AppTests app_tests(app);
@@ -2900,7 +2900,7 @@ index e60e0a2d9..8113dc205 100644
  {
      return RPCHelpMan{"decodepsbt",
 -                "\nReturn a JSON object representing the serialized, base64-encoded partially signed Bitcoin transaction.\n",
-+                "\nReturn a JSON object representing the serialized, base64-encoded partially signed Litecoin transaction.\n",
++                "\nReturn a JSON object representing the serialized, base64-encoded partially signed Sugarchain transaction.\n",
                  {
                      {"psbt", RPCArg::Type::STR, RPCArg::Optional::NO, "The PSBT base64 string"},
                  },
@@ -2909,7 +2909,7 @@ index e60e0a2d9..8113dc205 100644
                                          {RPCResult::Type::STR_HEX, "hex", "The hex"},
                                          {RPCResult::Type::STR, "type", "The type, eg 'pubkeyhash'"},
 -                                        {RPCResult::Type::STR, "address"," Bitcoin address if there is one"},
-+                                        {RPCResult::Type::STR, "address"," Litecoin address if there is one"},
++                                        {RPCResult::Type::STR, "address"," Sugarchain address if there is one"},
                                      }},
                                  }},
                                  {RPCResult::Type::OBJ_DYN, "partial_signatures", /* optional */ true, "",
@@ -2918,7 +2918,7 @@ index e60e0a2d9..8113dc205 100644
  {
      return RPCHelpMan{"combinepsbt",
 -                "\nCombine multiple partially signed Bitcoin transactions into one transaction.\n"
-+                "\nCombine multiple partially signed Litecoin transactions into one transaction.\n"
++                "\nCombine multiple partially signed Sugarchain transactions into one transaction.\n"
                  "Implements the Combiner role.\n",
                  {
                      {"txs", RPCArg::Type::ARR, RPCArg::Optional::NO, "The base64 strings of partially signed transactions",
@@ -2940,7 +2940,7 @@ index cfe457509..456f02fc7 100644
              CTxDestination destination = DecodeDestination(name_);
              if (!IsValidDestination(destination)) {
 -                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Bitcoin address: ") + name_);
-+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Litecoin address: ") + name_);
++                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Sugarchain address: ") + name_);
              }
  
              if (!destinations.insert(destination).second) {
@@ -2997,7 +2997,7 @@ index 41715aac1..2c86fcda8 100644
  #ifdef WIN32
      // Windows
 -    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitcoin";
-+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Litecoin";
++    return GetSpecialFolderPath(CSIDL_APPDATA) / "Sugarchain";
  #else
      fs::path pathRet;
      char* pszHome = getenv("HOME");
@@ -3006,7 +3006,7 @@ index 41715aac1..2c86fcda8 100644
  #ifdef MAC_OSX
      // Mac
 -    return pathRet / "Library/Application Support/Bitcoin";
-+    return pathRet / "Library/Application Support/Litecoin";
++    return pathRet / "Library/Application Support/Sugarchain";
  #else
      // Unix
 -    return pathRet / ".bitcoin";
@@ -3032,7 +3032,7 @@ index 9e36a0978..9679c61f5 100644
              "Note: Use \"getwalletinfo\" to query the scanning progress.\n",
                  {
 -                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The Bitcoin address (or hex-encoded script)"},
-+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The Litecoin address (or hex-encoded script)"},
++                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The Sugarchain address (or hex-encoded script)"},
                      {"label", RPCArg::Type::STR, /* default */ "\"\"", "An optional label"},
                      {"rescan", RPCArg::Type::BOOL, /* default */ "true", "Rescan the wallet for transactions"},
                      {"p2sh", RPCArg::Type::BOOL, /* default */ "false", "Add the P2SH version of the script as well"},
@@ -3041,7 +3041,7 @@ index 9e36a0978..9679c61f5 100644
              pwallet->ImportScriptPubKeys(strLabel, scripts, false /* have_solving_data */, true /* apply_label */, 1 /* timestamp */);
          } else {
 -            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address or script");
-+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Litecoin address or script");
++            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Sugarchain address or script");
          }
      }
      if (fRescan)
@@ -3059,7 +3059,7 @@ index 9e36a0978..9679c61f5 100644
      CTxDestination dest = DecodeDestination(strAddress);
      if (!IsValidDestination(dest)) {
 -        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address");
-+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Litecoin address");
++        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Sugarchain address");
      }
      auto keyid = GetKeyForDestination(spk_man, dest);
      if (keyid.IsNull()) {
@@ -3068,7 +3068,7 @@ index 9e36a0978..9679c61f5 100644
  
      // produce output
 -    file << strprintf("# Wallet dump created by Bitcoin %s\n", CLIENT_BUILD);
-+    file << strprintf("# Wallet dump created by Litecoin %s\n", CLIENT_BUILD);
++    file << strprintf("# Wallet dump created by Sugarchain %s\n", CLIENT_BUILD);
      file << strprintf("# * Created on %s\n", FormatISO8601DateTime(GetTime()));
      file << strprintf("# * Best block at time of backup was %i (%s),\n", wallet.GetLastBlockHeight(), wallet.GetLastBlockHash().ToString());
      int64_t block_time = 0;
@@ -3099,7 +3099,7 @@ index 2217bc287..d9d9c201b 100644
  {
      return RPCHelpMan{"getnewaddress",
 -                "\nReturns a new Bitcoin address for receiving payments.\n"
-+                "\nReturns a new Litecoin address for receiving payments.\n"
++                "\nReturns a new Sugarchain address for receiving payments.\n"
                  "If 'label' is specified, it is added to the address book \n"
                  "so payments received with the address will be associated with 'label'.\n",
                  {
@@ -3117,7 +3117,7 @@ index 2217bc287..d9d9c201b 100644
  {
      return RPCHelpMan{"getrawchangeaddress",
 -                "\nReturns a new Bitcoin address, for receiving change.\n"
-+                "\nReturns a new Litecoin address, for receiving change.\n"
++                "\nReturns a new Sugarchain address, for receiving change.\n"
                  "This is for use with raw transactions, NOT normal use.\n",
                  {
                      {"address_type", RPCArg::Type::STR, /* default */ "set by -changetype", "The address type to use. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\"."},
@@ -3135,7 +3135,7 @@ index 2217bc287..d9d9c201b 100644
      CTxDestination dest = DecodeDestination(request.params[0].get_str());
      if (!IsValidDestination(dest)) {
 -        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address");
-+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Litecoin address");
++        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Sugarchain address");
      }
  
      std::string label = LabelFromValue(request.params[1]);
@@ -3144,7 +3144,7 @@ index 2217bc287..d9d9c201b 100644
          CTxDestination dest = DecodeDestination(address);
          if (!IsValidDestination(dest)) {
 -            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Bitcoin address: ") + address);
-+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Litecoin address: ") + address);
++            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Sugarchain address: ") + address);
          }
  
          if (destinations.count(dest)) {
@@ -3189,7 +3189,7 @@ index 2217bc287..d9d9c201b 100644
          CTxDestination dest = DecodeDestination(params[0].get_str());
          if (!IsValidDestination(dest)) {
 -            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address");
-+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Litecoin address");
++            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Sugarchain address");
          }
          CScript script_pub_key = GetScriptForDestination(dest);
          if (!wallet.IsMine(script_pub_key)) {
@@ -3224,7 +3224,7 @@ index 2217bc287..d9d9c201b 100644
      return RPCHelpMan{"addmultisigaddress",
                  "\nAdd an nrequired-to-sign multisignature address to the wallet. Requires a new wallet backup.\n"
 -                "Each key is a Bitcoin address or hex-encoded public key.\n"
-+                "Each key is a Litecoin address or hex-encoded public key.\n"
++                "Each key is a Sugarchain address or hex-encoded public key.\n"
                  "This functionality is only intended for use with non-watchonly addresses.\n"
                  "See `importaddress` for watchonly p2sh address support.\n"
                  "If 'label' is specified, assign address to that label.\n",
@@ -3327,7 +3327,7 @@ index 2217bc287..d9d9c201b 100644
              CTxDestination dest = DecodeDestination(input.get_str());
              if (!IsValidDestination(dest)) {
 -                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Bitcoin address: ") + input.get_str());
-+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Litecoin address: ") + input.get_str());
++                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Sugarchain address: ") + input.get_str());
              }
              if (!destinations.insert(dest).second) {
                  throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, duplicated address: ") + input.get_str());
@@ -3463,8 +3463,8 @@ index daefb161a..9dfcfd3d1 100755
          self.stop_node(4)
 -        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Bitcoin Core")
 -        node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Bitcoin Core")
-+        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Litecoin Core")
-+        node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Litecoin Core")
++        node_v17.assert_start_raises_init_error(["-wallet=w3_v18"], "Error: Error loading w3_v18: Wallet requires newer version of Sugarchain Core")
++        node_v17.assert_start_raises_init_error(["-wallet=w3"], "Error: Error loading w3: Wallet requires newer version of Sugarchain Core")
          self.start_node(4)
  
          # Open most recent wallet in v0.16 (no loadwallet RPC)
@@ -3642,7 +3642,7 @@ index e73ec9081..69192ba12 100755
      def run_test(self):
          self.url = urllib.parse.urlparse(self.nodes[0].url)
 -        self.log.info("Mine blocks and send Bitcoin to node 1")
-+        self.log.info("Mine blocks and send Litecoin to node 1")
++        self.log.info("Mine blocks and send Sugarchain to node 1")
  
          # Random address so node1's balance doesn't increase
          not_related_address = "2MxqoHEdNQTyYeX1mHcbrrpzgojbosTpCvJ"
@@ -3694,7 +3694,7 @@ index 23b5e647d..a82ace59a 100755
          self.nodes[0].createrawtransaction(inputs=[], outputs=[])
          assert_raises_rpc_error(-8, "Data must be hexadecimal string", self.nodes[0].createrawtransaction, [], {'data': 'foo'})
 -        assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].createrawtransaction, [], {'foo': 0})
-+        assert_raises_rpc_error(-5, "Invalid Litecoin address", self.nodes[0].createrawtransaction, [], {'foo': 0})
++        assert_raises_rpc_error(-5, "Invalid Sugarchain address", self.nodes[0].createrawtransaction, [], {'foo': 0})
          assert_raises_rpc_error(-3, "Invalid amount", self.nodes[0].createrawtransaction, [], {address: 'foo'})
          assert_raises_rpc_error(-3, "Amount out of range", self.nodes[0].createrawtransaction, [], {address: -1})
          assert_raises_rpc_error(-8, "Invalid parameter, duplicated address: %s" % address, self.nodes[0].createrawtransaction, [], multidict([(address, 1), (address, 1)]))
@@ -3738,7 +3738,7 @@ index 5f9b316b1..830e218c8 100755
          self.recvbuf = b""
          self.magic_bytes = MAGIC_BYTES[net]
 -        logger.debug('Connecting to Bitcoin Node: %s:%d' % (self.dstaddr, self.dstport))
-+        logger.debug('Connecting to Litecoin Node: %s:%d' % (self.dstaddr, self.dstport))
++        logger.debug('Connecting to Sugarchain Node: %s:%d' % (self.dstaddr, self.dstport))
  
          loop = NetworkThread.network_event_loop
          conn_gen_unsafe = loop.create_connection(lambda: self, host=self.dstaddr, port=self.dstport)
@@ -4065,15 +4065,15 @@ index bb208341a..c96ab439f 100755
  
              # This will raise an exception for attempting to get the private key of an invalid Bitcoin address
 -            assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].dumpprivkey, "invalid")
-+            assert_raises_rpc_error(-5, "Invalid Litecoin address", self.nodes[0].dumpprivkey, "invalid")
++            assert_raises_rpc_error(-5, "Invalid Sugarchain address", self.nodes[0].dumpprivkey, "invalid")
  
              # This will raise an exception for attempting to set a label for an invalid Bitcoin address
 -            assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].setlabel, "invalid address", "label")
-+            assert_raises_rpc_error(-5, "Invalid Litecoin address", self.nodes[0].setlabel, "invalid address", "label")
++            assert_raises_rpc_error(-5, "Invalid Sugarchain address", self.nodes[0].setlabel, "invalid address", "label")
  
              # This will raise an exception for importing an invalid address
 -            assert_raises_rpc_error(-5, "Invalid Bitcoin address or script", self.nodes[0].importaddress, "invalid")
-+            assert_raises_rpc_error(-5, "Invalid Litecoin address or script", self.nodes[0].importaddress, "invalid")
++            assert_raises_rpc_error(-5, "Invalid Sugarchain address or script", self.nodes[0].importaddress, "invalid")
  
              # This will raise an exception for attempting to import a pubkey that isn't in hex
              assert_raises_rpc_error(-5, "Pubkey must be a hex string", self.nodes[0].importpubkey, "not hex")
@@ -4118,7 +4118,7 @@ index cff59bd1c..9a99c921b 100755
              assert_raises_rpc_error(
                  -5,
 -                "Invalid Bitcoin address or script",
-+                "Invalid Litecoin address or script",
++                "Invalid Sugarchain address or script",
                  lambda: wallet_watch_only.importaddress(label=l, rescan=False, address=ad),
              )
  
