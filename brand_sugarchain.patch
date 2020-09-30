@@ -1929,7 +1929,7 @@ index 883940f73..1cf732239 100644
  #include <string>
  
 -const std::string CURRENCY_UNIT = "BTC"; // One formatted unit
-+const std::string CURRENCY_UNIT = "LTC"; // One formatted unit
++const std::string CURRENCY_UNIT = "SUGAR"; // One formatted unit
  const std::string CURRENCY_ATOM = "sat"; // One indivisible minimum value unit
  
  /* Used to determine type of fee estimation requested */
@@ -2052,9 +2052,9 @@ index fd55c547f..1d8489e0f 100644
 -    case BTC: return QString("BTC");
 -    case mBTC: return QString("mBTC");
 -    case uBTC: return QString::fromUtf8("µBTC (bits)");
-+    case BTC: return QString("LTC");
-+    case mBTC: return QString("mLTC");
-+    case uBTC: return QString::fromUtf8("µLTC (bits)");
++    case BTC: return QString("SUGAR");
++    case mBTC: return QString("mSUGAR");
++    case uBTC: return QString::fromUtf8("µSUGAR (bits)");
      case SAT: return QString("Satoshi (sat)");
      default: return QString("???");
      }
@@ -2093,7 +2093,7 @@ index 5ce469ee9..af95b612d 100644
           </property>
           <property name="text">
 -          <string notr="true">0.00 BTC</string>
-+          <string notr="true">0.00 LTC</string>
++          <string notr="true">0.00 SUGAR</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2102,7 +2102,7 @@ index 5ce469ee9..af95b612d 100644
           </property>
           <property name="text">
 -          <string notr="true">0.00 BTC</string>
-+          <string notr="true">0.00 LTC</string>
++          <string notr="true">0.00 SUGAR</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2111,7 +2111,7 @@ index 5ce469ee9..af95b612d 100644
           </property>
           <property name="text">
 -          <string notr="true">0.00 BTC</string>
-+          <string notr="true">0.00 LTC</string>
++          <string notr="true">0.00 SUGAR</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2120,7 +2120,7 @@ index 5ce469ee9..af95b612d 100644
           </property>
           <property name="text">
 -          <string notr="true">0.00 BTC</string>
-+          <string notr="true">0.00 LTC</string>
++          <string notr="true">0.00 SUGAR</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2195,7 +2195,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">0.00000000 BTC</string>
-+               <string notr="true">0.00000000 LTC</string>
++               <string notr="true">0.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2204,7 +2204,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">0.00000000 BTC</string>
-+               <string notr="true">0.00000000 LTC</string>
++               <string notr="true">0.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2213,7 +2213,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">0.00000000 BTC</string>
-+               <string notr="true">0.00000000 LTC</string>
++               <string notr="true">0.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2222,7 +2222,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">0.00000000 BTC</string>
-+               <string notr="true">0.00000000 LTC</string>
++               <string notr="true">0.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2231,7 +2231,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">21 000 000.00000000 BTC</string>
-+               <string notr="true">21 000 000.00000000 LTC</string>
++               <string notr="true">21 000 000.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2240,7 +2240,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">21 000 000.00000000 BTC</string>
-+               <string notr="true">21 000 000.00000000 LTC</string>
++               <string notr="true">21 000 000.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2249,7 +2249,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">21 000 000.00000000 BTC</string>
-+               <string notr="true">21 000 000.00000000 LTC</string>
++               <string notr="true">21 000 000.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2258,7 +2258,7 @@ index 4d3f90c48..2956d4f44 100644
                </property>
                <property name="text">
 -               <string notr="true">21 000 000.00000000 BTC</string>
-+               <string notr="true">21 000 000.00000000 LTC</string>
++               <string notr="true">21 000 000.00000000 SUGAR</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2293,7 +2293,7 @@ index cfd4bf33d..59580fb34 100644
                   </property>
                   <property name="text">
 -                  <string notr="true">0.00 BTC</string>
-+                  <string notr="true">0.00 LTC</string>
++                  <string notr="true">0.00 SUGAR</string>
                   </property>
                   <property name="textInteractionFlags">
                    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2302,7 +2302,7 @@ index cfd4bf33d..59580fb34 100644
                   </property>
                   <property name="text">
 -                  <string notr="true">0.00 BTC</string>
-+                  <string notr="true">0.00 LTC</string>
++                  <string notr="true">0.00 SUGAR</string>
                   </property>
                   <property name="textInteractionFlags">
                    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2311,7 +2311,7 @@ index cfd4bf33d..59580fb34 100644
                   </property>
                   <property name="text">
 -                  <string notr="true">0.00 BTC</string>
-+                  <string notr="true">0.00 LTC</string>
++                  <string notr="true">0.00 SUGAR</string>
                   </property>
                   <property name="textInteractionFlags">
                    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2320,7 +2320,7 @@ index cfd4bf33d..59580fb34 100644
                   </property>
                   <property name="text">
 -                  <string notr="true">0.00 BTC</string>
-+                  <string notr="true">0.00 LTC</string>
++                  <string notr="true">0.00 SUGAR</string>
                   </property>
                   <property name="textInteractionFlags">
                    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2338,7 +2338,7 @@ index cfd4bf33d..59580fb34 100644
           </property>
           <property name="text">
 -          <string notr="true">123.456 BTC</string>
-+          <string notr="true">123.456 LTC</string>
++          <string notr="true">123.456 SUGAR</string>
           </property>
           <property name="textInteractionFlags">
            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -2953,7 +2953,7 @@ index e20900ed1..64f24cfb6 100644
      CFeeRate feeRate;
      feeRate = CFeeRate(1);
 -    BOOST_CHECK_EQUAL(feeRate.ToString(), "0.00000001 BTC/kB");
-+    BOOST_CHECK_EQUAL(feeRate.ToString(), "0.00000001 LTC/kB");
++    BOOST_CHECK_EQUAL(feeRate.ToString(), "0.00000001 SUGAR/kB");
  }
  
  BOOST_AUTO_TEST_SUITE_END()
@@ -3919,11 +3919,11 @@ index af7f0b62f..1e83c2d31 100644
      target_fee = round(tx_size * fee_per_kB / 1000, 8)
      if fee < target_fee:
 -        raise AssertionError("Fee of %s BTC too low! (Should be %s BTC)" % (str(fee), str(target_fee)))
-+        raise AssertionError("Fee of %s LTC too low! (Should be %s LTC)" % (str(fee), str(target_fee)))
++        raise AssertionError("Fee of %s SUGAR too low! (Should be %s SUGAR)" % (str(fee), str(target_fee)))
      # allow the wallet's estimation to be at most 2 bytes off
      if fee > (tx_size + 2) * fee_per_kB / 1000:
 -        raise AssertionError("Fee of %s BTC too high! (Should be %s BTC)" % (str(fee), str(target_fee)))
-+        raise AssertionError("Fee of %s LTC too high! (Should be %s LTC)" % (str(fee), str(target_fee)))
++        raise AssertionError("Fee of %s SUGAR too high! (Should be %s SUGAR)" % (str(fee), str(target_fee)))
  
  
  def assert_equal(thing1, thing2, *args):
@@ -4131,12 +4131,12 @@ index b64d2030a..0761c350a 100755
          # TODO: error should say 1.000 sat/b
          self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.1, estimate_mode="sat/b",
 -                       expect_error=(-4, "Fee rate (0.00000100 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)"))
-+                       expect_error=(-4, "Fee rate (0.00000100 LTC/kB) is lower than the minimum fee rate setting (0.00001000 LTC/kB)"))
++                       expect_error=(-4, "Fee rate (0.00000100 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)"))
  
 -        self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.000001, estimate_mode="BTC/KB",
 -                       expect_error=(-4, "Fee rate (0.00000100 BTC/kB) is lower than the minimum fee rate setting (0.00001000 BTC/kB)"))
-+        self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.000001, estimate_mode="LTC/KB",
-+                       expect_error=(-4, "Fee rate (0.00000100 LTC/kB) is lower than the minimum fee rate setting (0.00001000 LTC/kB)"))
++        self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.000001, estimate_mode="SUGAR/KB",
++                       expect_error=(-4, "Fee rate (0.00000100 SUGAR/kB) is lower than the minimum fee rate setting (0.00001000 SUGAR/kB)"))
  
          # TODO: Return hex if fee rate is below -maxmempool
          # res = self.test_send(from_wallet=w0, to_wallet=w1, amount=1, conf_target=0.1, estimate_mode="sat/b", add_to_wallet=False)
