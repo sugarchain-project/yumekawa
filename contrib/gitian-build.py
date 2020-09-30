@@ -25,8 +25,8 @@ def setup():
     else:
         programs += ['apt-cacher-ng', 'lxc', 'debootstrap']
     subprocess.check_call(['sudo', 'apt-get', 'install', '-qq'] + programs)
-    if not os.path.isdir('gitian.sigs.ltc'):
-        subprocess.check_call(['git', 'clone', 'https://github.com/sugarchain-project/gitian.sigs.ltc.git'])
+    if not os.path.isdir('gitian.sigs.sugar'):
+        subprocess.check_call(['git', 'clone', 'https://github.com/sugarchain-project/gitian.sigs.sugar.git'])
     if not os.path.isdir('sugarchain-detached-sigs'):
         subprocess.check_call(['git', 'clone', 'https://github.com/sugarchain-project/sugarchain-detached-sigs.git'])
     if not os.path.isdir('gitian-builder'):
@@ -61,20 +61,20 @@ def build():
     if args.linux:
         print('\nCompiling ' + args.version + ' Linux')
         subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'sugarchain='+args.commit, '--url', 'sugarchain='+args.url, '../sugarchain/contrib/gitian-descriptors/gitian-linux.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs.ltc/', '../sugarchain/contrib/gitian-descriptors/gitian-linux.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs.sugar/', '../sugarchain/contrib/gitian-descriptors/gitian-linux.yml'])
         subprocess.check_call('mv build/out/sugarchain-*.tar.gz build/out/src/sugarchain-*.tar.gz ../sugarchain-binaries/'+args.version, shell=True)
 
     if args.windows:
         print('\nCompiling ' + args.version + ' Windows')
         subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'sugarchain='+args.commit, '--url', 'sugarchain='+args.url, '../sugarchain/contrib/gitian-descriptors/gitian-win.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs.ltc/', '../sugarchain/contrib/gitian-descriptors/gitian-win.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs.sugar/', '../sugarchain/contrib/gitian-descriptors/gitian-win.yml'])
         subprocess.check_call('mv build/out/sugarchain-*-win-unsigned.tar.gz inputs/', shell=True)
         subprocess.check_call('mv build/out/sugarchain-*.zip build/out/sugarchain-*.exe build/out/src/sugarchain-*.tar.gz ../sugarchain-binaries/'+args.version, shell=True)
 
     if args.macos:
         print('\nCompiling ' + args.version + ' MacOS')
         subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'sugarchain='+args.commit, '--url', 'sugarchain='+args.url, '../sugarchain/contrib/gitian-descriptors/gitian-osx.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs.ltc/', '../sugarchain/contrib/gitian-descriptors/gitian-osx.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs.sugar/', '../sugarchain/contrib/gitian-descriptors/gitian-osx.yml'])
         subprocess.check_call('mv build/out/sugarchain-*-osx-unsigned.tar.gz inputs/', shell=True)
         subprocess.check_call('mv build/out/sugarchain-*.tar.gz build/out/sugarchain-*.dmg build/out/src/sugarchain-*.tar.gz ../sugarchain-binaries/'+args.version, shell=True)
 
@@ -82,7 +82,7 @@ def build():
 
     if args.commit_files:
         print('\nCommitting '+args.version+' Unsigned Sigs\n')
-        os.chdir('gitian.sigs.ltc')
+        os.chdir('gitian.sigs.sugar')
         subprocess.check_call(['git', 'add', args.version+'-linux/'+args.signer])
         subprocess.check_call(['git', 'add', args.version+'-win-unsigned/'+args.signer])
         subprocess.check_call(['git', 'add', args.version+'-osx-unsigned/'+args.signer])
@@ -97,21 +97,21 @@ def sign():
         print('\nSigning ' + args.version + ' Windows')
         subprocess.check_call('cp inputs/sugarchain-' + args.version + '-win-unsigned.tar.gz inputs/sugarchain-win-unsigned.tar.gz', shell=True)
         subprocess.check_call(['bin/gbuild', '--skip-image', '--upgrade', '--commit', 'signature='+args.commit, '../sugarchain/contrib/gitian-descriptors/gitian-win-signer.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-signed', '--destination', '../gitian.sigs.ltc/', '../sugarchain/contrib/gitian-descriptors/gitian-win-signer.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-signed', '--destination', '../gitian.sigs.sugar/', '../sugarchain/contrib/gitian-descriptors/gitian-win-signer.yml'])
         subprocess.check_call('mv build/out/sugarchain-*win64-setup.exe ../sugarchain-binaries/'+args.version, shell=True)
 
     if args.macos:
         print('\nSigning ' + args.version + ' MacOS')
         subprocess.check_call('cp inputs/sugarchain-' + args.version + '-osx-unsigned.tar.gz inputs/sugarchain-osx-unsigned.tar.gz', shell=True)
         subprocess.check_call(['bin/gbuild', '--skip-image', '--upgrade', '--commit', 'signature='+args.commit, '../sugarchain/contrib/gitian-descriptors/gitian-osx-signer.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs.ltc/', '../sugarchain/contrib/gitian-descriptors/gitian-osx-signer.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs.sugar/', '../sugarchain/contrib/gitian-descriptors/gitian-osx-signer.yml'])
         subprocess.check_call('mv build/out/sugarchain-osx-signed.dmg ../sugarchain-binaries/'+args.version+'/sugarchain-'+args.version+'-osx.dmg', shell=True)
 
     os.chdir(workdir)
 
     if args.commit_files:
         print('\nCommitting '+args.version+' Signed Sigs\n')
-        os.chdir('gitian.sigs.ltc')
+        os.chdir('gitian.sigs.sugar')
         subprocess.check_call(['git', 'add', args.version+'-win-signed/'+args.signer])
         subprocess.check_call(['git', 'add', args.version+'-osx-signed/'+args.signer])
         subprocess.check_call(['git', 'commit', '-a', '-m', 'Add '+args.version+' signed binary sigs for '+args.signer])
@@ -123,27 +123,27 @@ def verify():
     os.chdir('gitian-builder')
 
     print('\nVerifying v'+args.version+' Linux\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-linux', '../sugarchain/contrib/gitian-descriptors/gitian-linux.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.sugar/', '-r', args.version+'-linux', '../sugarchain/contrib/gitian-descriptors/gitian-linux.yml']):
         print('Verifying v'+args.version+' Linux FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' Windows\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-win-unsigned', '../sugarchain/contrib/gitian-descriptors/gitian-win.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.sugar/', '-r', args.version+'-win-unsigned', '../sugarchain/contrib/gitian-descriptors/gitian-win.yml']):
         print('Verifying v'+args.version+' Windows FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' MacOS\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-osx-unsigned', '../sugarchain/contrib/gitian-descriptors/gitian-osx.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.sugar/', '-r', args.version+'-osx-unsigned', '../sugarchain/contrib/gitian-descriptors/gitian-osx.yml']):
         print('Verifying v'+args.version+' MacOS FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' Signed Windows\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-win-signed', '../sugarchain/contrib/gitian-descriptors/gitian-win-signer.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.sugar/', '-r', args.version+'-win-signed', '../sugarchain/contrib/gitian-descriptors/gitian-win-signer.yml']):
         print('Verifying v'+args.version+' Signed Windows FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' Signed MacOS\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-osx-signed', '../sugarchain/contrib/gitian-descriptors/gitian-osx-signer.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs.sugar/', '-r', args.version+'-osx-signed', '../sugarchain/contrib/gitian-descriptors/gitian-osx-signer.yml']):
         print('Verifying v'+args.version+' Signed MacOS FAILED\n')
         rc = 1
 
@@ -253,7 +253,7 @@ def main():
         sign()
 
     if args.verify:
-        os.chdir('gitian.sigs.ltc')
+        os.chdir('gitian.sigs.sugar')
         subprocess.check_call(['git', 'pull'])
         os.chdir(workdir)
         sys.exit(verify())
