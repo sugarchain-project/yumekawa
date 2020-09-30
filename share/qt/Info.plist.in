@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>Litecoin-Qt</string>
+  <string>Sugarchain-Qt</string>
 
   <key>CFBundleName</key>
-  <string>Litecoin-Qt</string>
+  <string>Sugarchain-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.sugarchain.Litecoin-Qt</string>
+  <string>org.sugarchain.Sugarchain-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.sugarchain.LitecoinPayment</string>
+      <string>org.sugarchain.SugarchainPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>sugarchain</string>

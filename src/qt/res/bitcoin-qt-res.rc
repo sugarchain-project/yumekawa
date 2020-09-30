@@ -19,8 +19,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Litecoin"
-            VALUE "FileDescription",    PACKAGE_NAME " (GUI node for Litecoin)"
+            VALUE "CompanyName",        "Sugarchain"
+            VALUE "FileDescription",    PACKAGE_NAME " (GUI node for Sugarchain)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "sugarchain-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR

@@ -16,8 +16,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Litecoin"
-            VALUE "FileDescription",    "sugarchain-tx (CLI Litecoin transaction editor utility)"
+            VALUE "CompanyName",        "Sugarchain"
+            VALUE "FileDescription",    "sugarchain-tx (CLI Sugarchain transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "sugarchain-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR
