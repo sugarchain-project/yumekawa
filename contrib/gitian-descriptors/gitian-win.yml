@@ -23,7 +23,7 @@ packages:
 - "ca-certificates"
 - "python3"
 remotes:
-- "url": "https://github.com/sugarchain-project/sugarchain.git"
+- "url": "https://github.com/sugarchain-project/yumekawa.git"
   "dir": "sugarchain"
 files: []
 script: |
