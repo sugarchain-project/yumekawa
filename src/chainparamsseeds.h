@@ -8,6 +8,7 @@
  * IPv4 as well as onion addresses are wrapped inside an IPv6 address accordingly.
  */
 static SeedSpec6 pnSeed6_main[] = {
+    {{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xff,0xff,0x02,0x27,0xad,0x7e}, 34230}, // TODO.ZENY.PORT // 34230 // travis build error on OSX when empty
 };
 
 static SeedSpec6 pnSeed6_test[] = {
