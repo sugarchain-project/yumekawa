@@ -268,7 +268,7 @@ public:
             bin = ParseHex("512103ad5e0edad18cb1f0fc0d28a3d4f1f3e445640337489abb10404f2d1e086be430210359ef5021964fe22d6f8e05b2463c9540ce96883fe3b278760f048f5189f2e6c452ae");
             vSeeds.emplace_back("178.128.221.177");
             vSeeds.emplace_back("2a01:7c8:d005:390::5");
-            vSeeds.emplace_back("ntv3mtqw5wt63red.onion:38333");
+            vSeeds.emplace_back("ntv3mtqw5wt63red.onion:54230");
 
             consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000d145533ce");
             consensus.defaultAssumeValid = uint256S("0x00000128807d9175c494e24d805fc7854f7d79aa965cbb128342ad8b70cecfa5"); // 5348
@@ -327,7 +327,7 @@ public:
         uint256 hash = h.GetHash();
         memcpy(pchMessageStart, hash.begin(), 4);
 
-        nDefaultPort = 38333;
+        nDefaultPort = 54230;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1598918400, 52613770, 0x1e0377ae, 1, 50 * COIN);
