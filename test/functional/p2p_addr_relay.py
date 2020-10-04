@@ -34,7 +34,7 @@ class AddrReceiver(P2PInterface):
         for addr in message.addrs:
             assert_equal(addr.nServices, 9)
             assert addr.ip.startswith('123.123.123.')
-            assert (34230 <= addr.port < 8343)
+            assert (34230 <= addr.port < 34240) # TODO.ZENY.PORT # 34230
 
 
 class AddrTest(BitcoinTestFramework):
