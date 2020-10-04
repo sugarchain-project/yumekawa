@@ -48,7 +48,7 @@ std::unique_ptr<CBaseChainParams> CreateBaseChainParams(const std::string& chain
     } else if (chain == CBaseChainParams::TESTNET) {
         return MakeUnique<CBaseChainParams>("testnet3", 44229, 18334); // TODO.ZENY.PORT
     } else if (chain == CBaseChainParams::SIGNET) {
-        return MakeUnique<CBaseChainParams>("signet", 38332, 38334);
+        return MakeUnique<CBaseChainParams>("signet", 54229, 38334); // TODO.ZENY.PORT
     } else if (chain == CBaseChainParams::REGTEST) {
         return MakeUnique<CBaseChainParams>("regtest", 45339, 18445); // TODO.ZENY.PORT
     }
