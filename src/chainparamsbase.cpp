@@ -50,7 +50,7 @@ std::unique_ptr<CBaseChainParams> CreateBaseChainParams(const std::string& chain
     } else if (chain == CBaseChainParams::SIGNET) {
         return MakeUnique<CBaseChainParams>("signet", 38332, 38334);
     } else if (chain == CBaseChainParams::REGTEST) {
-        return MakeUnique<CBaseChainParams>("regtest", 18443, 18445);
+        return MakeUnique<CBaseChainParams>("regtest", 45339, 18445); // TODO.ZENY.PORT
     }
     throw std::runtime_error(strprintf("%s: Unknown chain %s.", __func__, chain));
 }
