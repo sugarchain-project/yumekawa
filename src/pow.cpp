@@ -14,7 +14,6 @@
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     assert(pindexLast != nullptr);
-    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 
     // Find the first block in the averaging interval
     const CBlockIndex* pindexFirst = pindexLast;
