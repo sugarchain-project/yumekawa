@@ -16,7 +16,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 
     // Genesis block
-    if (pindexLast == NULL)
+    if (pindexLast == nullptr)
         return nProofOfWorkLimit;
 
     {
@@ -26,9 +26,9 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
             pindexLast->nHeight >= params.nPowAllowMinDifficultyBlocksAfterHeight.get())
         {
             // Special difficulty rule for testnet:
-            // If the new block's timestamp is more than 6 * block interval minutes
+            // If the new block's timestamp is more than 6 * 2.5 minutes
             // then allow mining of a min-difficulty block.
-            if (pblock && pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.PoWTargetSpacing(pindexLast->nHeight + 1) * 6)
+            if (pblock && pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 6)
                 return nProofOfWorkLimit;
         }
     }
@@ -44,47 +44,43 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     }
 
     // Check we have enough blocks
-    if (pindexFirst == NULL)
+    if (pindexFirst == nullptr)
         return nProofOfWorkLimit;
 
     arith_uint256 bnAvg {bnTot / params.nPowAveragingWindow};
 
-    return CalculateNextWorkRequired(bnAvg,
-                                     pindexLast->GetMedianTimePast(), pindexFirst->GetMedianTimePast(),
-                                     params,
-                                     pindexLast->nHeight + 1);
+    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks) {
+        // Special difficulty rule for REGTEST: NO RETARGET
+        // It fixs test/validation_block_tests/processnewblock_signals_ordering
+        return pindexLast->nBits;
+    }
+
+    return CalculateNextWorkRequired(bnAvg, pindexLast->GetMedianTimePast(), pindexFirst->GetMedianTimePast(), params);
 }
 
 /* SugarShield */
 unsigned int CalculateNextWorkRequired(arith_uint256 bnAvg,
                                        int64_t nLastBlockTime, int64_t nFirstBlockTime,
-                                       const Consensus::Params& params,
-                                       int nextHeight)
+                                       const Consensus::Params& params)
 {
-    int64_t averagingWindowTimespan = params.AveragingWindowTimespan(nextHeight);
-    int64_t minActualTimespan = params.MinActualTimespan(nextHeight);
-    int64_t maxActualTimespan = params.MaxActualTimespan(nextHeight);
     // Limit adjustment step
     // Use medians to prevent time-warp attacks
     int64_t nActualTimespan = nLastBlockTime - nFirstBlockTime;
-    nActualTimespan = averagingWindowTimespan + (nActualTimespan - averagingWindowTimespan)/4;
+    nActualTimespan = params.AveragingWindowTimespan() + (nActualTimespan - params.AveragingWindowTimespan())/4;
 
-    if (nActualTimespan < minActualTimespan) {
-        nActualTimespan = minActualTimespan;
-    }
-    if (nActualTimespan > maxActualTimespan) {
-        nActualTimespan = maxActualTimespan;
-    }
+    if (nActualTimespan < params.MinActualTimespan())
+        nActualTimespan = params.MinActualTimespan();
+    if (nActualTimespan > params.MaxActualTimespan())
+        nActualTimespan = params.MaxActualTimespan();
 
     // Retarget
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     arith_uint256 bnNew {bnAvg};
-    bnNew /= averagingWindowTimespan;
+    bnNew /= params.AveragingWindowTimespan();
     bnNew *= nActualTimespan;
 
-    if (bnNew > bnPowLimit) {
+    if (bnNew > bnPowLimit)
         bnNew = bnPowLimit;
-    }
 
     return bnNew.GetCompact();
 }
