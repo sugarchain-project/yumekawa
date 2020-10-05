@@ -27,6 +27,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     arith_uint256 bnAvg {bnTot / params.nPowAveragingWindow};
 
+    // SugarShield // Never retargeting on regtest
+    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks)
+        return pindexLast->nBits;
+
     return CalculateNextWorkRequired(bnAvg, pindexLast->GetMedianTimePast(), pindexFirst->GetMedianTimePast(), params);
 }
 
@@ -35,10 +39,6 @@ unsigned int CalculateNextWorkRequired(arith_uint256 bnAvg,
                                        int64_t nLastBlockTime, int64_t nFirstBlockTime,
                                        const Consensus::Params& params)
 {
-    // SugarShield // Never retargeting on regtest
-    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks)
-        return pindexLast->nBits;
-
     // Limit adjustment step
     // Use medians to prevent time-warp attacks
     int64_t nActualTimespan = nLastBlockTime - nFirstBlockTime;
