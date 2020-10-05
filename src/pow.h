@@ -14,9 +14,8 @@ class CBlockHeader;
 class CBlockIndex;
 class uint256;
 
-class arith_uint256; /* SugarShield */
+class arith_uint256; // SugarShield
 
-/* SugarShield */
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params&);
 unsigned int CalculateNextWorkRequired(arith_uint256 bnAvg,
                                        int64_t nLastBlockTime, int64_t nFirstBlockTime,
