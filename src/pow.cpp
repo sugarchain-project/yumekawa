@@ -61,7 +61,9 @@ unsigned int CalculateNextWorkRequired(arith_uint256 bnAvg,
     return bnNew.GetCompact();
 }
 
-unsigned int BTC_GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+/* BTC */
+/*
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     assert(pindexLast != nullptr);
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
@@ -94,10 +96,10 @@ unsigned int BTC_GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlock
     const CBlockIndex* pindexFirst = pindexLast->GetAncestor(nHeightFirst);
     assert(pindexFirst);
 
-    return BTC_CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
+    return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
 }
 
-unsigned int BTC_CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
+unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;
@@ -121,6 +123,7 @@ unsigned int BTC_CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_
 
     return bnNew.GetCompact();
 }
+*/
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
