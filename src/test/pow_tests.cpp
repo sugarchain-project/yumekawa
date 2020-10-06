@@ -35,7 +35,7 @@ BOOST_AUTO_TEST_CASE(get_next_work)
     '1d00ffff'
     */
 
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffff); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
 }
 
 /* Test the constraint on the upper bound for next work */
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_pow_limit)
     arith_uint256 bnAvg = arith_uint256("003fffff00000000000000000000000000000000000000000000000000000000"); // height=511 (N=510)
     int64_t nLastBlockTime = 1555910839;
     int64_t nFirstBlockTime = 1555908929;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffff); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
 }
 
 /* Test the constraint on the lower bound for actual time taken */
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_lower_limit_actual)
     arith_uint256 bnAvg = arith_uint256("0037e5f3e2626262626262626262626262626262626262626262626262626262"); // height=1234
     int64_t nLastBlockTime = 1555913812;
     int64_t nFirstBlockTime = 1555911686;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffff); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
 }
 
 /* Test the constraint on the upper bound for actual time taken */
@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_upper_limit_actual)
     arith_uint256 bnAvg = arith_uint256("003ffdfaf9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9"); // height=512
     int64_t nLastBlockTime = 1555910839;
     int64_t nFirstBlockTime = 1555908929;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffff); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
 }
 
 BOOST_AUTO_TEST_CASE(CheckProofOfWork_test_negative_target)
