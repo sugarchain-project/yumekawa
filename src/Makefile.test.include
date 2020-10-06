@@ -209,7 +209,7 @@ BITCOIN_TESTS =\
   test/amount_tests.cpp \
   test/allocator_tests.cpp \
   test/base32_tests.cpp \
-  # test/base58_tests.cpp \
+  test/base58_tests.cpp \
   test/base64_tests.cpp \
   test/bech32_tests.cpp \
   test/bip32_tests.cpp \
@@ -232,7 +232,7 @@ BITCOIN_TESTS =\
   test/getarg_tests.cpp \
   test/hash_tests.cpp \
   test/interfaces_tests.cpp \
-  # test/key_io_tests.cpp \
+  test/key_io_tests.cpp \
   test/key_tests.cpp \
   test/limitedmap_tests.cpp \
   test/logging_tests.cpp \
@@ -241,14 +241,14 @@ BITCOIN_TESTS =\
   test/mempool_tests.cpp \
   test/merkle_tests.cpp \
   test/merkleblock_tests.cpp \
-  # test/miner_tests.cpp \
+  test/miner_tests.cpp \
   test/multisig_tests.cpp \
   test/net_tests.cpp \
   test/netbase_tests.cpp \
   test/pmt_tests.cpp \
   test/policy_fee_tests.cpp \
   test/policyestimator_tests.cpp \
-  # test/pow_tests.cpp \
+  test/pow_tests.cpp \
   test/prevector_tests.cpp \
   test/raii_event_tests.cpp \
   test/random_tests.cpp \
