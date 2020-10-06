@@ -60,7 +60,7 @@ implicit-integer-sign-change:script/interpreter.cpp
 implicit-integer-sign-change:serialize.h
 implicit-integer-sign-change:test/arith_uint256_tests.cpp
 implicit-integer-sign-change:test/coins_tests.cpp
-implicit-integer-sign-change:test/pow_tests.cpp
+# implicit-integer-sign-change:test/pow_tests.cpp
 implicit-integer-sign-change:test/prevector_tests.cpp
 implicit-integer-sign-change:test/sighash_tests.cpp
 implicit-integer-sign-change:test/streams_tests.cpp
