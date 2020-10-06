@@ -85,6 +85,7 @@ FUZZ_TARGETS = \
   test/fuzz/partially_signed_transaction_deserialize \
   test/fuzz/policy_estimator \
   test/fuzz/policy_estimator_io \
+  test/fuzz/pow \
   test/fuzz/prefilled_transaction_deserialize \
   test/fuzz/prevector \
   test/fuzz/primitives_transaction \
@@ -209,7 +210,7 @@ BITCOIN_TESTS =\
   test/amount_tests.cpp \
   test/allocator_tests.cpp \
   test/base32_tests.cpp \
-  # test/base58_tests.cpp \
+  test/base58_tests.cpp \
   test/base64_tests.cpp \
   test/bech32_tests.cpp \
   test/bip32_tests.cpp \
@@ -232,7 +233,7 @@ BITCOIN_TESTS =\
   test/getarg_tests.cpp \
   test/hash_tests.cpp \
   test/interfaces_tests.cpp \
-  # test/key_io_tests.cpp \
+  test/key_io_tests.cpp \
   test/key_tests.cpp \
   test/limitedmap_tests.cpp \
   test/logging_tests.cpp \
@@ -241,14 +242,14 @@ BITCOIN_TESTS =\
   test/mempool_tests.cpp \
   test/merkle_tests.cpp \
   test/merkleblock_tests.cpp \
-  # test/miner_tests.cpp \
+  test/miner_tests.cpp \
   test/multisig_tests.cpp \
   test/net_tests.cpp \
   test/netbase_tests.cpp \
   test/pmt_tests.cpp \
   test/policy_fee_tests.cpp \
   test/policyestimator_tests.cpp \
-  # test/pow_tests.cpp \
+  test/pow_tests.cpp \
   test/prevector_tests.cpp \
   test/raii_event_tests.cpp \
   test/random_tests.cpp \
@@ -822,6 +823,12 @@ test_fuzz_policy_estimator_io_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 test_fuzz_policy_estimator_io_LDADD = $(FUZZ_SUITE_LD_COMMON)
 test_fuzz_policy_estimator_io_LDFLAGS = $(FUZZ_SUITE_LDFLAGS_COMMON)
 test_fuzz_policy_estimator_io_SOURCES = test/fuzz/policy_estimator_io.cpp
+
+test_fuzz_pow_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+test_fuzz_pow_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+test_fuzz_pow_LDADD = $(FUZZ_SUITE_LD_COMMON)
+test_fuzz_pow_LDFLAGS = $(FUZZ_SUITE_LDFLAGS_COMMON)
+test_fuzz_pow_SOURCES = test/fuzz/pow.cpp
 
 test_fuzz_prefilled_transaction_deserialize_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -DPREFILLED_TRANSACTION_DESERIALIZE=1
 test_fuzz_prefilled_transaction_deserialize_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
