@@ -47,6 +47,7 @@ BlockAssembler MinerTestingSetup::AssemblerForTest(const CChainParams& params)
     return BlockAssembler(*m_node.mempool, params, options);
 }
 
+/* // TODO.ZENY.POW // TEST DISABLED
 constexpr static struct {
     unsigned char extranonce;
     unsigned int nonce;
@@ -80,7 +81,9 @@ constexpr static struct {
     {2, 0xd351e722}, {1, 0xf4ca48c9}, {1, 0x5b19c670}, {1, 0xa164bf0e},
     {2, 0xbbbeb305}, {2, 0xfe1c810a},
 };
+*/
 
+/* // TODO.ZENY.POW // TEST DISABLED
 static CBlockIndex CreateBlockIndex(int nHeight) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
 {
     CBlockIndex index;
@@ -88,6 +91,7 @@ static CBlockIndex CreateBlockIndex(int nHeight) EXCLUSIVE_LOCKS_REQUIRED(cs_mai
     index.pprev = ::ChainActive().Tip();
     return index;
 }
+*/
 
 // Test suite for ancestor feerate transaction selection.
 // Implemented as an additional function, rather than a separate test case,
