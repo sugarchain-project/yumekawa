@@ -14,6 +14,7 @@ BOOST_FIXTURE_TEST_SUITE(pow_tests, BasicTestingSetup)
 /* Test calculation of next difficulty target with no constraints applying */
 BOOST_AUTO_TEST_CASE(get_next_work)
 {
+    /* BTC */
     /*
     const auto chainParams = CreateChainParams(*m_node.args, CBaseChainParams::MAIN);
     int64_t nLastRetargetTime = 1261130161; // Block #30240
@@ -32,7 +33,7 @@ BOOST_AUTO_TEST_CASE(get_next_work)
     /*
     // TODO.ZENY.POW // fix after YespowerSugar
     >>> "%08x" % 486604799
-    '1d00ffff'
+    '1d00ffff' + U for unsigned integer = 0x1d00ffffU
     */
 
     BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
@@ -41,6 +42,7 @@ BOOST_AUTO_TEST_CASE(get_next_work)
 /* Test the constraint on the upper bound for next work */
 BOOST_AUTO_TEST_CASE(get_next_work_pow_limit)
 {
+    /* BTC */
     /*
     const auto chainParams = CreateChainParams(*m_node.args, CBaseChainParams::MAIN);
     int64_t nLastRetargetTime = 1231006505; // Block #0
@@ -61,6 +63,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_pow_limit)
 /* Test the constraint on the lower bound for actual time taken */
 BOOST_AUTO_TEST_CASE(get_next_work_lower_limit_actual)
 {
+    /* BTC */
     /*
     const auto chainParams = CreateChainParams(*m_node.args, CBaseChainParams::MAIN);
     int64_t nLastRetargetTime = 1279008237; // Block #66528
@@ -81,6 +84,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_lower_limit_actual)
 /* Test the constraint on the upper bound for actual time taken */
 BOOST_AUTO_TEST_CASE(get_next_work_upper_limit_actual)
 {
+    /* BTC */
     /*
     const auto chainParams = CreateChainParams(*m_node.args, CBaseChainParams::MAIN);
     int64_t nLastRetargetTime = 1263163443; // NOTE: Not an actual block time
