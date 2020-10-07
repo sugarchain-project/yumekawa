@@ -8,10 +8,11 @@ from test_framework.messages import (
     CBlockHeader,
     FromHex,
 )
-from test_framework.p2p import (
-    P2PInterface,
-    msg_headers,
-)
+# TODO.ZENY.POW # TEST DISABLED
+# from test_framework.p2p import (
+#     P2PInterface,
+#     msg_headers,
+# )
 from test_framework.test_framework import BitcoinTestFramework
 
 import os
@@ -46,7 +47,7 @@ class RejectLowDifficultyHeadersTest(BitcoinTestFramework):
         self.headers_fork = [FromHex(CBlockHeader(), h) for h in self.headers_fork]
 
         self.log.info("Feed all non-fork headers, including and up to the first checkpoint")
-        peer_checkpoint = self.nodes[0].add_p2p_connection(P2PInterface())
+        # peer_checkpoint = self.nodes[0].add_p2p_connection(P2PInterface()) # TODO.ZENY.POW # TEST DISABLED
 
         # TODO.ZENY.POW # TEST DISABLED
         """
