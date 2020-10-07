@@ -90,7 +90,6 @@ public:
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
         consensus.nPowMaxAdjustDown = 32; // 32% adjustment down
         consensus.nPowMaxAdjustUp = 16; // 16% adjustment up
-        consensus.nPowAllowMinDifficultyBlocksAfterHeight = boost::none;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000e1ab5ec9348e9f4b8eb8154");
@@ -207,7 +206,6 @@ public:
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
         consensus.nPowMaxAdjustDown = 32; // 32% adjustment down
         consensus.nPowMaxAdjustUp = 16; // 16% adjustment up
-        consensus.nPowAllowMinDifficultyBlocksAfterHeight = boost::none;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000001495c1d5a01e2af8a23");
@@ -337,7 +335,6 @@ public:
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
         consensus.nPowMaxAdjustDown = 32; // 32% adjustment down
         consensus.nPowMaxAdjustUp = 16; // 16% adjustment up
-        consensus.nPowAllowMinDifficultyBlocksAfterHeight = boost::none;
 
         // message start is defined as the first 4 bytes of the sha256d of the block script
         CHashWriter h(SER_DISK, 0);
@@ -403,7 +400,6 @@ public:
         consensus.nPowAveragingWindow = 17; // 85/nPowTargetSpacing(5) = 17
         consensus.nPowMaxAdjustDown = 0; // Turn off adjustment down
         consensus.nPowMaxAdjustUp = 0; // Turn off adjustment up
-        consensus.nPowAllowMinDifficultyBlocksAfterHeight = boost::none;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
