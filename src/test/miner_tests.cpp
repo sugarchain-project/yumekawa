@@ -81,9 +81,7 @@ constexpr static struct {
     {2, 0xd351e722}, {1, 0xf4ca48c9}, {1, 0x5b19c670}, {1, 0xa164bf0e},
     {2, 0xbbbeb305}, {2, 0xfe1c810a},
 };
-*/
 
-/* // TODO.ZENY.POW // TEST DISABLED
 static CBlockIndex CreateBlockIndex(int nHeight) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
 {
     CBlockIndex index;
@@ -518,7 +516,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     TestPackageSelection(chainparams, scriptPubKey, txFirst);
 
     fCheckpointsEnabled = true;
-    */ // TODO.ZENY.POW // TEST DISABLED
+    */
 }
 
 BOOST_AUTO_TEST_SUITE_END()
