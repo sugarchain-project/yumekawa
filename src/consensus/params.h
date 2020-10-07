@@ -9,6 +9,8 @@
 #include <uint256.h>
 #include <limits>
 
+#include <boost/optional.hpp> // SugarShield
+
 namespace Consensus {
 
 enum DeploymentPos
@@ -95,6 +97,7 @@ struct Params {
     int64_t MaxActualTimespan() const { return (AveragingWindowTimespan() * (100 + nPowMaxAdjustDown)) / 100; }
     int64_t nPowMaxAdjustDown;
     int64_t nPowMaxAdjustUp;
+    boost::optional<uint32_t> nPowAllowMinDifficultyBlocksAfterHeight;
 };
 } // namespace Consensus
 
