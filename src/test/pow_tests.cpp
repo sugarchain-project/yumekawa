@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(get_next_work)
     pindexLast.nHeight = 32255;
     pindexLast.nTime = 1262152739;  // Block #32255
     pindexLast.nBits = 0x1d00ffff;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00d86aU);
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(&pindexLast, nLastRetargetTime, chainParams->GetConsensus()), 0x1d00d86aU);
     */
 
     const auto chainParams = CreateChainParams(*m_node.args, CBaseChainParams::MAIN);
