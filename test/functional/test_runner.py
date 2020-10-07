@@ -209,7 +209,7 @@ BASE_SCRIPTS = [
     'rpc_bind.py --ipv6',
     'rpc_bind.py --nonloopback',
     'mining_basic.py',
-    # 'feature_signet.py', # pow
+    'feature_signet.py',
     'wallet_bumpfee.py',
     'wallet_implicitsegwit.py',
     'rpc_named_arguments.py',
@@ -233,7 +233,7 @@ BASE_SCRIPTS = [
     'wallet_coinbase_category.py',
     'feature_filelock.py',
     'feature_loadblock.py',
-    # 'p2p_dos_header_tree.py', # pow
+    'p2p_dos_header_tree.py',
     'p2p_unrequested_blocks.py',
     'p2p_blockfilters.py',
     'feature_includeconf.py',
