@@ -10,14 +10,24 @@
 #include <primitives/block.h>
 #include <uint256.h>
 
+/*
+SugarShield-N510 is based on Zcash's modification of Digishield (commit 4b37cfd)
+https://github.com/zcash/zcash/blob/4c90270469e32cbf3459ec2fd25d46a089bd5c58/src/pow.cpp
+https://github.com/zcash/zcash/blob/4c90270469e32cbf3459ec2fd25d46a089bd5c58/src/pow.h
+*/
+
 /* SugarShield */
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
+    assert(pindexLast != nullptr);
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 
-    // Genesis block
-    if (pindexLast == nullptr) // FIXME.SUGAR // SURE? // <chain.cpp>
-        return nProofOfWorkLimit;
+    // TODO.ZENY.POW // SURE?
+    // REGTEST: Never retarget
+    {
+        if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks)
+            return pindexLast->nBits;
+    }
 
     // Find the first block in the averaging interval
     const CBlockIndex* pindexFirst = pindexLast;
@@ -30,17 +40,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     }
 
     // Check we have enough blocks
-    if (pindexFirst == nullptr) // FIXME.SUGAR // SURE? // <chain.cpp>
+    if (pindexFirst == nullptr)
         return nProofOfWorkLimit;
 
     arith_uint256 bnAvg {bnTot / params.nPowAveragingWindow};
-
-    // FIXME.SUGAR // SURE?
-    if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks) {
-        // Special difficulty rule for REGTEST: NO RETARGET
-        // It fixs test/validation_block_tests/processnewblock_signals_ordering
-        return pindexLast->nBits;
-    }
 
     return CalculateNextWorkRequired(bnAvg, pindexLast->GetMedianTimePast(), pindexFirst->GetMedianTimePast(), params);
 }

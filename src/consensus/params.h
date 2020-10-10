@@ -9,8 +9,6 @@
 #include <uint256.h>
 #include <limits>
 
-#include <boost/optional.hpp> // SugarShield
-
 namespace Consensus {
 
 enum DeploymentPos
