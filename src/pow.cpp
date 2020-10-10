@@ -10,6 +10,72 @@
 #include <primitives/block.h>
 #include <uint256.h>
 
+/*
+SugarShield-N510 is based on Zcash's modification of Digishield (commit 4c90270)
+https://github.com/zcash/zcash/blob/4c90270469e32cbf3459ec2fd25d46a089bd5c58/src/pow.cpp
+*/
+
+/* SugarShield */
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+{
+    assert(pindexLast != nullptr);
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+
+    // TODO.ZENY.POW // SURE?
+    // REGTEST: Never retarget
+    {
+        if (params.fPowNoRetargeting && params.fPowAllowMinDifficultyBlocks)
+            return pindexLast->nBits;
+    }
+
+    // Find the first block in the averaging interval
+    const CBlockIndex* pindexFirst = pindexLast;
+    arith_uint256 bnTot {0};
+    for (int i = 0; pindexFirst && i < params.nPowAveragingWindow; i++) {
+        arith_uint256 bnTmp;
+        bnTmp.SetCompact(pindexFirst->nBits);
+        bnTot += bnTmp;
+        pindexFirst = pindexFirst->pprev;
+    }
+
+    // Check we have enough blocks
+    if (pindexFirst == nullptr)
+        return nProofOfWorkLimit;
+
+    arith_uint256 bnAvg {bnTot / params.nPowAveragingWindow};
+
+    return CalculateNextWorkRequired(bnAvg, pindexLast->GetMedianTimePast(), pindexFirst->GetMedianTimePast(), params);
+}
+
+/* SugarShield */
+unsigned int CalculateNextWorkRequired(arith_uint256 bnAvg,
+                                       int64_t nLastBlockTime, int64_t nFirstBlockTime,
+                                       const Consensus::Params& params)
+{
+    // Limit adjustment step
+    // Use medians to prevent time-warp attacks
+    int64_t nActualTimespan = nLastBlockTime - nFirstBlockTime;
+    nActualTimespan = params.AveragingWindowTimespan() + (nActualTimespan - params.AveragingWindowTimespan())/4;
+
+    if (nActualTimespan < params.MinActualTimespan())
+        nActualTimespan = params.MinActualTimespan();
+    if (nActualTimespan > params.MaxActualTimespan())
+        nActualTimespan = params.MaxActualTimespan();
+
+    // Retarget
+    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+    arith_uint256 bnNew {bnAvg};
+    bnNew /= params.AveragingWindowTimespan();
+    bnNew *= nActualTimespan;
+
+    if (bnNew > bnPowLimit)
+        bnNew = bnPowLimit;
+
+    return bnNew.GetCompact();
+}
+
+/* BTC */
+/*
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     assert(pindexLast != nullptr);
@@ -70,6 +136,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
 
     return bnNew.GetCompact();
 }
+*/
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
