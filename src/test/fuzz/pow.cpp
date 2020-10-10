@@ -56,11 +56,14 @@ void test_one_input(const std::vector<uint8_t>& buffer)
             blocks.push_back(current_block);
         }
         {
+            // Sugarchain: DAA SugarShield-N510
+            /*
             (void)GetBlockProof(current_block);
             (void)CalculateNextWorkRequired(&current_block, fuzzed_data_provider.ConsumeIntegralInRange<int64_t>(0, std::numeric_limits<int64_t>::max()), consensus_params);
             if (current_block.nHeight != std::numeric_limits<int>::max() && current_block.nHeight - (consensus_params.DifficultyAdjustmentInterval() - 1) >= 0) {
                 (void)GetNextWorkRequired(&current_block, &(*block_header), consensus_params);
             }
+            */
         }
         {
             const CBlockIndex* to = &blocks[fuzzed_data_provider.ConsumeIntegralInRange<size_t>(0, blocks.size() - 1)];
