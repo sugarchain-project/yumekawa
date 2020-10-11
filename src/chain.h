@@ -180,14 +180,26 @@ public:
     uint32_t nBits{0};
     uint32_t nNonce{0};
 
+    /* YespowerSugar */
+    //! (currently memory only, but don't have to be)
+    bool cache_init{false};
+    uint256 cache_block_hash, cache_PoW_hash;
+
     //! (memory only) Sequential id assigned to distinguish order in which blocks are received.
     int32_t nSequenceId{0};
 
     //! (memory only) Maximum nTime in the chain up to and including this block.
     unsigned int nTimeMax{0};
 
+    /* YespowerSugar */
+    void SetNullCacheInit()
+    {
+        cache_init = false;
+    }
+
     CBlockIndex()
     {
+        SetNullCacheInit(); /* YespowerSugar */
     }
 
     explicit CBlockIndex(const CBlockHeader& block)
@@ -197,6 +209,11 @@ public:
           nBits{block.nBits},
           nNonce{block.nNonce}
     {
+        /* YespowerSugar */
+        SetNullCacheInit();
+        cache_init = block.cache_init;
+        cache_block_hash = block.cache_block_hash;
+        cache_PoW_hash = block.cache_PoW_hash;
     }
 
     FlatFilePos GetBlockPos() const {
@@ -227,12 +244,24 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
+
+        /* YespowerSugar */
+        block.cache_init     = cache_init;
+        block.cache_block_hash = cache_block_hash;
+        block.cache_PoW_hash = cache_PoW_hash;
+
         return block;
     }
 
     uint256 GetBlockHash() const
     {
         return *phashBlock;
+    }
+
+    /* YespowerSugar */
+    uint256 GetBlockPoWHash() const
+    {
+        return GetBlockHeader().GetPoWHash();
     }
 
     /**

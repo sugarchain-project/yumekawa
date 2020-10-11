@@ -385,6 +385,7 @@ libbitcoin_wallet_tool_a_SOURCES = \
 # crypto primitives library
 crypto_libbitcoin_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
 crypto_libbitcoin_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libbitcoin_crypto_base_a_CFLAGS = $(PIE_FLAGS) -I$(srcdir)/crypto/yespower-1.0.1 -Wall -O2 -fomit-frame-pointer
 crypto_libbitcoin_crypto_base_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
@@ -411,6 +412,9 @@ crypto_libbitcoin_crypto_base_a_SOURCES = \
   crypto/sha3.h \
   crypto/sha512.cpp \
   crypto/sha512.h \
+  crypto/yespower-1.0.1/sha256.c \
+  crypto/yespower-1.0.1/yespower.h \
+  crypto/yespower-1.0.1/yespower-opt.c \
   crypto/siphash.cpp \
   crypto/siphash.h
 

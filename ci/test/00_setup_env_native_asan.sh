@@ -11,4 +11,5 @@ export PACKAGES="clang llvm python3-zmq qtbase5-dev qttools5-dev-tools libevent-
 export DOCKER_NAME_TAG=ubuntu:20.04
 export NO_DEPENDS=1
 export GOAL="install"
-export BITCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --with-gui=qt5 CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' --with-sanitizers=address,integer,undefined CC=clang CXX=clang++ --with-boost-process"
+YESPOWER_PATH=/tmp/cirrus-ci-build/src/crypto/yespower-1.0.1
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --enable-zmq --with-incompatible-bdb --with-gui=qt5 CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' --with-sanitizers=address,integer,undefined CC=clang CXX=clang++ --with-boost-process"

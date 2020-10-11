@@ -15,5 +15,6 @@ export RUN_FUNCTIONAL_TESTS=false
 export RUN_FUZZ_TESTS=true
 export FUZZ_TESTS_CONFIG="--valgrind"
 export GOAL="install"
-export BITCOIN_CONFIG="--enable-fuzz --with-sanitizers=fuzzer CC=clang CXX=clang++"
+YESPOWER_PATH=/tmp/cirrus-ci-build/src/crypto/yespower-1.0.1
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --enable-fuzz --with-sanitizers=fuzzer CC=clang CXX=clang++"
 export CCACHE_SIZE=200M

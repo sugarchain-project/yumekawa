@@ -14,5 +14,6 @@ export RUN_UNIT_TESTS=false
 export RUN_FUNCTIONAL_TESTS=false
 export RUN_FUZZ_TESTS=true
 export GOAL="install"
-export BITCOIN_CONFIG="--enable-fuzz --with-sanitizers=fuzzer,address,undefined CC=clang CXX=clang++ --with-boost-process"
+YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --enable-fuzz --with-sanitizers=fuzzer,address,undefined CC=clang CXX=clang++ --with-boost-process"
 export CCACHE_SIZE=200M
