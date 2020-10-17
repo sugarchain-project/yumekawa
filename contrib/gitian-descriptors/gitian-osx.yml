@@ -124,7 +124,10 @@ script: |
     tar -xf $GIT_ARCHIVE
 
     ./autogen.sh
-    CONFIG_SITE=${BASEPREFIX}/${i}/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS}
+    YESPOWER_PATH="/home/ubuntu/build/sugarchain/src/crypto/yespower-1.0.1"
+    YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+    YESPOWER_CFLAGS="CFLAGS='-I${YESPOWER_PATH} ${YESPOWER_OPTION}'"
+    CONFIG_SITE=${BASEPREFIX}/${i}/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS} ${YESPOWER_CFLAGS}
     make ${MAKEOPTS}
     make ${MAKEOPTS} -C src check-security
     make ${MAKEOPTS} -C src check-symbols
