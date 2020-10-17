@@ -16,4 +16,5 @@ export RUN_FUNCTIONAL_TESTS=false
 export GOAL="deploy"
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
 YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
-export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION' --with-gui --enable-reduce-exports --enable-werror --with-boost-process"
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+export BITCOIN_CONFIG="$YESPOWER_CFLAGS --with-gui --enable-reduce-exports --enable-werror --with-boost-process"
