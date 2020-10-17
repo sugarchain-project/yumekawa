@@ -10,6 +10,8 @@
 #include <serialize.h>
 #include <uint256.h>
 
+#include <sync.h> /* YespowerSugar */
+
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
  * requirements.  When they solve the proof-of-work, they broadcast the block
@@ -17,7 +19,7 @@
  * in the block is a special one that creates a new coin owned by the creator
  * of the block.
  */
-class CBlockHeader
+class CBlockHeaderUncached
 {
 public:
     // header
@@ -28,12 +30,12 @@ public:
     uint32_t nBits;
     uint32_t nNonce;
 
-    CBlockHeader()
+    CBlockHeaderUncached()
     {
         SetNull();
     }
 
-    SERIALIZE_METHODS(CBlockHeader, obj) { READWRITE(obj.nVersion, obj.hashPrevBlock, obj.hashMerkleRoot, obj.nTime, obj.nBits, obj.nNonce); }
+    SERIALIZE_METHODS(CBlockHeaderUncached, obj) { READWRITE(obj.nVersion, obj.hashPrevBlock, obj.hashMerkleRoot, obj.nTime, obj.nBits, obj.nNonce); }
 
     void SetNull()
     {
@@ -52,12 +54,43 @@ public:
 
     uint256 GetHash() const;
 
+    uint256 GetPoWHash() const; /* YespowerSugar */
+
     int64_t GetBlockTime() const
     {
         return (int64_t)nTime;
     }
 };
 
+/* YespowerSugar */
+class CBlockHeader : public CBlockHeaderUncached
+{
+public:
+    mutable RecursiveMutex cache_lock; // Do not use CCriticalSection // See https://github.com/bitcoin/bitcoin/pull/17891
+    mutable bool cache_init;
+    mutable uint256 cache_block_hash, cache_PoW_hash;
+
+    CBlockHeader()
+    {
+        cache_init = false;
+    }
+
+    CBlockHeader(const CBlockHeader& header)
+    {
+        *this = header;
+    }
+
+    CBlockHeader& operator=(const CBlockHeader& header)
+    {
+        *(CBlockHeaderUncached*)this = (CBlockHeaderUncached)header;
+        cache_init = header.cache_init;
+        cache_block_hash = header.cache_block_hash;
+        cache_PoW_hash = header.cache_PoW_hash;
+        return *this;
+    }
+
+    uint256 GetPoWHash_cached() const;
+};
 
 class CBlock : public CBlockHeader
 {
