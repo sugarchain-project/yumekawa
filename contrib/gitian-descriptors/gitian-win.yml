@@ -31,7 +31,8 @@ script: |
 
   WRAP_DIR=$HOME/wrapped
   HOSTS="x86_64-w64-mingw32"
-  CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests"
+  YESPOWER_WIN_OPTION="--disable-shared" # TODO.ZENY.POW # Build is failing without this flag...
+  CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests ${YESPOWER_WIN_OPTION}"
   FAKETIME_HOST_PROGS="ar ranlib nm windres strip objcopy"
   FAKETIME_PROGS="date makensis zip"
   YESPOWER_PATH="/home/ubuntu/build/sugarchain/src/crypto/yespower-1.0.1"
@@ -131,8 +132,7 @@ script: |
     tar -xf $GIT_ARCHIVE
 
     ./autogen.sh
-    YESPOWER_WIN_OPTION="--disable-shared" # TODO.ZENY.POW # Build is failing without this flag...
-    CONFIG_SITE=${BASEPREFIX}/${i}/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS} CFLAGS="${HOST_CFLAGS}" ${YESPOWER_WIN_OPTION} CXXFLAGS="${HOST_CXXFLAGS}"
+    CONFIG_SITE=${BASEPREFIX}/${i}/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS} CFLAGS="${HOST_CFLAGS}" CXXFLAGS="${HOST_CXXFLAGS}"
     make ${MAKEOPTS}
     make ${MAKEOPTS} -C src check-security
     make ${MAKEOPTS} -C src check-symbols
