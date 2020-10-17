@@ -11,5 +11,6 @@ export DOCKER_NAME_TAG=ubuntu:20.04
 export PACKAGES="cmake python3"
 export DEP_OPTS="MULTIPROCESS=1"
 export GOAL="install"
-export BITCOIN_CONFIG="--with-boost-process"
+YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --with-boost-process"
 export TEST_RUNNER_ENV="BITCOIND=sugarchain-node"
