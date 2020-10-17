@@ -13,7 +13,7 @@
 
 static void BlockToJsonVerbose(benchmark::Bench& bench)
 {
-    CDataStream stream(benchmark::data::block413567, SER_NETWORK, PROTOCOL_VERSION);
+    CDataStream stream(benchmark::data::block6513497, SER_NETWORK, PROTOCOL_VERSION);
     char a = '\0';
     stream.write(&a, 1); // Prevent compaction
 
@@ -23,7 +23,7 @@ static void BlockToJsonVerbose(benchmark::Bench& bench)
     CBlockIndex blockindex;
     const uint256 blockHash = block.GetHash();
     blockindex.phashBlock = &blockHash;
-    blockindex.nBits = 403014710;
+    blockindex.nBits = 503362144; // TODO.ZENY.YESPOWER // block6513497 // >>> print int("0x1e00b260", 0)
 
     bench.run([&] {
         (void)blockToJSON(block, &blockindex, &blockindex, /*verbose*/ true);

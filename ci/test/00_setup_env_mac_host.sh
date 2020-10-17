@@ -10,7 +10,10 @@ export HOST=x86_64-apple-darwin16
 export DOCKER_NAME_TAG=ubuntu:18.04  # Check that bionic can cross-compile to macos (bionic is used in the gitian build as well)
 export PIP_PACKAGES="zmq"
 export GOAL="install"
-export BITCOIN_CONFIG="--with-gui --enable-reduce-exports --enable-werror --with-boost-process"
+YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+export BITCOIN_CONFIG="$YESPOWER_CFLAGS --with-gui --enable-reduce-exports --enable-werror --with-boost-process"
 export NO_DEPENDS=1
 export OSX_SDK=""
 export CCACHE_SIZE=300M
