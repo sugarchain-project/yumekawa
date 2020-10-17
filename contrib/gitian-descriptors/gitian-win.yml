@@ -31,10 +31,13 @@ script: |
 
   WRAP_DIR=$HOME/wrapped
   HOSTS="x86_64-w64-mingw32"
-  CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests"
+  YESPOWER_WIN_OPTION="--disable-shared" # TODO.ZENY.POW # Build is failing without this flag...
+  CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests ${YESPOWER_WIN_OPTION}"
   FAKETIME_HOST_PROGS="ar ranlib nm windres strip objcopy"
   FAKETIME_PROGS="date makensis zip"
-  HOST_CFLAGS="-O2 -g -fno-ident"
+  YESPOWER_PATH="/home/ubuntu/build/sugarchain/src/crypto/yespower-1.0.1"
+  YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+  HOST_CFLAGS="-O2 -g -fno-ident -I${YESPOWER_PATH} ${YESPOWER_OPTION}"
   HOST_CXXFLAGS="-O2 -g -fno-ident"
 
   export QT_RCC_TEST=1
@@ -136,7 +139,7 @@ script: |
     make deploy BITCOIN_WIN_INSTALLER="${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
     make install DESTDIR=${INSTALLPATH}
     cd installed
-    mv ${DISTNAME}/bin/*.dll ${DISTNAME}/lib/
+    # mv ${DISTNAME}/bin/*.dll ${DISTNAME}/lib/ # YESPOWER_WIN_OPTION # No DLL because "--disable-shared"
     find . -name "lib*.la" -delete
     find . -name "lib*.a" -delete
     rm -rf ${DISTNAME}/lib/pkgconfig
