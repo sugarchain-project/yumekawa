@@ -8,9 +8,58 @@
 #include <hash.h>
 #include <tinyformat.h>
 
-uint256 CBlockHeader::GetHash() const
+/* YespowerSugar */
+#include <crypto/yespower-1.0.1/yespower.h>
+#include <streams.h>
+#include <version.h>
+#include <stdlib.h> // exit()
+#include <sync.h>
+
+uint256 CBlockHeaderUncached::GetHash() const
 {
     return SerializeHash(*this);
+}
+
+/* YespowerSugar */
+uint256 CBlockHeaderUncached::GetPoWHash() const
+{
+    static const yespower_params_t yespower_1_0_sugarchain = {
+        .version = YESPOWER_1_0,
+        .N = 2048,
+        .r = 32,
+        .pers = (const uint8_t *)"Satoshi Nakamoto 31/Oct/2008 Proof-of-work is essentially one-CPU-one-vote",
+        .perslen = 74
+    };
+    uint256 hash;
+    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
+    ss << *this;
+    if (yespower_tls((const uint8_t *)&ss[0], ss.size(), &yespower_1_0_sugarchain, (yespower_binary_t *)&hash)) {
+        tfm::format(std::cerr, "Error: CBlockHeaderUncached::GetPoWHash(): failed to compute PoW hash (out of memory?)\n");
+        exit(1);
+    }
+    return hash;
+}
+
+/* YespowerSugar */
+uint256 CBlockHeader::GetPoWHash_cached() const
+{
+    uint256 block_hash = GetHash();
+    LOCK(cache_lock);
+    if (cache_init) {
+        if (block_hash != cache_block_hash) {
+            tfm::format(std::cerr, "Error: CBlockHeader::GetPoWHash_cached(): block hash changed unexpectedly\n");
+            exit(1);
+        }
+        /* yespower PoW cache log: O (cyan) = HIT */
+        // printf("\033[36;1mO\033[0m block = %s PoW = %s\n", cache_block_hash.ToString().c_str(), cache_PoW_hash.ToString().c_str());
+    } else {
+        cache_PoW_hash = GetPoWHash();
+        cache_block_hash = block_hash;
+        cache_init = true;
+        /* yespower PoW cache log: x = MISS */
+        // printf("x block = %s PoW = %s\n", cache_block_hash.ToString().c_str(), cache_PoW_hash.ToString().c_str());
+    }
+    return cache_PoW_hash;
 }
 
 std::string CBlock::ToString() const

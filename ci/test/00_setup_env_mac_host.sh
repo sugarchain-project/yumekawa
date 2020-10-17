@@ -9,7 +9,10 @@ export LC_ALL=C.UTF-8
 export HOST=x86_64-apple-darwin16
 export PIP_PACKAGES="zmq"
 export GOAL="install"
-export BITCOIN_CONFIG="--with-gui --enable-reduce-exports --enable-werror --with-boost-process"
+YESPOWER_PATH="$BASE_ROOT_DIR/src/crypto/yespower-1.0.1"
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+export BITCOIN_CONFIG="$YESPOWER_CFLAGS --with-gui --enable-reduce-exports --enable-werror --with-boost-process"
 export CI_OS_NAME="macos"
 export NO_DEPENDS=1
 export OSX_SDK=""

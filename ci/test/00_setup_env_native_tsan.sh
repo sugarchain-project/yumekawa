@@ -12,4 +12,7 @@ export PACKAGES="clang llvm libc++abi-dev libc++-dev python3-zmq"
 export DEP_OPTS="CC=clang CXX='clang++ -stdlib=libc++'"
 export TEST_RUNNER_EXTRA="--exclude feature_block"  # Low memory on Travis machines, exclude feature_block.
 export GOAL="install"
-export BITCOIN_CONFIG="--enable-zmq --with-gui=no CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' CXXFLAGS='-g' --with-sanitizers=thread CC=clang CXX='clang++ -stdlib=libc++' --with-boost-process"
+YESPOWER_PATH=/tmp/cirrus-ci-build/src/crypto/yespower-1.0.1
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+export BITCOIN_CONFIG="$YESPOWER_CFLAGS --enable-zmq --with-gui=no CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' CXXFLAGS='-g' --with-sanitizers=thread CC=clang CXX='clang++ -stdlib=libc++' --with-boost-process"
