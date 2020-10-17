@@ -139,12 +139,7 @@ script: |
     make deploy BITCOIN_WIN_INSTALLER="${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
     make install DESTDIR=${INSTALLPATH}
     cd installed
-    # BEGIN - YESPOWER_WIN_OPTION
-    # mv ${DISTNAME}/bin/*.dll ${DISTNAME}/lib/ # TODO.ZENY.POW # Build is failing without this flag...
-    if [ -f ${DISTNAME}/bin/*.dll ]; then
-      mv ${DISTNAME}/bin/*.dll ${DISTNAME}/lib/
-    fi
-    # END - YESPOWER_WIN_OPTION
+    # mv ${DISTNAME}/bin/*.dll ${DISTNAME}/lib/ # YESPOWER_WIN_OPTION # No DLL because "--disable-shared"
     find . -name "lib*.la" -delete
     find . -name "lib*.a" -delete
     rm -rf ${DISTNAME}/lib/pkgconfig
