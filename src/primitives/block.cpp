@@ -14,7 +14,6 @@
 #include <version.h>
 #include <stdlib.h> // exit()
 #include <sync.h>
-#include <logging.h> // for LogPrintf()
 
 uint256 CBlockHeaderUncached::GetHash() const
 {
@@ -35,7 +34,7 @@ uint256 CBlockHeaderUncached::GetPoWHash() const
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss << *this;
     if (yespower_tls((const uint8_t *)&ss[0], ss.size(), &yespower_1_0_sugarchain, (yespower_binary_t *)&hash)) {
-        LogPrintf("Error: CBlockHeaderUncached::GetPoWHash(): failed to compute PoW hash (out of memory?)\n");
+        // printf("Error: CBlockHeaderUncached::GetPoWHash(): failed to compute PoW hash (out of memory?)\n");
         exit(1);
     }
     return hash;
@@ -48,17 +47,17 @@ uint256 CBlockHeader::GetPoWHash_cached() const
     LOCK(cache_lock);
     if (cache_init) {
         if (block_hash != cache_block_hash) {
-            LogPrintf("Error: CBlockHeader::GetPoWHash_cached(): block hash changed unexpectedly\n");
+            // printf("Error: CBlockHeader::GetPoWHash_cached(): block hash changed unexpectedly\n");
             exit(1);
         }
         /* yespower PoW cache log: O (cyan) = HIT */
-        LogPrintf("O block = %s PoW = %s\n", cache_block_hash.ToString().c_str(), cache_PoW_hash.ToString().c_str());
+        // printf("O block = %s PoW = %s\n", cache_block_hash.ToString().c_str(), cache_PoW_hash.ToString().c_str());
     } else {
         cache_PoW_hash = GetPoWHash();
         cache_block_hash = block_hash;
         cache_init = true;
         /* yespower PoW cache log: x = MISS */
-        LogPrintf("x block = %s PoW = %s\n", cache_block_hash.ToString().c_str(), cache_PoW_hash.ToString().c_str());
+        // printf("x block = %s PoW = %s\n", cache_block_hash.ToString().c_str(), cache_PoW_hash.ToString().c_str());
     }
     return cache_PoW_hash;
 }
