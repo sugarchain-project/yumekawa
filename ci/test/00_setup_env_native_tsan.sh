@@ -14,4 +14,5 @@ export TEST_RUNNER_EXTRA="--exclude feature_block"  # Low memory on Travis machi
 export GOAL="install"
 YESPOWER_PATH=/tmp/cirrus-ci-build/src/crypto/yespower-1.0.1
 YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
-export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION' --enable-zmq --with-gui=no CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' CXXFLAGS='-g' --with-sanitizers=thread CC=clang CXX='clang++ -stdlib=libc++' --with-boost-process"
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+export BITCOIN_CONFIG="$YESPOWER_CFLAGS --enable-zmq --with-gui=no CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' CXXFLAGS='-g' --with-sanitizers=thread CC=clang CXX='clang++ -stdlib=libc++' --with-boost-process"
