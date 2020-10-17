@@ -66,7 +66,7 @@ public:
 class CBlockHeader : public CBlockHeaderUncached
 {
 public:
-    mutable RecursiveMutex cache_lock;
+    mutable RecursiveMutex cache_lock; // Do not use CCriticalSection // See https://github.com/bitcoin/bitcoin/pull/17891
     mutable bool cache_init;
     mutable uint256 cache_block_hash, cache_PoW_hash;
 
