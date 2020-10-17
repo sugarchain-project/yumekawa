@@ -30,13 +30,17 @@ BOOST_AUTO_TEST_CASE(get_next_work)
     int64_t nLastBlockTime = 1555935464;
     int64_t nFirstBlockTime = 1555932646;
 
+    /* YespowerSugar */
     /*
-    // TODO.ZENY.POW // fix after YespowerSugar
-    >>> "%08x" % 486604799
-    '1d00ffff' + U for unsigned integer = 0x1d00ffffU
+    >>> "%08x" % 521642053
+    '1f17a045'
+    + U for unsigned integer = 0x1f17a045U
+
+    >>> print int("0x1f35c28e", 0)
+    523616910
     */
 
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f17a045U); // TODO.ZENY.YESPOWER // 521642053
 }
 
 /* Test the constraint on the upper bound for next work */
@@ -57,7 +61,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_pow_limit)
     arith_uint256 bnAvg = arith_uint256("003fffff00000000000000000000000000000000000000000000000000000000"); // height=511 (N=510)
     int64_t nLastBlockTime = 1555910839;
     int64_t nFirstBlockTime = 1555908929;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f35c28eU); // TODO.ZENY.YESPOWER // 523616910
 }
 
 /* Test the constraint on the lower bound for actual time taken */
@@ -78,7 +82,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_lower_limit_actual)
     arith_uint256 bnAvg = arith_uint256("0037e5f3e2626262626262626262626262626262626262626262626262626262"); // height=1234
     int64_t nLastBlockTime = 1555913812;
     int64_t nFirstBlockTime = 1555911686;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f2ef45cU); // TODO.ZENY.YESPOWER // 523170908
 }
 
 /* Test the constraint on the upper bound for actual time taken */
@@ -99,7 +103,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_upper_limit_actual)
     arith_uint256 bnAvg = arith_uint256("003ffdfaf9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9"); // height=512
     int64_t nLastBlockTime = 1555910839;
     int64_t nFirstBlockTime = 1555908929;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1d00ffffU); // TODO.ZENY.POW // fix after YespowerSugar
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f35c0ddU); // TODO.ZENY.YESPOWER // 523616477
 }
 
 BOOST_AUTO_TEST_CASE(CheckProofOfWork_test_negative_target)
@@ -197,11 +201,35 @@ void sanity_check_chainparams(const ArgsManager& args, std::string chainName)
     BOOST_CHECK(!over);
     BOOST_CHECK(UintToArith256(consensus.powLimit) >= pow_compact);
 
+    /* BTC */
+    /*
     // check max target * 4*nPowTargetTimespan doesn't overflow -- see pow.cpp:CalculateNextWorkRequired()
     if (!consensus.fPowNoRetargeting) {
         arith_uint256 targ_max("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
         targ_max /= consensus.nPowTargetTimespan*4;
         BOOST_CHECK(UintToArith256(consensus.powLimit) < targ_max);
+    }
+    */
+
+    /* SugarShield */
+    arith_uint256 targ_max("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+    // MAIN & TESTNET
+    if (consensus.powLimit == uint256S("003fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")) {
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) == 1024);
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow);
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) == consensus.nPowAveragingWindow + 514); // 1024 − 510 = 514
+    }
+    // SIGNET
+    if (consensus.powLimit == uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")) {
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) == 512);
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow);
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) == consensus.nPowAveragingWindow + 2); // 512 − 510 = 2
+    }
+    // REGTEST
+    if (consensus.powLimit == uint256S("0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f")) {
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) == 17);
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow);
+        BOOST_CHECK(targ_max/UintToArith256(consensus.powLimit) == consensus.nPowAveragingWindow + 0); // 17 − 17 = 0
     }
 }
 
