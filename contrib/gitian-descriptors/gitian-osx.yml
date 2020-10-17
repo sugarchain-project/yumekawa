@@ -126,8 +126,8 @@ script: |
     ./autogen.sh
     YESPOWER_PATH="/home/ubuntu/build/sugarchain/src/crypto/yespower-1.0.1"
     YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
-    YESPOWER_CFLAGS="CFLAGS='-I${YESPOWER_PATH} ${YESPOWER_OPTION}'"
-    CONFIG_SITE=${BASEPREFIX}/${i}/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS} ${YESPOWER_CFLAGS}
+    HOST_CFLAGS="-I${YESPOWER_PATH} ${YESPOWER_OPTION}"
+    CONFIG_SITE=${BASEPREFIX}/${i}/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS} CFLAGS="${HOST_CFLAGS}"
     make ${MAKEOPTS}
     make ${MAKEOPTS} -C src check-security
     make ${MAKEOPTS} -C src check-symbols
