@@ -16,5 +16,6 @@ export RUN_FUZZ_TESTS=false # TODO.ZENY.POW # TEST DISABLED # Due to timeout...
 # export FUZZ_TESTS_CONFIG="--valgrind" # TODO.ZENY.POW # TEST DISABLED # Due to timeout...
 export GOAL="install"
 YESPOWER_PATH=/tmp/cirrus-ci-build/src/crypto/yespower-1.0.1
-export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --enable-fuzz --with-sanitizers=fuzzer CC=clang CXX=clang++"
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION' --enable-fuzz --with-sanitizers=fuzzer CC=clang CXX=clang++"
 export CCACHE_SIZE=200M
