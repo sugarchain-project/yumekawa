@@ -11,7 +11,8 @@ export DOCKER_NAME_TAG=ubuntu:18.04  # Check that bionic can cross-compile to ma
 export PIP_PACKAGES="zmq"
 export GOAL="install"
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
-export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --with-gui --enable-reduce-exports --enable-werror --with-boost-process"
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION' --with-gui --enable-reduce-exports --enable-werror --with-boost-process"
 export NO_DEPENDS=1
 export OSX_SDK=""
 export CCACHE_SIZE=300M

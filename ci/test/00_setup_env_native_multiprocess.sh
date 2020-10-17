@@ -12,5 +12,6 @@ export PACKAGES="cmake python3"
 export DEP_OPTS="MULTIPROCESS=1"
 export GOAL="install"
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
-export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --with-boost-process"
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION' --with-boost-process"
 export TEST_RUNNER_ENV="BITCOIND=sugarchain-node"

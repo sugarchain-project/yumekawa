@@ -26,4 +26,5 @@ export GOAL="install"
 # -Wno-psabi is to disable ABI warnings: "note: parameter passing for argument of type ... changed in GCC 7.1"
 # This could be removed once the ABI change warning does not show up by default
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
-export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' --enable-glibc-back-compat --enable-reduce-exports CXXFLAGS=-Wno-psabi --enable-werror --with-boost-process"
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION' --enable-glibc-back-compat --enable-reduce-exports CXXFLAGS=-Wno-psabi --enable-werror --with-boost-process"

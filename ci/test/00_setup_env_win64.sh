@@ -14,5 +14,6 @@ export RUN_FUNCTIONAL_TESTS=false
 export RUN_SECURITY_TESTS="true"
 export GOAL="deploy"
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
+YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
 YESPOWER_WIN_OPTION="--disable-shared" # TODO.ZENY.POW # Build is failing without this flag...
-export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH' $YESPOWER_WIN_OPTION --enable-reduce-exports --disable-gui-tests --without-boost-process"
+export BITCOIN_CONFIG="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION' $YESPOWER_WIN_OPTION --enable-reduce-exports --disable-gui-tests --without-boost-process"
