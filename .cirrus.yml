@@ -71,7 +71,7 @@ task:
     FILE_ENV: "./ci/test/00_setup_env_native_asan.sh"
 
 task:
-  name: 'x86_64 Linux  [GOAL: install]  [focal]  [no depends, only system libs, fuzzers under valgrind]'
+  name: 'x86_64 Linux  [GOAL: install]  [focal]  [no depends, only system libs, no fuzzers under valgrind]'
   << : *GLOBAL_TASK_TEMPLATE
   container:
     image: ubuntu:focal
