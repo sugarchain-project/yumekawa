@@ -96,6 +96,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1230767999; // December 31, 2008
 
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
+
         /* SugarShield */
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
         consensus.nPowMaxAdjustDown = 32; // 32% adjustment down
@@ -205,6 +210,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1230767999; // December 31, 2008
+
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
 
         /* SugarShield */
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
@@ -321,7 +331,7 @@ public:
         strNetworkID = CBaseChainParams::SIGNET;
         consensus.signet_blocks = true;
         consensus.signet_challenge.assign(bin.begin(), bin.end());
-        consensus.nSubsidyHalvingInterval = 150;
+        consensus.nSubsidyHalvingInterval = 12500000;
         consensus.BIP16Exception = uint256{};
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256{};
@@ -340,6 +350,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
+
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
 
         /* SugarShield */
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
@@ -390,7 +405,7 @@ public:
         strNetworkID =  CBaseChainParams::REGTEST;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
-        consensus.nSubsidyHalvingInterval = 150;
+        consensus.nSubsidyHalvingInterval = 150; // TODO.ZENY.SETTINGS // Special halvings rule only for regtest
         consensus.BIP16Exception = uint256();
         consensus.BIP34Height = 500; // BIP34 activated on regtest (Used in functional tests)
         consensus.BIP34Hash = uint256();
@@ -412,6 +427,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32 / 1000 * 0.012);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
 
         /* SugarShield */
         consensus.nPowAveragingWindow = 17; // 85/nPowTargetSpacing(5) = 17
