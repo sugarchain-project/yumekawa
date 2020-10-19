@@ -3838,9 +3838,31 @@ bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, Block
     return true;
 }
 
+/* YespowerSugar */
+// Function "bool ProcessNewBlock(...)" moved to "bool ChainstateManager::ProcessNewBlock(...)"
 bool ChainstateManager::ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool* fNewBlock)
 {
     AssertLockNotHeld(cs_main);
+
+    /* YespowerSugar */
+    // Look for this block's header in the index like AcceptBlock() will
+    uint256 hash = pblock->GetHash();
+    {
+        LOCK(cs_main);
+
+        BlockMap::iterator miSelf = m_blockman.m_block_index.find(hash); // Use "m_blockman.m_block_index" rather than "mapBlockIndex"
+        CBlockIndex *pindex = nullptr;
+        if (miSelf != m_blockman.m_block_index.end()) {
+            // Block header is already known
+            pindex = miSelf->second;
+            if (!pblock->cache_init && pindex->cache_init) {
+                LOCK(pblock->cache_lock); // Probably unnecessary since no concurrent access to pblock is expected
+                pblock->cache_init = true;
+                pblock->cache_block_hash = pindex->cache_block_hash;
+                pblock->cache_PoW_hash = pindex->cache_PoW_hash;
+            }
+        }
+    }
 
     {
         CBlockIndex *pindex = nullptr;
