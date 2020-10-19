@@ -12,7 +12,7 @@ export DOCKER_NAME_TAG=centos:7
 export DOCKER_PACKAGES="gcc-c++ glibc-devel.x86_64 libstdc++-devel.x86_64 glibc-devel.i686 libstdc++-devel.i686 ccache libtool make git python3 python36-zmq which patch lbzip2 dash"
 export GOAL="install"
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
-YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
-YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+# YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer" # TODO.ZENY.YESPOWER # OPTION DISABLED # Due to timeout...
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH'"
 export BITCOIN_CONFIG="$YESPOWER_CFLAGS --enable-zmq --with-gui=qt5 --enable-reduce-exports --with-boost-process"
 export CONFIG_SHELL="/bin/dash"
