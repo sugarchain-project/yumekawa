@@ -71,7 +71,7 @@ public:
         strNetworkID = CBaseChainParams::MAIN;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
-        consensus.nSubsidyHalvingInterval = 210000;
+        consensus.nSubsidyHalvingInterval = 12500000;
         consensus.BIP16Exception = uint256S("");
         consensus.BIP34Height = 227931;
         consensus.BIP34Hash = uint256S("");
@@ -82,7 +82,7 @@ public:
         consensus.MinBIP9WarningHeight = 483840; // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("003fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetSpacing = 5;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
@@ -95,6 +95,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1230767999; // December 31, 2008
+
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
 
         /* SugarShield */
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
@@ -112,10 +117,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xd9;
+        pchMessageStart[0] = 0x9f;
+        pchMessageStart[1] = 0xeb;
+        pchMessageStart[2] = 0x4b;
+        pchMessageStart[3] = 0x9d;
         nDefaultPort = 34230;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 350;
@@ -181,7 +186,7 @@ public:
         strNetworkID = CBaseChainParams::TESTNET;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
-        consensus.nSubsidyHalvingInterval = 210000;
+        consensus.nSubsidyHalvingInterval = 12500000;
         consensus.BIP16Exception = uint256S("");
         consensus.BIP34Height = 21111;
         consensus.BIP34Hash = uint256S("");
@@ -192,7 +197,7 @@ public:
         consensus.MinBIP9WarningHeight = 836640; // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("003fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetSpacing = 5;
         consensus.fPowAllowMinDifficultyBlocks = false; // Sugarchain: DAA SugarShield-N510
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
@@ -206,6 +211,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1230767999; // December 31, 2008
 
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
+
         /* SugarShield */
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
         consensus.nPowMaxAdjustDown = 32; // 32% adjustment down
@@ -217,10 +227,10 @@ public:
         consensus.nMinimumChainWork = uint256S("");
         consensus.defaultAssumeValid = uint256S(""); // 1692000
 
-        pchMessageStart[0] = 0x0b;
+        pchMessageStart[0] = 0xb0;
         pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x09;
-        pchMessageStart[3] = 0x07;
+        pchMessageStart[2] = 0x90;
+        pchMessageStart[3] = 0x70;
         nDefaultPort = 44230;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 40;
@@ -321,7 +331,7 @@ public:
         strNetworkID = CBaseChainParams::SIGNET;
         consensus.signet_blocks = true;
         consensus.signet_challenge.assign(bin.begin(), bin.end());
-        consensus.nSubsidyHalvingInterval = 210000;
+        consensus.nSubsidyHalvingInterval = 12500000;
         consensus.BIP16Exception = uint256{};
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256{};
@@ -330,7 +340,7 @@ public:
         consensus.CSVHeight = 1;
         consensus.SegwitHeight = 1;
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetSpacing = 5;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
@@ -345,6 +355,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
 
         /* SugarShield */
         consensus.nPowAveragingWindow = 510; // 2550/nPowTargetSpacing(5) = 510
@@ -395,7 +410,7 @@ public:
         strNetworkID =  CBaseChainParams::REGTEST;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
-        consensus.nSubsidyHalvingInterval = 150;
+        consensus.nSubsidyHalvingInterval = 150; // Sugarchain: Settings Part 1 // Special halvings rule only for regtest
         consensus.BIP16Exception = uint256();
         consensus.BIP34Height = 500; // BIP34 activated on regtest (Used in functional tests)
         consensus.BIP34Hash = uint256();
@@ -406,7 +421,7 @@ public:
         consensus.MinBIP9WarningHeight = 0;
         consensus.powLimit = uint256S("0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-        consensus.nPowTargetSpacing = 10 * 60;
+        consensus.nPowTargetSpacing = 5;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains
@@ -417,6 +432,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+
+        /* Sugarchain Settings */
+        assert(MAX_MONEY == pow(2,30) * COIN);
+        assert(consensus.nSubsidyHalvingInterval == pow(5,8) * 32 / 1000 * 0.012);
+        assert(consensus.nPowTargetSpacing == 10 * 60 / 120);
 
         /* SugarShield */
         consensus.nPowAveragingWindow = 17; // 85/nPowTargetSpacing(5) = 17
@@ -429,10 +449,10 @@ public:
         consensus.nMinimumChainWork = uint256{};
         consensus.defaultAssumeValid = uint256{};
 
-        pchMessageStart[0] = 0xfa;
-        pchMessageStart[1] = 0xbf;
-        pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xda;
+        pchMessageStart[0] = 0xaf;
+        pchMessageStart[1] = 0xfb;
+        pchMessageStart[2] = 0x5b;
+        pchMessageStart[3] = 0xad;
         nDefaultPort = 45340;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;

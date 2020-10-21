@@ -82,10 +82,11 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
 
             static bool fDone;
             if (!fDone) {
-                // If nobody has a time different than ours but within 5 minutes of ours, give a warning
+                // FTL: 70 seconds, 120x faster but 1/60 times // was (70 * 60)
+                // If nobody has a time different than ours but within 5 seconds of ours, give a warning // was (5 minutes)
                 bool fMatch = false;
                 for (const int64_t nOffset : vSorted) {
-                    if (nOffset != 0 && nOffset > -5 * 60 && nOffset < 5 * 60) fMatch = true;
+                    if (nOffset != 0 && nOffset > -5 * 60/60 && nOffset < 5 * 60/60) fMatch = true; // was (5 * 60)
                 }
 
                 if (!fMatch) {
