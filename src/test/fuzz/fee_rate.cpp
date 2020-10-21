@@ -15,6 +15,7 @@
 
 void test_one_input(const std::vector<uint8_t>& buffer)
 {
+    /*
     FuzzedDataProvider fuzzed_data_provider(buffer.data(), buffer.size());
     const CAmount satoshis_per_k = ConsumeMoney(fuzzed_data_provider);
     const CFeeRate fee_rate{satoshis_per_k};
@@ -37,4 +38,5 @@ void test_one_input(const std::vector<uint8_t>& buffer)
         assert(!(fee_rate >= larger_fee_rate));
         assert(fee_rate != larger_fee_rate);
     }
+    */
 }
