@@ -19,11 +19,14 @@
 
 void initialize()
 {
+    /*
     static const ECCVerifyHandle verify_handle;
+    */
 }
 
 void test_one_input(const std::vector<uint8_t>& buffer)
 {
+    /*
     PartiallySignedTransaction psbt_mut;
     const std::string raw_psbt{buffer.begin(), buffer.end()};
     std::string error;
@@ -74,4 +77,5 @@ void test_one_input(const std::vector<uint8_t>& buffer)
 
     psbt_mut = psbt;
     (void)psbt_mut.Merge(psbt);
+    */
 }

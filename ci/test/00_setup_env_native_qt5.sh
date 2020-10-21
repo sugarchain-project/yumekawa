@@ -15,7 +15,7 @@ export DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1"
 export TEST_RUNNER_EXTRA="--previous-releases --coverage --extended --exclude feature_dbcrash"  # Run extended tests so that coverage does not fail, but exclude the very slow dbcrash
 '
 # ENDCOMMENT
-export TEST_RUNNER_EXTRA="--coverage --exclude rpc_bind --exclude p2p_blockfilters" # TODO.ZENY.YESPOWER # TEST DISABLED # Due to timeout...
+export TEST_RUNNER_EXTRA="--coverage --exclude rpc_bind" # TODO.ZENY.YESPOWER # TEST DISABLED # Due to timeout...
 export RUN_SECURITY_TESTS="true"
 export RUN_UNIT_TESTS_SEQUENTIAL="true"
 export RUN_UNIT_TESTS="false"
@@ -26,6 +26,6 @@ export PREVIOUS_RELEASES_TO_DOWNLOAD="v0.15.2 v0.16.3 v0.17.2 v0.18.1 v0.19.1"
 '
 # ENDCOMMENT
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
-YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
+# YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer" # TODO.ZENY.YESPOWER # OPTION DISABLED # Due to timeout...
 # YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'" # TODO.ZENY.YESPOWER # Already there a CFLAGS
-export BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-c++17 --enable-debug CFLAGS=\"-I$YESPOWER_PATH $YESPOWER_OPTION -g0 -O2 -funsigned-char\" CXXFLAGS=\"-g0 -O2 -funsigned-char\" --with-boost-process"
+export BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-c++17 --enable-debug CFLAGS=\"-I$YESPOWER_PATH -g0 -O2 -funsigned-char\" CXXFLAGS=\"-g0 -O2 -funsigned-char\" --with-boost-process"
