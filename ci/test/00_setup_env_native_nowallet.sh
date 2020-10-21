@@ -12,6 +12,6 @@ export PACKAGES="python3-zmq clang-3.8 llvm-3.8"  # Use clang-3.8 to test C++11 
 export DEP_OPTS="NO_WALLET=1"
 export GOAL="install"
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
-YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
-YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+# YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer" # TODO.ZENY.YESPOWER # OPTION DISABLED # Due to timeout...
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH'"
 export BITCOIN_CONFIG="$YESPOWER_CFLAGS --enable-glibc-back-compat --enable-reduce-exports CC=clang-3.8 CXX=clang++-3.8 --with-boost-process"

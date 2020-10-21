@@ -19,7 +19,8 @@
  * Maximum amount of time that a block timestamp is allowed to exceed the
  * current network-adjusted time before the block will be accepted.
  */
-static constexpr int64_t MAX_FUTURE_BLOCK_TIME = 2 * 60 * 60;
+// FTL: 60 seconds, approx. 12 blocks. // was (2 * 60 * 60)
+static constexpr int64_t MAX_FUTURE_BLOCK_TIME = 2 * 60 * 60 / 120;
 
 /**
  * Timestamp window used as a grace period by code that compares external

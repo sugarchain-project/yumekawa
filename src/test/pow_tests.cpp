@@ -32,15 +32,15 @@ BOOST_AUTO_TEST_CASE(get_next_work)
 
     /* YespowerSugar */
     /*
-    >>> "%08x" % 521642053
-    '1f17a045'
-    + U for unsigned integer = 0x1f17a045U
+    >>> "0x%08x" % 521985409
+    '0x1f1cdd81'
+    + U for unsigned integer = 0x1f1cdd81U
 
     >>> print int("0x1f35c28e", 0)
-    523616910
+    521985409
     */
 
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f17a045U); // TODO.ZENY.YESPOWER // 521642053
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f1cdd81U); // TODO.ZENY.YESPOWER // 521985409
 }
 
 /* Test the constraint on the upper bound for next work */
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_pow_limit)
     arith_uint256 bnAvg = arith_uint256("003fffff00000000000000000000000000000000000000000000000000000000"); // height=511 (N=510)
     int64_t nLastBlockTime = 1555910839;
     int64_t nFirstBlockTime = 1555908929;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f35c28eU); // TODO.ZENY.YESPOWER // 523616910
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f3bfbfbU); // TODO.ZENY.YESPOWER // 524024827
 }
 
 /* Test the constraint on the lower bound for actual time taken */
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_lower_limit_actual)
     arith_uint256 bnAvg = arith_uint256("0037e5f3e2626262626262626262626262626262626262626262626262626262"); // height=1234
     int64_t nLastBlockTime = 1555913812;
     int64_t nFirstBlockTime = 1555911686;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f2ef45cU); // TODO.ZENY.YESPOWER // 523170908
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f35931bU); // TODO.ZENY.YESPOWER // 523604763
 }
 
 /* Test the constraint on the upper bound for actual time taken */
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_upper_limit_actual)
     arith_uint256 bnAvg = arith_uint256("003ffdfaf9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9"); // height=512
     int64_t nLastBlockTime = 1555910839;
     int64_t nFirstBlockTime = 1555908929;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f35c0ddU); // TODO.ZENY.YESPOWER // 523616477
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(bnAvg, nLastBlockTime, nFirstBlockTime, chainParams->GetConsensus()), 0x1f3bfa17U); // TODO.ZENY.YESPOWER // 524024343
 }
 
 BOOST_AUTO_TEST_CASE(CheckProofOfWork_test_negative_target)
