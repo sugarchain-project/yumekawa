@@ -12,6 +12,6 @@ export DOCKER_NAME_TAG=ubuntu:20.04
 export NO_DEPENDS=1
 export GOAL="install"
 YESPOWER_PATH=/tmp/cirrus-ci-build/src/crypto/yespower-1.0.1
-YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
-YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+# YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer" # Sugarchain: Settings Part 1
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH'"
 export BITCOIN_CONFIG="$YESPOWER_CFLAGS --enable-zmq --with-incompatible-bdb --with-gui=qt5 CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' --with-sanitizers=address,integer,undefined CC=clang CXX=clang++ --with-boost-process"
