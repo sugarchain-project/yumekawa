@@ -73,17 +73,19 @@ BOOST_AUTO_TEST_CASE(addtimedata)
     BOOST_CHECK_EQUAL(GetTimeOffset(), 0);
 
     // Part 2: Test positive and negative medians by adding more offsets
-    MultiAddTimeData(4, 100); // filter size 9
-    BOOST_CHECK_EQUAL(GetTimeOffset(), 100);
-    MultiAddTimeData(10, -100); //filter size 19
-    BOOST_CHECK_EQUAL(GetTimeOffset(), -100);
+    // Sugarchain: Settings Part 1
+    // According to "src/timedata.cpp:89", this 100 (300/3) maybe 1.666... (5/3), but should be an integer. So randomly decide is "3".
+    MultiAddTimeData(4, 3); // filter size 9 // was (4, 100)
+    BOOST_CHECK_EQUAL(GetTimeOffset(), 3); // was (100)
+    MultiAddTimeData(10, -3); //filter size 19 // was (10, -100)
+    BOOST_CHECK_EQUAL(GetTimeOffset(), -3); // was (-100)
 
     // Part 3: Test behaviour when filter has reached maximum number of offsets
     const int MAX_SAMPLES = 200;
     int nfill = (MAX_SAMPLES - 3 - 19) / 2; //89
     MultiAddTimeData(nfill, 100);
     MultiAddTimeData(nfill, -100); //filter size MAX_SAMPLES - 3
-    BOOST_CHECK_EQUAL(GetTimeOffset(), -100);
+    BOOST_CHECK_EQUAL(GetTimeOffset(), -3); // was (-100)
 
     MultiAddTimeData(2, 100);
     //filter size MAX_SAMPLES -1, median is the initial 0 offset

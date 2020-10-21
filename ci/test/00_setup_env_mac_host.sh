@@ -11,8 +11,8 @@ export DOCKER_NAME_TAG=ubuntu:18.04  # Check that bionic can cross-compile to ma
 export PIP_PACKAGES="zmq"
 export GOAL="install"
 YESPOWER_PATH=$TRAVIS_BUILD_DIR/src/crypto/yespower-1.0.1
-YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer"
-YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH $YESPOWER_OPTION'"
+# YESPOWER_OPTION="-fPIE -Wall -O2 -fomit-frame-pointer" # Sugarchain: Settings Part 1
+YESPOWER_CFLAGS="CFLAGS='-I$YESPOWER_PATH'"
 export BITCOIN_CONFIG="$YESPOWER_CFLAGS --with-gui --enable-reduce-exports --enable-werror --with-boost-process"
 export NO_DEPENDS=1
 export OSX_SDK=""
