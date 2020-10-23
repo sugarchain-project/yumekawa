@@ -169,10 +169,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 4096 0000000000000000000f2adce67e49b0b6bdeb9de8b7c3d7e93b21e7fc1e819d
-            /* nTime    */ 0,
-            /* nTxCount */ 0,
-            /* dTxRate  */ 0,
+            // Data from RPC: getchaintxstats 4096 855f0c66238bc0246c8ca25cf958283fd49b9fb4b217ddeb518e5ea9f5071b9e (6513497)
+            /* nTime    */ 1599181736,
+            /* nTxCount */ 6858263,
+            /* dTxRate  */ 0.2053689306146399
         };
     }
 };
@@ -272,10 +272,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 4096 000000000000056c49030c174179b52a928c870e6e8a822c75973b7970cfbd01
-            /* nTime    */ 0,
-            /* nTxCount */ 0,
-            /* dTxRate  */ 0,
+            // Data from RPC: getchaintxstats 4096 bd83debccee1bef17340539beff64ad3feab03c25e5d91969cf5418b8e2fe5a7 (780811)
+            /* nTime    */ 1598648664,
+            /* nTxCount */ 4033793,
+            /* dTxRate  */ 0.1692345821801809
         };
     }
 };
@@ -299,7 +299,7 @@ public:
             consensus.defaultAssumeValid = uint256S(""); // TODO: signet not launched yet
             m_assumed_blockchain_size = 1;
             m_assumed_chain_state_size = 0;
-            chainTxData = ChainTxData{
+            chainTxData = ChainTxData{ // TODO: signet not launched yet
                 // Data from RPC: getchaintxstats 4096 00000128807d9175c494e24d805fc7854f7d79aa965cbb128342ad8b70cecfa5
                 /* nTime    */ 0,
                 /* nTxCount */ 0,
@@ -316,7 +316,7 @@ public:
             consensus.defaultAssumeValid = uint256{}; // TODO: signet not launched yet
             m_assumed_blockchain_size = 0;
             m_assumed_chain_state_size = 0;
-            chainTxData = ChainTxData{
+            chainTxData = ChainTxData{ // TODO: signet not launched yet
                 0,
                 0,
                 0,
@@ -475,7 +475,7 @@ public:
             }
         };
 
-        chainTxData = ChainTxData{
+        chainTxData = ChainTxData{ // regtest clean
             0,
             0,
             0
