@@ -109,8 +109,8 @@ public:
         assert(maxUint/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow); // 1024 >= 510
         assert(maxUint/UintToArith256(consensus.powLimit) == consensus.nPowAveragingWindow + 514); // 1024 − 510 = 514
 
-        consensus.nMinimumChainWork = uint256S("");
-        consensus.defaultAssumeValid = uint256S(""); // 623950
+        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000003f23ef34da28"); // getblockhash 6513497 && "chainwork"
+        consensus.defaultAssumeValid = uint256S("0x855f0c66238bc0246c8ca25cf958283fd49b9fb4b217ddeb518e5ea9f5071b9e"); // getblockhash 6513497 && "hash"
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -224,8 +224,8 @@ public:
         assert(maxUint/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow); // 1024 >= 510
         assert(maxUint/UintToArith256(consensus.powLimit) == consensus.nPowAveragingWindow + 514); // 1024 − 510 = 514
 
-        consensus.nMinimumChainWork = uint256S("");
-        consensus.defaultAssumeValid = uint256S(""); // 1692000
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000014d9bf048"); // getblockhash 4000000 && "chainwork" (testnet)
+        consensus.defaultAssumeValid = uint256S("0xbc05c2d5e81785f287cd58a798b64467cff35c8ef2bbe8062d8420eeb86f4056"); // getblockhash 4000000 && "hash" (testnet)
 
         pchMessageStart[0] = 0xb0;
         pchMessageStart[1] = 0x11;
@@ -295,8 +295,8 @@ public:
             vSeeds.emplace_back("2a01:7c8:d005:390::5");
             vSeeds.emplace_back("ntv3mtqw5wt63red.onion:54230");
 
-            consensus.nMinimumChainWork = uint256S("");
-            consensus.defaultAssumeValid = uint256S(""); // 5348
+            consensus.nMinimumChainWork = uint256S(""); // TODO: signet not launched yet
+            consensus.defaultAssumeValid = uint256S(""); // TODO: signet not launched yet
             m_assumed_blockchain_size = 1;
             m_assumed_chain_state_size = 0;
             chainTxData = ChainTxData{
@@ -312,8 +312,8 @@ public:
             }
             bin = ParseHex(signet_challenge[0]);
 
-            consensus.nMinimumChainWork = uint256{};
-            consensus.defaultAssumeValid = uint256{};
+            consensus.nMinimumChainWork = uint256{}; // TODO: signet not launched yet
+            consensus.defaultAssumeValid = uint256{}; // TODO: signet not launched yet
             m_assumed_blockchain_size = 0;
             m_assumed_chain_state_size = 0;
             chainTxData = ChainTxData{
@@ -441,8 +441,8 @@ public:
         assert(maxUint/UintToArith256(consensus.powLimit) >= consensus.nPowAveragingWindow); // 17 >= 17
         assert(maxUint/UintToArith256(consensus.powLimit) == consensus.nPowAveragingWindow + 0); // 17 − 17 = 0
 
-        consensus.nMinimumChainWork = uint256{};
-        consensus.defaultAssumeValid = uint256{};
+        consensus.nMinimumChainWork = uint256{}; // regtest clean
+        consensus.defaultAssumeValid = uint256{}; // regtest clean
 
         pchMessageStart[0] = 0xaf;
         pchMessageStart[1] = 0xfb;
