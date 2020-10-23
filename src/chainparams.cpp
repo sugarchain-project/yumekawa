@@ -123,8 +123,8 @@ public:
         pchMessageStart[3] = 0x9d;
         nDefaultPort = 34230;
         nPruneAfterHeight = 100000;
-        m_assumed_blockchain_size = 320;
-        m_assumed_chain_state_size = 4;
+        m_assumed_blockchain_size = 6;
+        m_assumed_chain_state_size = 1;
 
         genesis = CreateGenesisBlock(1565881200, 247, 0x1f3fffff, 1, 42.94967296 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -233,8 +233,8 @@ public:
         pchMessageStart[3] = 0x70;
         nDefaultPort = 44230;
         nPruneAfterHeight = 1000;
-        m_assumed_blockchain_size = 40;
-        m_assumed_chain_state_size = 2;
+        m_assumed_blockchain_size = 1;
+        m_assumed_chain_state_size = 1;
 
         genesis = CreateGenesisBlock(1565913601, 490, 0x1f3fffff, 1, 42.94967296 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -297,8 +297,8 @@ public:
 
             consensus.nMinimumChainWork = uint256S(""); // TODO: signet not launched yet
             consensus.defaultAssumeValid = uint256S(""); // TODO: signet not launched yet
-            m_assumed_blockchain_size = 1;
-            m_assumed_chain_state_size = 0;
+            m_assumed_blockchain_size = 0; // TODO: signet not launched yet
+            m_assumed_chain_state_size = 0; // TODO: signet not launched yet
             chainTxData = ChainTxData{ // TODO: signet not launched yet
                 // Data from RPC: getchaintxstats 4096 00000128807d9175c494e24d805fc7854f7d79aa965cbb128342ad8b70cecfa5
                 /* nTime    */ 0,
@@ -312,11 +312,11 @@ public:
             }
             bin = ParseHex(signet_challenge[0]);
 
-            consensus.nMinimumChainWork = uint256{}; // TODO: signet not launched yet
-            consensus.defaultAssumeValid = uint256{}; // TODO: signet not launched yet
-            m_assumed_blockchain_size = 0;
-            m_assumed_chain_state_size = 0;
-            chainTxData = ChainTxData{ // TODO: signet not launched yet
+            consensus.nMinimumChainWork = uint256{}; // a new signet clean
+            consensus.defaultAssumeValid = uint256{}; // a new signet clean
+            m_assumed_blockchain_size = 0; // a new signet clean
+            m_assumed_chain_state_size = 0; // a new signet clean
+            chainTxData = ChainTxData{ // a new signet clean
                 0,
                 0,
                 0,
@@ -450,8 +450,8 @@ public:
         pchMessageStart[3] = 0xad;
         nDefaultPort = 45340;
         nPruneAfterHeight = 1000;
-        m_assumed_blockchain_size = 0;
-        m_assumed_chain_state_size = 0;
+        m_assumed_blockchain_size = 0; // regtest clean
+        m_assumed_chain_state_size = 0; // regtest clean
 
         UpdateActivationParametersFromArgs(args);
 
