@@ -74,10 +74,10 @@ public:
         consensus.nSubsidyHalvingInterval = 12500000;
         consensus.BIP16Exception = uint256{};
         consensus.BIP34Height = 17;
-        consensus.BIP34Hash = uint256S("72e36f3fcdf98d3625dfe03f28a914c513b913231e479d53fc22e5e46cf5b585"); // getblockhash 17
-        consensus.BIP65Height = 1; // Always on
-        consensus.BIP66Height = 1; // Always on
-        consensus.CSVHeight = 1; // Always on
+        consensus.BIP34Hash = uint256S("0x72e36f3fcdf98d3625dfe03f28a914c513b913231e479d53fc22e5e46cf5b585"); // getblockhash 17
+        consensus.BIP65Height = 1;  // Always on
+        consensus.BIP66Height = 1;  // Always on
+        consensus.CSVHeight = 1;    // Always on
         consensus.SegwitHeight = 1; // Always on
         consensus.MinBIP9WarningHeight = 12240; // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("003fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -181,21 +181,21 @@ public:
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
         consensus.nSubsidyHalvingInterval = 12500000;
-        consensus.BIP16Exception = uint256S("");
-        consensus.BIP34Height = 21111;
-        consensus.BIP34Hash = uint256S("");
-        consensus.BIP65Height = 581885; // 00000000007f6655f22f98e72ed80d8b06dc761d5da09df0fa1dc4be4f861eb6
-        consensus.BIP66Height = 330776; // 000000002104c8c45e99a8853285a3b592602a3ccde2b832481da85e9e4ba182
-        consensus.CSVHeight = 770112; // 00000000025e930139bac5c6c31a403776da130831ab85be56578f3fa75369bb
-        consensus.SegwitHeight = 834624; // 00000000002b980fcd729daaa248fd9316a5200e9b367f4ff2c42453e84201ca
-        consensus.MinBIP9WarningHeight = 836640; // segwit activation height + miner confirmation window
+        consensus.BIP16Exception = uint256{};
+        consensus.BIP34Height = 17;
+        consensus.BIP34Hash = uint256S("0xc7c210c9267ebc195100c71691336c7048cbdd37761b4bd20c9b1f32caf4fb9c"); // getblockhash 17
+        consensus.BIP65Height = 1;  // Always on
+        consensus.BIP66Height = 1;  // Always on
+        consensus.CSVHeight = 1;    // Always on
+        consensus.SegwitHeight = 1; // Always on
+        consensus.MinBIP9WarningHeight = 12240; // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("003fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
+        consensus.nPowTargetTimespan = 61200; // 17 hours = 17*60*60 = 61200
         consensus.nPowTargetSpacing = 5;
         consensus.fPowAllowMinDifficultyBlocks = false; // TODO.ZENY.POW // Never allow fPowNoRetargeting on TESTNET. Only possible on REGTEST. See src/pow.cpp (GetNextWorkRequired)
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 9180; // 75% of nMinerConfirmationWindow = 61200/5*0.75 = 9180 (was 1916 = 1209600/600*0.95+0.8) // 9180/510 = 18 cycles of DigiShieldZEC
+        consensus.nMinerConfirmationWindow = 12240; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
