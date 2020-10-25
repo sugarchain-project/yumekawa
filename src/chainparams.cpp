@@ -329,17 +329,17 @@ public:
         consensus.BIP16Exception = uint256{};
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256{};
-        consensus.BIP65Height = 1;
-        consensus.BIP66Height = 1;
-        consensus.CSVHeight = 1;
-        consensus.SegwitHeight = 1;
-        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
+        consensus.BIP65Height = 1;  // Always on
+        consensus.BIP66Height = 1;  // Always on
+        consensus.CSVHeight = 1;    // Always on
+        consensus.SegwitHeight = 1; // Always on
+        consensus.nPowTargetTimespan = 61200; // 17 hours = 17*60*60 = 61200
         consensus.nPowTargetSpacing = 5;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1916;
-        consensus.nMinerConfirmationWindow = 2016;
-        consensus.MinBIP9WarningHeight = 0;
+        consensus.nRuleChangeActivationThreshold = 9180; // 75% of nMinerConfirmationWindow = 61200/5*0.75 = 9180 (was 1916 = 1209600/600*0.95+0.8) // 9180/510 = 18 cycles of DigiShieldZEC
+        consensus.nMinerConfirmationWindow = 12240; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.MinBIP9WarningHeight = 12240; // segwit activation height + miner confirmation window
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
