@@ -98,9 +98,6 @@ struct Params {
     int64_t MaxActualTimespan() const { return (AveragingWindowTimespan() * (100 + nPowMaxAdjustDown)) / 100; }
     int64_t nPowMaxAdjustDown;
     int64_t nPowMaxAdjustUp;
-
-    /* Sugarchain Settings */
-    int64_t nHowMuchFasterThanBitcoin = 120;
 };
 } // namespace Consensus
 
