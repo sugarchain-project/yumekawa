@@ -2020,6 +2020,13 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
     int64_t nTime1 = GetTimeMicros(); nTimeCheck += nTime1 - nTimeStart;
     LogPrint(BCLog::BENCH, "    - Sanity checks: %.2fms [%.2fs (%.2fms/blk)]\n", MILLI * (nTime1 - nTimeStart), nTimeCheck * MICRO, nTimeCheck * MILLI / nBlocksTotal);
 
+    /*
+    Removing BIP30
+    See following:
+    https://github.com/litecoin-project/litecoin/blob/81c4f2d80fbd33d127ff9b31bf588e4925599d79/src/validation.cpp#L1866
+    https://github.com/litecoin-project/litecoin/blob/81c4f2d80fbd33d127ff9b31bf588e4925599d79/src/validation.cpp#L1934
+    */
+    /*
     // Do not allow blocks that contain transactions which 'overwrite' older transactions,
     // unless those are already completely spent.
     // If such overwrites are allowed, coinbases and transactions depending upon those
@@ -2109,6 +2116,7 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
             }
         }
     }
+    */
 
     // Start enforcing BIP68 (sequence locks)
     int nLockTimeFlags = 0;
