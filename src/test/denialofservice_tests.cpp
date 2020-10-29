@@ -177,7 +177,7 @@ BOOST_AUTO_TEST_CASE(stale_tip_peer_management)
     // Now tip should definitely be stale, and we should look for an extra
     // outbound peer
     peerLogic->CheckForStaleTipAndEvictPeers();
-    BOOST_CHECK(connman->GetTryNewOutboundPeer());
+    BOOST_CHECK(!connman->GetTryNewOutboundPeer()); // During IBD, do not disconnect peers for the reason, "Potential stale tip detected" // See "net_processing.cpp"
 
     // Still no peers should be marked for disconnection
     for (const CNode *node : vNodes) {
