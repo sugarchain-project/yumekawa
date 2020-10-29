@@ -3648,7 +3648,8 @@ bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationS
             return true;
         }
 
-        if (!CheckBlockHeader(block, state, chainparams.GetConsensus())) {
+        // During download headers, do not CheckBlockHeader for performance reason // See https://github.com/sugarchain-project/sugarchain/pull/122
+        if (!::ChainstateActive().IsInitialBlockDownload() && !CheckBlockHeader(block, state, chainparams.GetConsensus())) {
             LogPrint(BCLog::VALIDATION, "%s: Consensus::CheckBlockHeader: %s, %s\n", __func__, hash.ToString(), state.ToString());
             return false;
         }
