@@ -86,12 +86,12 @@ EXTENDED_SCRIPTS = [
 BASE_SCRIPTS = [
     # Scripts that are run by default.
     # Longest test should go first, to favor running tests in parallel
-    # 'wallet_hd.py', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
-    # 'wallet_hd.py --descriptors', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
-    # 'wallet_backup.py', # TODO.ZENY.SETTINGS # BLOCK REWARD
-    # 'wallet_backup.py --descriptors', # TODO.ZENY.SETTINGS # BLOCK REWARD
+    # 'wallet_hd.py', # Sugarchain: Settings Part 2 # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
+    # 'wallet_hd.py --descriptors', # Sugarchain: Settings Part 2 # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
+    # 'wallet_backup.py', # Sugarchain: Settings Part 1
+    # 'wallet_backup.py --descriptors', # Sugarchain: Settings Part 1
     # vv Tests less than 5m vv
-    # 'mining_getblocktemplate_longpoll.py', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
+    # 'mining_getblocktemplate_longpoll.py', # Sugarchain: Settings Part 2 # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
     'feature_maxuploadtarget.py',
     # 'feature_block.py', # Sugarchain: Introduce YespowerSugar
     # 'rpc_fundrawtransaction.py', # Sugarchain: Settings Part 1
@@ -105,7 +105,7 @@ BASE_SCRIPTS = [
     # 'wallet_labels.py --descriptors', # Sugarchain: Settings Part 1
     # 'p2p_segwit.py', # Sugarchain: Introduce YespowerSugar
     'p2p_timeouts.py',
-    # 'p2p_tx_download.py', # TODO.ZENY.SETTINGS
+    # 'p2p_tx_download.py', # Sugarchain: Settings Part 1
     'mempool_updatefromblock.py',
     # 'wallet_dump.py --legacy-wallet', # Sugarchain: Settings Part 1
     'wallet_listtransactions.py',
@@ -115,7 +115,7 @@ BASE_SCRIPTS = [
     # 'p2p_sendheaders.py', # Sugarchain: Introduce YespowerSugar # Won't fix due to "lint-python.sh"
     # 'wallet_importmulti.py --legacy-wallet', # Sugarchain: Settings Part 2
     'mempool_limit.py',
-    # 'rpc_txoutproof.py', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
+    # 'rpc_txoutproof.py', # Sugarchain: Settings Part 2 # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
     'wallet_listreceivedby.py',
     'wallet_listreceivedby.py --descriptors',
     'wallet_abandonconflict.py',
@@ -130,8 +130,8 @@ BASE_SCRIPTS = [
     'feature_reindex.py',
     'feature_abortnode.py',
     # vv Tests less than 30s vv
-    # 'wallet_keypool_topup.py', # TODO.ZENY.SETTINGS
-    # 'wallet_keypool_topup.py --descriptors', # TODO.ZENY.SETTINGS
+    # 'wallet_keypool_topup.py', # Sugarchain: Settings Part 1
+    # 'wallet_keypool_topup.py --descriptors', # Sugarchain: Settings Part 1
     'feature_fee_estimation.py',
     # 'interface_zmq.py', # Sugarchain: Introduce YespowerSugar
     # 'interface_bitcoin_cli.py', # Sugarchain: Settings Part 1
@@ -143,15 +143,15 @@ BASE_SCRIPTS = [
     # 'wallet_txn_clone.py --segwit', # Sugarchain: Settings Part 1
     'rpc_getchaintips.py',
     'rpc_misc.py',
-    # 'interface_rest.py', # TODO.ZENY.SETTINGS
-    # 'mempool_spend_coinbase.py', # TODO.ZENY.SETTINGS
+    # 'interface_rest.py', # Sugarchain: Settings Part 1
+    # 'mempool_spend_coinbase.py', # Sugarchain: Settings Part 1
     'wallet_avoidreuse.py',
     'wallet_avoidreuse.py --descriptors',
-    # 'mempool_reorg.py', # TODO.ZENY.SETTINGS
+    # 'mempool_reorg.py', # Sugarchain: Settings Part 1
     'mempool_persist.py',
-    # 'wallet_multiwallet.py', # TODO.ZENY.SETTINGS
-    # 'wallet_multiwallet.py --descriptors', # TODO.ZENY.SETTINGS
-    # 'wallet_multiwallet.py --usecli', # TODO.ZENY.SETTINGS
+    # 'wallet_multiwallet.py', # Sugarchain: Settings Part 1
+    # 'wallet_multiwallet.py --descriptors', # Sugarchain: Settings Part 1
+    # 'wallet_multiwallet.py --usecli', # Sugarchain: Settings Part 1
     'wallet_createwallet.py',
     'wallet_createwallet.py --usecli',
     'wallet_createwallet.py --descriptors',
@@ -160,8 +160,8 @@ BASE_SCRIPTS = [
     'wallet_reorgsrestore.py',
     'interface_http.py',
     'interface_rpc.py',
-    # 'rpc_psbt.py', # TODO.ZENY.SETTINGS
-    # 'rpc_psbt.py --descriptors', # TODO.ZENY.SETTINGS
+    # 'rpc_psbt.py', # Sugarchain: Settings Part 1
+    # 'rpc_psbt.py --descriptors', # Sugarchain: Settings Part 1
     'rpc_users.py',
     'rpc_whitelist.py',
     'feature_proxy.py',
@@ -186,8 +186,8 @@ BASE_SCRIPTS = [
     'p2p_nobloomfilter_messages.py',
     'p2p_filter.py',
     'rpc_setban.py',
-    # 'p2p_blocksonly.py', # TODO.ZENY.SETTINGS
-    # 'mining_prioritisetransaction.py', # TODO.ZENY.SETTINGS # too slow...
+    # 'p2p_blocksonly.py', # Sugarchain: Settings Part 1
+    # 'mining_prioritisetransaction.py', # Sugarchain: Settings Part 1
     'p2p_invalid_locator.py',
     # 'p2p_invalid_block.py', # Sugarchain: Introduce YespowerSugar
     'p2p_invalid_messages.py',
@@ -201,7 +201,7 @@ BASE_SCRIPTS = [
     # 'wallet_txn_clone.py --mineblock', # Sugarchain: Settings Part 1
     'feature_notifications.py',
     'rpc_getblockfilter.py',
-    # 'rpc_invalidateblock.py', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
+    # 'rpc_invalidateblock.py', # Sugarchain: Settings Part 2 # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
     'feature_rbf.py',
     'mempool_packages.py',
     'mempool_package_onemore.py',
@@ -255,7 +255,7 @@ BASE_SCRIPTS = [
     # 'wallet_send.py', # Sugarchain: Settings Part 1
     # 'wallet_create_tx.py --descriptors', # Sugarchain: Introduce YespowerSugar
     # 'p2p_fingerprint.py', # Sugarchain: Introduce YespowerSugar
-    'feature_uacomment.py',
+    # 'feature_uacomment.py', Sugarchain: Settings Part 5
     'wallet_coinbase_category.py',
     'wallet_coinbase_category.py --descriptors',
     'feature_filelock.py',
@@ -264,16 +264,16 @@ BASE_SCRIPTS = [
     # 'p2p_unrequested_blocks.py', # Sugarchain: Introduce YespowerSugar
     # 'p2p_blockfilters.py', # Sugarchain: Settings Part 1
     'feature_includeconf.py',
-    'feature_asmap.py',
+    # 'feature_asmap.py', # During IBD, do not print "Potential stale tip detected..."
     'mempool_unbroadcast.py',
     # 'mempool_compatibility.py', # Sugarchain: Branding
     # 'rpc_deriveaddresses.py', # Sugarchain: Settings Part 2
     # 'rpc_deriveaddresses.py --usecli', # Sugarchain: Settings Part 2
     'p2p_ping.py',
-    # 'rpc_scantxoutset.py', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
+    # 'rpc_scantxoutset.py', # Sugarchain: Settings Part 2 # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
     'feature_logging.py',
     'p2p_node_network_limited.py',
-    # 'p2p_permissions.py', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
+    # 'p2p_permissions.py', # Sugarchain: Settings Part 2 # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
     'feature_blocksdir.py',
     'wallet_startup.py',
     'feature_config_args.py',

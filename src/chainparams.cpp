@@ -172,7 +172,7 @@ public:
 };
 
 /**
- * Testnet (v3)
+ * Testnet (v5)
  */
 class CTestNetParams : public CChainParams {
 public:
