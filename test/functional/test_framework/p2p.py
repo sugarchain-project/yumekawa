@@ -111,7 +111,7 @@ MESSAGEMAP = {
 
 MAGIC_BYTES = {
     "mainnet": b"\x9f\xeb\x4b\x9d",   # mainnet
-    "testnet3": b"\xb0\x11\x90\x70",  # testnet3
+    "testnet5": b"\xb0\x11\x90\x70",  # testnet5
     "regtest": b"\xaf\xfb\x5b\xad",   # regtest
     "signet": b"\x0a\x03\xcf\x40",    # signet # TODO.ZENY.SETTINGS # See https://en.bitcoin.it/wiki/Signet
 }
