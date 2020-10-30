@@ -81,10 +81,7 @@ void DeserializeFromFuzzingInput(const std::vector<uint8_t>& buffer, T& obj)
 template <typename T>
 void AssertEqualAfterSerializeDeserialize(const T& obj)
 {
-    // TODO.ZENY.SETTINGS // after IBD settings
-    /*
     assert(Deserialize<T>(Serialize(obj)) == obj);
-    */
 }
 
 } // namespace
