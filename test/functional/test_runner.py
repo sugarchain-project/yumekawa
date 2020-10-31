@@ -234,7 +234,7 @@ BASE_SCRIPTS = [
     # 'wallet_create_tx.py', # TODO.ZENY.YESPOWER # AssertionError
     # 'wallet_send.py', # TODO.ZENY.SETTINGS
     # 'p2p_fingerprint.py', # TODO.ZENY.YESPOWER # AssertionError
-    # 'feature_uacomment.py', # TODO.ZENY.SETTINGS # after IBD settings
+    'feature_uacomment.py',
     'wallet_coinbase_category.py',
     'feature_filelock.py',
     'feature_loadblock.py',
@@ -242,7 +242,7 @@ BASE_SCRIPTS = [
     # 'p2p_unrequested_blocks.py', # TODO.ZENY.YESPOWER # AssertionError
     # 'p2p_blockfilters.py', # TODO.ZENY.SETTINGS # too slow...
     'feature_includeconf.py',
-    # 'feature_asmap.py', # TODO.ZENY.SETTINGS # after IBD settings
+    'feature_asmap.py',
     'mempool_unbroadcast.py',
     # 'mempool_compatibility.py', # TODO.ZENY.BRANDING # AssertionError # No any previous releases
     # 'rpc_deriveaddresses.py', # TODO.ZENY.SETTINGS # ADDRESS # ADDRESS_BCRT1_P2WSH_OP_TRUE (address.py)
