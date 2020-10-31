@@ -1861,13 +1861,7 @@ void PeerManager::ProcessHeadersMessage(CNode& pfrom, const std::vector<CBlockHe
             // Headers message had its maximum size; the peer may have more headers.
             // TODO: optimize: if pindexLast is an ancestor of ::ChainActive().Tip or pindexBestHeader, continue
             // from there instead.
-            // During IBD, do not download additional block headers, against too much traffic
-            /*
             LogPrint(BCLog::NET, "more getheaders (%d) to end to peer=%d (startheight:%d)\n", pindexLast->nHeight, pfrom.GetId(), pfrom.nStartingHeight);
-            */
-            if (!::ChainstateActive().IsInitialBlockDownload()) {
-                LogPrint(BCLog::NET, "more getheaders (%d) to end to peer=%d (startheight:%d)\n", pindexLast->nHeight, pfrom.GetId(), pfrom.nStartingHeight);
-            }
             m_connman.PushMessage(&pfrom, msgMaker.Make(NetMsgType::GETHEADERS, ::ChainActive().GetLocator(pindexLast), uint256()));
         }
 
@@ -3957,13 +3951,7 @@ void PeerManager::CheckForStaleTipAndEvictPeers()
         // Check whether our tip is stale, and if so, allow using an extra
         // outbound peer
         if (!fImporting && !fReindex && m_connman.GetNetworkActive() && m_connman.GetUseAddrmanOutgoing() && TipMayBeStale(m_chainparams.GetConsensus())) {
-            // During IBD, do not disconnect peers for the reason, "Potential stale tip detected"
-            /*
             LogPrintf("Potential stale tip detected, will try using extra outbound peer (last tip update: %d seconds ago)\n", time_in_seconds - g_last_tip_update);
-            */
-            if (!::ChainstateActive().IsInitialBlockDownload()) {
-                LogPrintf("Potential stale tip detected, will try using extra outbound peer (last tip update: %d seconds ago)\n", time_in_seconds - g_last_tip_update);
-            }
             m_connman.SetTryNewOutboundPeer(true);
         } else if (m_connman.GetTryNewOutboundPeer()) {
             m_connman.SetTryNewOutboundPeer(false);
