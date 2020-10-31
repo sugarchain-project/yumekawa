@@ -327,12 +327,12 @@ public:
         consensus.signet_challenge.assign(bin.begin(), bin.end());
         consensus.nSubsidyHalvingInterval = 12500000;
         consensus.BIP16Exception = uint256{};
-        consensus.BIP34Height = 1;
+        consensus.BIP34Height = 1; // TODO: signet not launched yet
         consensus.BIP34Hash = uint256{};
-        consensus.BIP65Height = 1;  // Always on
-        consensus.BIP66Height = 1;  // Always on
-        consensus.CSVHeight = 1;    // Always on
-        consensus.SegwitHeight = 1; // Always on
+        consensus.BIP65Height = 1; // TODO: signet not launched yet
+        consensus.BIP66Height = 1; // TODO: signet not launched yet
+        consensus.CSVHeight = 1; // TODO: signet not launched yet
+        consensus.SegwitHeight = 1; // TODO: signet not launched yet
         consensus.nPowTargetTimespan = 61200; // 17 hours = 17*60*60 = 61200
         consensus.nPowTargetSpacing = 5;
         consensus.fPowAllowMinDifficultyBlocks = false;
