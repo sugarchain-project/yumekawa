@@ -10,8 +10,10 @@ to addrman with).
 
 The seeds compiled into the release are created from sipa's DNS seed data, like this:
 
-    curl -s http://bitcoin.sipa.be/seeds.txt.gz | gzip -dc > seeds_main.txt
+    curl -s http://1seed.sugarchain.info | gzip -dc > seeds_main.txt
+    curl -s http://1seed-testnet.cryptozeny.com | gzip -dc > seeds_main.txt
     python3 makeseeds.py < seeds_main.txt > nodes_main.txt
+    python3 makeseeds.py < seeds_test.txt > nodes_test.txt
     python3 generate-seeds.py . > ../../src/chainparamsseeds.h
 
 ## Dependencies
