@@ -67,7 +67,7 @@ namespace GUIUtil {
 
 QString dateTimeStr(const QDateTime &date)
 {
-    return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm");
+    return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm:ss"); // Sugarchain Settings // Show seconds TX time on QT GUI
 }
 
 QString dateTimeStr(qint64 nTime)
@@ -835,10 +835,14 @@ QString formatBytes(uint64_t bytes)
         return QString(QObject::tr("%1 B")).arg(bytes);
     if(bytes < 1024 * 1024)
         return QString(QObject::tr("%1 KB")).arg(bytes / 1024);
+    // Sugarchain Settings: Do not display in GB on QT GUI
+    /*
     if(bytes < 1024 * 1024 * 1024)
         return QString(QObject::tr("%1 MB")).arg(bytes / 1024 / 1024);
 
     return QString(QObject::tr("%1 GB")).arg(bytes / 1024 / 1024 / 1024);
+    */
+    return QString(QObject::tr("%1 MB")).arg(bytes / 1024 / 1024);
 }
 
 qreal calculateIdealFontSize(int width, const QString& text, QFont font, qreal minPointSize, qreal font_size) {
