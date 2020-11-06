@@ -595,7 +595,20 @@ std::string LicenseInfo()
 {
     const std::string URL_SOURCE_CODE = "<https://github.com/sugarchain-project/sugarchain>";
 
+    const std::string COPYRIGHT_1 = strprintf(_("Copyright (C) %i-%i").translated, 2009, 2010) + " " + "Satoshi Nakamoto";
+    const std::string COPYRIGHT_2 = strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " " + "The Bitcoin Core developers";
+    const std::string COPYRIGHT_3 = strprintf(_("Copyright (C) %i-%i").translated, 2013, 2019) + " " + "Alexander Peslyak - Yespower 1.0.1";
+    const std::string COPYRIGHT_4 = strprintf(_("Copyright (C) %i-%i").translated, 2016, 2018) + " " + "The Zcash developers - DigiShieldZEC";
+
+    /*
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2019, COPYRIGHT_YEAR) + " ") + "\n" +
+    */
+
+    return COPYRIGHT_1 + "\n" +
+           COPYRIGHT_2 + "\n" +
+           COPYRIGHT_3 + "\n" +
+           COPYRIGHT_4 + "\n" +
+           CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2019, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
            strprintf(_("Please contribute if you find %s useful. "
                        "Visit %s for further information about the software.").translated,
