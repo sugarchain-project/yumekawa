@@ -28,9 +28,16 @@
 SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) :
     QWidget(nullptr, f), curAlignment(0)
 {
+    /*
     // set reference point, paddings
     int paddingRight            = 50;
     int paddingTop              = 50;
+    int titleVersionVSpace      = 17;
+    int titleCopyrightVSpace    = 40;
+    */
+    // set reference point, paddings
+    int paddingRight            = 50*3.0+1;
+    int paddingTop              = 50*1.0;
     int titleVersionVSpace      = 17;
     int titleCopyrightVSpace    = 40;
 
@@ -78,8 +85,12 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     QRect rGradient(QPoint(0,0), splashSize);
     pixPaint.fillRect(rGradient, gradient);
 
+    /*
     // draw the bitcoin icon, expected size of PNG: 1024x1024
     QRect rectIcon(QPoint(-150,-122), QSize(430,430));
+    */
+    // draw the bitcoin icon, expected size of PNG: 1024x1024
+    QRect rectIcon(QPoint(120,40), QSize(480,480));
 
     const QSize requiredSize(1024,1024);
     QPixmap icon(networkStyle->getAppIcon().pixmap(requiredSize));
@@ -90,9 +101,15 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     pixPaint.setFont(QFont(font, 33*fontFactor));
     QFontMetrics fm = pixPaint.fontMetrics();
     int titleTextWidth = GUIUtil::TextWidth(fm, titleText);
+    /*
     if (titleTextWidth > 176) {
         fontFactor = fontFactor * 176 / titleTextWidth;
     }
+    */
+    if (titleTextWidth > 176*1.75) {
+      fontFactor = fontFactor * 176*1.75 / titleTextWidth;
+    }
+
 
     pixPaint.setFont(QFont(font, 33*fontFactor));
     fm = pixPaint.fontMetrics();
@@ -112,7 +129,14 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
 
     // draw copyright stuff
     {
+        /*
         pixPaint.setFont(QFont(font, 10*fontFactor));
+        const int x = pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight;
+        const int y = paddingTop+titleCopyrightVSpace;
+        QRect copyrightRect(x, y, pixmap.width() - x - paddingRight, pixmap.height() - y);
+        pixPaint.drawText(copyrightRect, Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, copyrightText);
+        */
+        pixPaint.setFont(QFont(font, 13*fontFactor));
         const int x = pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight;
         const int y = paddingTop+titleCopyrightVSpace;
         QRect copyrightRect(x, y, pixmap.width() - x - paddingRight, pixmap.height() - y);
