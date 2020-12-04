@@ -184,6 +184,7 @@ private:
     // Cache some values to be able to detect changes
     interfaces::WalletBalances m_cached_balances;
     EncryptionStatus cachedEncryptionStatus;
+    int cachedNumBlocks; // Reduce interval of QT balance refresh
     QTimer* timer;
 
     // Block hash denoting when the last balance update was done.
