@@ -30,6 +30,8 @@
 
 #include <stdint.h>
 
+#include <validation.h> // Reduce fetch interval of QT balance // for "::ChainActive().Height()"
+
 #include <QDebug>
 #include <QMessageBox>
 #include <QSet>
@@ -46,6 +48,7 @@ WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, ClientModel
     transactionTableModel(nullptr),
     recentRequestsTableModel(nullptr),
     cachedEncryptionStatus(Unencrypted),
+    cachedNumBlocks(0), // Reduce fetch interval of QT balance
     timer(new QTimer(this))
 {
     fHaveWatchOnly = m_wallet->haveWatchOnly();
@@ -99,6 +102,7 @@ void WalletModel::pollBalanceChanged()
         return;
     }
 
+    /*
     if (fForceCheckBalanceChanged || block_hash != m_cached_last_update_tip) {
         fForceCheckBalanceChanged = false;
 
@@ -108,6 +112,31 @@ void WalletModel::pollBalanceChanged()
         checkBalanceChanged(new_balances);
         if(transactionTableModel)
             transactionTableModel->updateConfirmations();
+    }
+    */
+
+    /* Sugarchain Settings */
+    // Reduce fetch interval of QT balance
+    if (fForceCheckBalanceChanged || block_hash != m_cached_last_update_tip || ::ChainActive().Height() != cachedNumBlocks) {
+        fForceCheckBalanceChanged = false;
+
+        tfm::format(std::cout, "  %d = height \n", ::ChainActive().Height());
+        tfm::format(std::cout, "  %d = cached \n", cachedNumBlocks);
+        tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
+
+        // Do not fetch balance every blocks, but every 12 blocks (12*5 = 60 seconds)
+        if (::ChainActive().Height() - cachedNumBlocks >= 12) {
+            tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
+            tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
+
+            // Balance and number of transactions might have changed
+            m_cached_last_update_tip = block_hash;
+            cachedNumBlocks = ::ChainActive().Height();
+
+            checkBalanceChanged(new_balances); // update balance immediately, otherwise there could be a short noticeable delay until pollBalanceChanged hits
+            if(transactionTableModel)
+                transactionTableModel->updateConfirmations();
+        }
     }
 }
 
