@@ -120,12 +120,12 @@ void WalletModel::pollBalanceChanged()
             tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
             tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
 
+            // Balance and number of transactions might have changed
+            cachedNumBlocks = ::ChainActive().Height();
+
             checkBalanceChanged(new_balances);
             if(transactionTableModel)
                 transactionTableModel->updateConfirmations();
-
-            // Balance and number of transactions might have changed
-            cachedNumBlocks = ::ChainActive().Height();
         }
     }
 }
