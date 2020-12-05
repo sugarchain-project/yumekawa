@@ -126,9 +126,6 @@ void WalletModel::pollBalanceChanged()
 
         // Do not fetch balance every blocks, but every 12 blocks (12*5 = 60 seconds)
         if (::ChainActive().Height() - cachedNumBlocks >= 12) {
-            tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
-            tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
-
             // Balance and number of transactions might have changed
             m_cached_last_update_tip = block_hash;
             cachedNumBlocks = ::ChainActive().Height();
@@ -136,6 +133,9 @@ void WalletModel::pollBalanceChanged()
             checkBalanceChanged(new_balances); // update balance immediately, otherwise there could be a short noticeable delay until pollBalanceChanged hits
             if(transactionTableModel)
                 transactionTableModel->updateConfirmations();
+
+            tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
+            tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
         }
     }
 }
