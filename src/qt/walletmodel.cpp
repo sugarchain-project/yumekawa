@@ -117,11 +117,11 @@ void WalletModel::pollBalanceChanged()
 
         // Do not update balance every blocks, but every 12 blocks (12*5 = 60 seconds)
         if (::ChainActive().Height() - cachedNumBlocks >= 12) {
-            tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
-            tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
-
             // Balance and number of transactions might have changed
             cachedNumBlocks = ::ChainActive().Height();
+
+            tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
+            tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
 
             checkBalanceChanged(new_balances);
             if(transactionTableModel)
