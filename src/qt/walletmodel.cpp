@@ -105,28 +105,24 @@ void WalletModel::pollBalanceChanged()
         return;
     }
 
-    if (fForceCheckBalanceChanged || block_hash != m_cached_last_update_tip) {
+    tfm::format(std::cout, "  %d = height \n", ::ChainActive().Height());
+    tfm::format(std::cout, "  %d = cached \n", cachedNumBlocks);
+    tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
+
+    // Do not update balance every blocks, but every 12 blocks (12*5 = 60 seconds)
+    if (::ChainActive().Height() - cachedNumBlocks >= 12 && (fForceCheckBalanceChanged || block_hash != m_cached_last_update_tip)) {
         fForceCheckBalanceChanged = false;
 
         // Balance and number of transactions might have changed
         m_cached_last_update_tip = block_hash;
+        cachedNumBlocks = ::ChainActive().Height();
 
-        tfm::format(std::cout, "  %d = height \n", ::ChainActive().Height());
-        tfm::format(std::cout, "  %d = cached \n", cachedNumBlocks);
+        tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
         tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
 
-        // Do not update balance every blocks, but every 12 blocks (12*5 = 60 seconds)
-        if (::ChainActive().Height() - cachedNumBlocks >= 12) {
-            // Balance and number of transactions might have changed
-            cachedNumBlocks = ::ChainActive().Height();
-
-            tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
-            tfm::format(std::cout, "height - cached = %d \n", (int)(::ChainActive().Height() - cachedNumBlocks));
-
-            checkBalanceChanged(new_balances);
-            if(transactionTableModel)
-                transactionTableModel->updateConfirmations();
-        }
+        checkBalanceChanged(new_balances);
+        if(transactionTableModel)
+            transactionTableModel->updateConfirmations();
     }
 }
 
