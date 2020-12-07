@@ -168,6 +168,7 @@ BASE_SCRIPTS = [
     # 'rpc_signrawtransaction.py', # Sugarchain: Settings Part 1
     # 'rpc_signrawtransaction.py --descriptors', # Sugarchain: Settings Part 1
     'wallet_groups.py',
+    'wallet_transactiontime_rescan.py',
     'p2p_addrv2_relay.py',
     'wallet_groups.py --descriptors',
     'p2p_disconnect_ban.py',
