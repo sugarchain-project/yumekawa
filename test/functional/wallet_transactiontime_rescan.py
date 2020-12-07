@@ -7,8 +7,7 @@
 
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import (
-    assert_equal,
-    assert_raises_rpc_error
+    assert_equal
 )
 
 
@@ -55,7 +54,7 @@ class TransactionTimeRescanTest(BitcoinTestFramework):
         wo_wallet.importpubkey(pubkey='02f5ccbee49546e0b5bf2e76422ed959e983dafaa94c8abafc9c8f8b99ef23d16a')
 
         self.log.info('Start transactions')
-        
+
         # check blockcount
         assert_equal(minernode.getblockcount(), 200)
 
@@ -70,8 +69,8 @@ class TransactionTimeRescanTest(BitcoinTestFramework):
         restorenode.setmocktime(mocktime + ten_days)
         # send 10 btc to user first watch-only address
         self.log.info('Send 10 btc to user')
-        txid1 = miner_wallet.sendtoaddress(wo1, 10)
-        
+        miner_wallet.sendtoaddress(wo1, 10)
+
         # generate blocks and check blockcount
         minernode.generatetoaddress(100, m1)
         assert_equal(minernode.getblockcount(), 600)
@@ -83,8 +82,8 @@ class TransactionTimeRescanTest(BitcoinTestFramework):
         restorenode.setmocktime(mocktime + ten_days + ten_days)
         # send 5 btc to our second watch-only address
         self.log.info('Send 5 btc to user')
-        txid2 = miner_wallet.sendtoaddress(wo2, 5)
-        
+        miner_wallet.sendtoaddress(wo2, 5)
+
         # generate blocks and check blockcount
         minernode.generatetoaddress(100, m1)
         assert_equal(minernode.getblockcount(), 700)
@@ -96,8 +95,8 @@ class TransactionTimeRescanTest(BitcoinTestFramework):
         restorenode.setmocktime(mocktime + ten_days + ten_days + ten_days)
         # send 1 btc to our third watch-only address
         self.log.info('Send 1 btc to user')
-        txid3 = miner_wallet.sendtoaddress(wo3, 1)
-        
+        miner_wallet.sendtoaddress(wo3, 1)
+
         # generate more blocks and check blockcount
         minernode.generatetoaddress(100, m1)
         assert_equal(minernode.getblockcount(), 800)
