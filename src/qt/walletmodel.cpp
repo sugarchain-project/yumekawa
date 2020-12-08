@@ -46,6 +46,7 @@ WalletModel::WalletModel(std::unique_ptr<interfaces::Wallet> wallet, ClientModel
     transactionTableModel(nullptr),
     recentRequestsTableModel(nullptr),
     cachedEncryptionStatus(Unencrypted),
+    countBlockhashChanged(0), // Reduce fetch interval of QT balance
     timer(new QTimer(this))
 {
     fHaveWatchOnly = m_wallet->haveWatchOnly();
@@ -99,15 +100,29 @@ void WalletModel::pollBalanceChanged()
         return;
     }
 
+    /* Sugarchain Settings */
+    // Reduce fetch interval of QT balance
     if (fForceCheckBalanceChanged || block_hash != m_cached_last_update_tip) {
         fForceCheckBalanceChanged = false;
+
+        // Count if block height tip is changed
+        countBlockhashChanged++;
 
         // Balance and number of transactions might have changed
         m_cached_last_update_tip = block_hash;
 
-        checkBalanceChanged(new_balances);
-        if(transactionTableModel)
-            transactionTableModel->updateConfirmations();
+        // tfm::format(std::cout, "count = %d \n", countBlockhashChanged); // DEBUG
+
+        // Do not update balance every blocks, but every 12 blocks (12*5 = 60 seconds)
+        if (countBlockhashChanged >= 12) {
+            countBlockhashChanged = 0; // Reset count
+
+            // tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // DEBUG
+
+            checkBalanceChanged(new_balances);
+            if(transactionTableModel)
+                transactionTableModel->updateConfirmations();
+        }
     }
 }
 
