@@ -111,13 +111,13 @@ void WalletModel::pollBalanceChanged()
         // Balance and number of transactions might have changed
         m_cached_last_update_tip = block_hash;
 
-        tfm::format(std::cout, "count = %d \n", countBlockhashChanged);
+        // tfm::format(std::cout, "count = %d \n", countBlockhashChanged); // DEBUG
 
         // Do not update balance every blocks, but every 12 blocks (12*5 = 60 seconds)
         if (countBlockhashChanged >= 12) {
             countBlockhashChanged = 0; // Reset count
 
-            tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // red
+            // tfm::format(std::cout, "\033[0;31m  pollBalanceChanged:  \033[0m \n"); // DEBUG
 
             checkBalanceChanged(new_balances);
             if(transactionTableModel)
