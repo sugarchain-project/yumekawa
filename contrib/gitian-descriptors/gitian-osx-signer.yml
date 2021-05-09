@@ -10,7 +10,7 @@ packages:
 - "xorriso"
 - "python3-pip"
 remotes:
-- "url": "https://github.com/sugarchain-project/sugarchain-detached-sigs.git"
+- "url": "https://github.com/sugarchain-project/bitcoin-detached-sigs.git"
   "dir": "signature"
 - "url": "https://github.com/achow101/signapple.git"
   "dir": "signapple"

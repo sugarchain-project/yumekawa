@@ -28,8 +28,8 @@ def setup():
     subprocess.check_call(['sudo', 'apt-get', 'install', '-qq'] + programs)
     if not os.path.isdir('gitian.sigs'):
         subprocess.check_call(['git', 'clone', 'https://github.com/sugarchain-project/gitian.sigs.git'])
-    if not os.path.isdir('sugarchain-detached-sigs'):
-        subprocess.check_call(['git', 'clone', 'https://github.com/sugarchain-project/sugarchain-detached-sigs.git'])
+    if not os.path.isdir('bitcoin-detached-sigs'):
+        subprocess.check_call(['git', 'clone', 'https://github.com/sugarchain-project/bitcoin-detached-sigs.git'])
     if not os.path.isdir('gitian-builder'):
         subprocess.check_call(['git', 'clone', 'https://github.com/devrandom/gitian-builder.git'])
     if not os.path.isdir('sugarchain'):
